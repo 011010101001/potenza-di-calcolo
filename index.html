@@ -170,6 +170,9 @@
   }
   h3.subhead{font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:-.01em;margin:38px 0 8px}
   table.desc td:last-child,table.desc th:last-child{text-align:left}
+  table.human td:nth-child(2),table.human th:nth-child(2){text-align:left;white-space:normal;line-height:1.4}
+  table.human td:last-child,table.human th:last-child{text-align:left;white-space:normal;line-height:1.4}
+  table.human td small{color:var(--muted)}
   table.desc td:first-child{white-space:nowrap}
   table.fmt td,table.fmt th{padding-left:12px;padding-right:12px}
   @media (min-width:700px){
@@ -237,6 +240,18 @@
     .arows,.grows{grid-template-rows:none;display:flex;flex-direction:column;gap:14px}
     .ahead,.ghead{height:auto;padding-bottom:10px}
   }
+
+
+  /* ── pietre miliari della matematica ───── */
+  .milestones{margin-top:10px;border-top:1px solid var(--rule-soft)}
+  .ms{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--rule-soft)}
+  .ms .y{font-family:var(--mono);font-size:13px;color:var(--pc);padding-top:2px}
+  .ms>div>b{display:block;font-size:15px;font-weight:600;color:var(--ink);line-height:1.4}
+  .ms p b{color:var(--ink);font-weight:600}
+  .ms p{margin:4px 0 0;font-size:14px;color:var(--ink-dim);line-height:1.55;max-width:82ch}
+  .ms p i{color:var(--muted)}
+  .ms.hl .y{color:var(--world)}
+  @media (max-width:700px){ .ms{grid-template-columns:1fr;gap:4px} }
 
   /* ── arena 10 secondi ──────────────────── */
   .arena{border:1px solid var(--rule);background:var(--panel);
@@ -1151,6 +1166,91 @@
       più del doppio. La differenza fra locale e frontiera non è «intelligente o scemo»: è
       <b>quanto a lungo riesce a lavorare senza perdersi</b>, quanto contesto tiene in testa e quanto è
       affidabile quando la risposta non è in un quiz.
+    </p>
+
+    <h3 class="subhead">Il metro umano, prova per prova</h3>
+    <p class="sub" style="margin-bottom:18px">
+      Ogni benchmark ha un umano di riferimento: uno studente delle olimpiadi, un professore, un
+      matematico di ricerca. È quello il metro — non «bravo per essere una macchina».
+    </p>
+
+    <div class="tablewrap" style="max-height:none">
+      <table class="desc human">
+        <caption>Le cinque prove che contano, con l'umano accanto. Novembre 2026.</caption>
+        <thead><tr><th>Prova</th><th>L'umano di riferimento</th><th>Umano</th><th>Miglior AI</th></tr></thead>
+        <tbody>
+          <tr><td>MMLU</td><td>conoscenza generale da esame universitario</td><td>≈90%</td><td>90% <small>(gpt-oss-120b, aperto)</small></td></tr>
+          <tr><td>GPQA Diamond</td><td>professore di fisica/chimica/biologia, con Google</td><td>65-75%</td><td><b>96,8%</b> <small>(GPT-6 Astra)</small></td></tr>
+          <tr><td>IMO</td><td>medaglia d'oro alle olimpiadi</td><td>35/42 punti</td><td>35/42 <small>(Gemini Deep Think, 2025)</small></td></tr>
+          <tr><td>FrontierMath</td><td>matematico di ricerca: ore o giorni per un problema</td><td>nessun dato: nessuno ha fatto tutta la prova</td><td><b>95%</b> <small>(Claude Fable 5.2)</small></td></tr>
+          <tr><td>Humanity's Last Exam</td><td>esperti in oltre 100 discipline</td><td>—</td><td>55% <small>(GPT-6 Astra)</small></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption">
+      Il salto più violento è FrontierMath: nel 2024 i modelli risolvevano <b>meno del 2%</b> dei problemi,
+      due anni dopo il 95%. Ma attenzione al metro: <b>nessun umano ha mai sostenuto quella prova per
+      intero</b>, quindi «95% di un umano» è una frase che non si può dire. Si può dire che è il 95% di una
+      prova che un matematico impiega ore o giorni a risolvere, problema per problema.
+    </p>
+
+    <h3 class="subhead">I problemi che nessuno risolveva</h3>
+    <p class="sub" style="margin-bottom:14px">
+      Qui non si tratta di rispondere a un quiz: sono risultati nuovi, su domande aperte da decenni,
+      controllati da matematici e in alcuni casi formalizzati in Lean — cioè verificati riga per riga da
+      un programma che non può sbagliare.
+    </p>
+
+    <div class="milestones">
+      <div class="ms">
+        <div class="y">2022</div>
+        <div><b>AlphaTensor · moltiplicare matrici meglio di Strassen</b>
+        <p>Un record fermo dal 1969: due matrici 4×4 si moltiplicano con <b>47 prodotti invece di 49</b>.
+        Cinquantatré anni di matematica, battuti da una rete addestrata a giocare.</p></div>
+      </div>
+      <div class="ms">
+        <div class="y">2023</div>
+        <div><b>FunSearch · i «cap set»</b>
+        <p>Un problema di combinatoria aperto dagli anni '90: il programma trova costruzioni migliori di
+        quelle di chiunque altro, e i matematici ne capiscono il perché solo dopo.</p></div>
+      </div>
+      <div class="ms">
+        <div class="y">2024</div>
+        <div><b>AlphaProof e AlphaGeometry · argento all'IMO</b>
+        <p>Dimostrazioni scritte in Lean e verificate da un proof assistant: tre problemi su sei, livello
+        medaglia d'argento alle olimpiadi internazionali.</p></div>
+      </div>
+      <div class="ms">
+        <div class="y">2025</div>
+        <div><b>Gemini Deep Think · oro all'IMO</b>
+        <p>35 punti su 42, cinque problemi su sei. Nello stesso anno AlphaEvolve, applicato a oltre 50
+        problemi aperti, <b>migliora un quinto</b> delle soluzioni conosciute.</p></div>
+      </div>
+      <div class="ms hl">
+        <div class="y">2026</div>
+        <div><b>La congettura delle distanze unitarie di Erdős</b>
+        <p>Posta nel 1946 e aperta per ottant'anni: quanti punti del piano possono stare a distanza
+        esattamente 1 l'uno dall'altro? Un modello di OpenAI costruisce una famiglia infinita di
+        configurazioni che smentisce l'ipotesi di tutti. <b>È la prima volta che un problema aperto
+        centrale per un settore viene risolto in autonomia da una macchina</b>, con la prova controllata
+        da matematici esterni.</p></div>
+      </div>
+      <div class="ms hl">
+        <div class="y">2026</div>
+        <div><b>Dieci problemi in un colpo</b>
+        <p>Gruppi non-sofi, la congettura di rigidità di Connes, i numeri di Ramsey, il packing di sfere in
+        dimensione alta, il problema vettore più vicino della crittografia post-quantistica. Dieci risultati
+        su domande aperte, dimostrazioni formalizzate in Lean, per <b>circa 2.000 dollari di token</b>.</p></div>
+      </div>
+    </div>
+
+    <p class="caption">
+      Il controcanto, che è la parte onesta: come scrive <i>Science</i>, l'AI ha risolto molti problemi ma
+      <b>non ha risolto la matematica</b>. È bravissima a trovare l'ago nel pagliaio — una costruzione, un
+      controesempio, un limite migliore — e molto meno brava a capire perché funziona e a costruirci sopra
+      una teoria. Per questo i matematici, in tutti questi casi, hanno dovuto riscrivere la dimostrazione e
+      spiegarla: la macchina ha trovato la risposta, l'umano ha capito la domanda.
     </p>
 
     <h3 class="subhead">E nel datacenter di una volta?</h3>
