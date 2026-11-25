@@ -1,3 +1,5 @@
 * text=auto
 *.html text eol=lf
 *.md   text eol=lf
+qr-potenza.png binary
+*.png binary
