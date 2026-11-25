@@ -214,11 +214,13 @@
 
 
   .racewrap{display:grid;grid-template-columns:600px 1fr;gap:22px;align-items:start}
-  .genome{border:1px solid #24413d;background:#0b1211;padding:20px 20px 16px;height:600px;display:flex;flex-direction:column}
+  .genome{border:1px solid #24413d;background:#0b1211;padding:20px 20px 16px;min-height:600px;display:flex;flex-direction:column}
   .genome .gtag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--world)}
   .genome h4{font-family:var(--serif);font-size:23px;font-weight:400;margin:6px 0 8px;letter-spacing:-.01em}
   .genome .gnote{font-size:13.5px;color:var(--ink-dim);line-height:1.5;margin:0 0 14px}
   .genome .gnote b{color:var(--ink);font-weight:500}
+  .genome .gdef{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 12px;padding:9px 11px;border-left:2px solid #2f4a48;background:#0e1615}
+  .genome .gdef b{color:var(--ink-dim);font-weight:500}
   .grows{flex:1;display:flex;flex-direction:column;justify-content:space-between}
   .grow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:baseline;padding:5px 0;border-bottom:1px solid #14201e}
   .grow:last-child{border-bottom:0}
@@ -852,6 +854,11 @@
         Un genoma a 30× (allineamento + chiamata delle varianti) costa circa <b>600 ore di CPU</b>
         — 32 core per 20 ore — cioè nell'ordine di <b>2×10¹⁵ operazioni</b>. Ecco quanti ne
         completi nei dieci secondi della gara.
+      </p>
+      <p class="gdef">
+        <b>Genoma non è sequenziamento.</b> Il genoma è il contenuto — 3,2 miliardi di lettere; sequenziarlo
+        è leggerlo. Le 600 ore contate qui sono solo l'informatica: rimettere in ordine i frammenti e cercare
+        le differenze. La macchina che legge il DNA è un'altra cosa, e non è una CPU.
       </p>
       <div class="grows" id="gRows"></div>
       <p class="gfoot" id="gFoot">
