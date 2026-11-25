@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dal 4004 al zettaflop — 55 anni di potenza di calcolo</title>
+<meta name="description" content="La capacità di calcolo di un PC medio e dell'intera umanità, anno per anno dal 1971 al 2026, con il confronto fra dieci anni fa e oggi.">
+<style>
+  :root{
+    --bg:#08090a;
+    --panel:#0e1012;
+    --panel-2:#14171a;
+    --ink:#ecebe7;
+    --ink-dim:#a8a9a6;
+    --muted:#75777a;
+    --rule:#22262b;
+    --rule-soft:#191d21;
+    --pc:#f2a33c;
+    --world:#54cfc3;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,"Liberation Mono",monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(1200px 600px at 12% -10%, #12161a 0%, transparent 70%);
+    background-repeat:no-repeat;
+  }
+  a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+  a:hover{border-color:var(--ink-dim)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+  /* ── top bar ─────────────────────────────── */
+  .topbar{
+    position:sticky;top:0;z-index:40;background:rgba(8,9,10,.86);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-soft);
+  }
+  .topbar .wrap{display:flex;align-items:center;gap:18px;height:56px}
+  .brand{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+  .brand b{color:var(--pc);font-weight:600}
+  .topbar nav{margin-left:auto;display:flex;gap:11px}
+  .topbar nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:0;white-space:nowrap}
+  .topbar nav a:hover{color:var(--ink)}
+  .stamp{font-family:var(--mono);font-size:11px;color:var(--muted);border-left:1px solid var(--rule);padding-left:18px}
+  @media (max-width:1000px){ .topbar nav{display:none} .stamp{margin-left:auto} }
+
+  /* ── hero ───────────────────────────────── */
+  header.hero{padding:74px 0 18px;border-bottom:1px solid var(--rule-soft)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--pc);margin:0 0 22px}
+  h1{
+    font-family:var(--serif);font-weight:400;font-size:clamp(38px,6.2vw,76px);
+    line-height:1.02;letter-spacing:-.02em;margin:0 0 22px;max-width:17ch;text-wrap:balance;
+  }
+  h1 em{font-style:italic;color:var(--pc)}
+  .lede{font-size:clamp(17px,2vw,21px);line-height:1.55;color:var(--ink-dim);max-width:62ch;margin:0 0 46px}
+  .lede b{color:var(--ink);font-weight:500}
+
+  .statgrid{display:grid;grid-template-columns:1.1fr 1.1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+  .stat{background:var(--panel);padding:24px 22px 22px}
+  .stat .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex:0 0 auto}
+  .dot.pc{background:var(--pc)}
+  .dot.world{background:var(--world)}
+  .stat .v{font-family:var(--mono);font-size:clamp(26px,3.1vw,38px);line-height:1.1;margin:14px 0 2px;letter-spacing:-.02em}
+  .stat .u{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+  .stat .d{font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);margin-top:16px;border-top:1px solid var(--rule-soft);padding-top:12px}
+  .stat .d b{color:var(--ink);font-weight:600}
+  .stat .x{font-size:15px;color:var(--pc)}
+  .stat.w .x{color:var(--world)}
+  @media (max-width:860px){ .statgrid{grid-template-columns:1fr} }
+
+  .hero-note{display:flex;gap:26px;flex-wrap:wrap;padding:18px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .hero-note span{border-left:1px solid var(--rule);padding-left:12px}
+
+  /* ── sections ───────────────────────────── */
+  section{padding:76px 0;border-bottom:1px solid var(--rule-soft)}
+  .sechead{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:8px}
+  .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--pc);text-transform:uppercase}
+  .num.w{color:var(--world)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.015em}
+  .sub{color:var(--ink-dim);max-width:66ch;margin:0 0 34px;font-size:16.5px}
+  .sub b{color:var(--ink);font-weight:500}
+
+  /* ── chart shell ────────────────────────── */
+  .chartbox{border:1px solid var(--rule);background:var(--panel);position:relative}
+  .chartbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--rule-soft)}
+  .chartbar .t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:auto}
+  .seg{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+  .seg button{
+    appearance:none;background:transparent;border:0;color:var(--muted);
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    padding:7px 11px;cursor:pointer;min-height:32px
+  }
+  .seg button+button{border-left:1px solid var(--rule)}
+  .seg button[aria-pressed="true"]{background:var(--panel-2);color:var(--ink)}
+  .seg button:hover{color:var(--ink)}
+  .chartwrap{position:relative;padding:6px 6px 0}
+  .chartwrap svg{display:block;width:100%;height:auto}
+  @media (max-width:780px){
+    .chartwrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+    .chartwrap svg{min-width:700px}
+    .chartwrap::after{content:"scorri →";display:block;font-family:var(--mono);font-size:9px;
+      letter-spacing:.14em;color:#5f6469;text-align:right;padding:6px 8px 2px;text-transform:uppercase}
+  }
+  .tip{
+    position:absolute;pointer-events:none;opacity:0;transition:opacity .12s;
+    background:#050607ee;border:1px solid var(--rule);padding:9px 11px;min-width:150px;
+    font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--ink);
+    transform:translate(-50%,-108%);z-index:5;border-radius:2px
+  }
+  .tip .y{color:var(--muted);letter-spacing:.1em;font-size:10.5px;margin-bottom:5px}
+  .tip .r{display:flex;justify-content:space-between;gap:14px}
+  .tip .r i{font-style:normal;color:var(--muted)}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;padding:10px 16px 14px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:7px}
+  .legend .ln{width:22px;height:0;border-top:2px solid var(--ink)}
+  .legend .ln.dash{border-top-style:dashed}
+
+  .gridline{stroke:#191e23;stroke-width:1}
+  .gridline.major{stroke:#242a31}
+  .axislabel{fill:#6c7075;font-family:var(--mono);font-size:10.5px}
+  .annot{fill:#9fa2a0;font-family:var(--mono);font-size:10.5px}
+  .annot-b{fill:#e6e5e1}
+  .lead{stroke:#3a4047;stroke-width:1}
+
+  .readout{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-top:0}
+  .readout div{background:var(--bg);padding:14px 16px}
+  .readout .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .readout .v{font-family:var(--mono);font-size:16px;margin-top:4px}
+  @media (max-width:700px){.readout{grid-template-columns:1fr}}
+
+  .caption{font-size:14px;color:var(--muted);margin:14px 0 0;max-width:78ch}
+  .caption b{color:var(--ink-dim);font-weight:500}
+
+  /* ── unità ─────────────────────────────── */
+  .unit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:22px}
+  .unit-grid>div{background:var(--panel);padding:22px 20px}
+  .unit-grid h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--world);margin:0 0 10px;font-weight:500}
+  .unit-grid p{margin:0;font-size:14.5px;color:var(--ink-dim);line-height:1.55}
+  .unit-grid p+p{margin-top:9px}
+  .unit-grid b{color:var(--ink);font-weight:500}
+  @media (max-width:820px){.unit-grid{grid-template-columns:1fr}}
+
+
+
+  /* ── formati numerici ──────────────────── */
+  .fmtbox{border:1px solid var(--rule);background:var(--panel);padding:20px 22px 16px;margin-top:22px}
+  .fmtrow{display:grid;grid-template-columns:78px 1fr 130px;gap:14px;align-items:center;padding:5px 0}
+  .fmthead{display:grid;grid-template-columns:78px 1fr 130px;gap:14px;padding-bottom:8px}
+  .fmtname{font-family:var(--mono);font-size:12px;color:var(--ink);text-align:right;letter-spacing:.02em}
+  .strip{display:flex;height:20px;gap:2px}
+  .strip i{display:block;border-radius:1px;min-width:2px}
+  .strip i.s{background:#6b7280}
+  .strip i.e{background:var(--world)}
+  .strip i.m{background:var(--pc)}
+  .strip i.g{background:#9b7ede}
+  .fmtsize{font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+  .fmtkey{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .fmtkey span{display:flex;align-items:center;gap:6px}
+  .fmtkey i{width:10px;height:10px;border-radius:1px;display:block}
+  @media (max-width:700px){
+    .fmtrow{grid-template-columns:56px 1fr;gap:10px}
+    .fmtsize,.fmthead{display:none}
+  }
+  h3.subhead{font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:-.01em;margin:38px 0 8px}
+  table.desc td:last-child,table.desc th:last-child{text-align:left}
+  table.desc td:first-child{white-space:nowrap}
+  table.fmt td,table.fmt th{padding-left:12px;padding-right:12px}
+  @media (min-width:700px){
+    table.fmt td:nth-child(5){white-space:normal;text-align:left;line-height:1.4}
+    table.fmt th:nth-child(5){text-align:left}
+  }
+
+
+  /* ── spiegazione per bambini ───────────── */
+  .kidbox{border:1px solid var(--rule);background:var(--panel);padding:24px 22px 22px;margin-top:26px}
+  .kidtag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--pc)}
+  .kidbox h3{font-family:var(--serif);font-size:27px;font-weight:400;margin:8px 0 6px;letter-spacing:-.01em}
+  .kidbox .klede{font-size:16px;color:var(--ink-dim);line-height:1.6;max-width:74ch;margin:0 0 22px}
+  .race{display:grid;gap:14px}
+  .raceRow{display:grid;grid-template-columns:158px 1fr;gap:16px;align-items:center}
+  .rc{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.5}
+  .rc b{display:block;color:var(--ink);font-size:11px;letter-spacing:.06em}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .step{border:1px solid #3a3020;background:#141008;padding:9px 10px;border-radius:2px;min-height:62px}
+  .step i{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--pc);display:inline-block;
+    min-width:15px;height:15px;line-height:15px;text-align:center;border:1px solid #3a3020;border-radius:2px;margin-bottom:6px}
+  .step.ok i{border-color:#24413d}
+  .step b{font-family:var(--mono);font-size:11.5px;color:var(--ink);font-weight:500;display:block;line-height:1.35}
+  .step small{font-family:var(--mono);font-size:9.5px;color:var(--muted);display:block;margin-top:3px}
+  .step.ok{border-color:#24413d;background:#0b1211}
+  .step.ok i{color:var(--world)}
+  .spare{border:1px dashed #2b3138;border-radius:2px;min-height:62px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:9.5px;color:#5f6469;text-align:center;padding:6px;grid-column:span 3}
+  .kidnotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:22px}
+  .kidnotes>div{background:var(--panel);padding:16px 16px 14px}
+  .kidnotes h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--world);margin:0 0 8px;font-weight:500}
+  .kidnotes p{margin:0;font-size:14px;color:var(--ink-dim);line-height:1.55}
+  .kidnotes b{color:var(--ink);font-weight:500}
+  @media (max-width:900px){
+    .kidnotes{grid-template-columns:1fr}
+    .raceRow{grid-template-columns:1fr;gap:8px}
+    .rc{text-align:left}
+    .steps{grid-template-columns:1fr 1fr}
+    .spare{grid-column:span 2}
+  }
+
+  /* ── barre dispositivi ─────────────────── */
+  .devchart{border:1px solid var(--rule);background:var(--panel);padding:16px 18px 14px}
+  .devrow{display:grid;grid-template-columns:230px 1fr 108px 156px;gap:16px;align-items:center;padding:9px 0}
+  .devrow+.devrow{border-top:1px solid var(--rule-soft)}
+  .devrow.devaxis{padding:0 0 6px;border:0}
+  .devname b{display:block;font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.3}
+  .devname span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+  .devtrack{position:relative;height:22px}
+  .devtrack i{position:absolute;left:0;top:5px;height:12px;background:var(--pc);border-radius:1px;min-width:2px}
+  .devtrack i.hi{background:var(--world)}
+  .devgrid{position:absolute;top:0;bottom:0;width:1px;background:#1b2026;display:block}
+  .devlab{font-family:var(--mono);font-size:9.5px;color:#5f6469;position:absolute;bottom:-14px;transform:translateX(-50%)}
+  .devval{font-family:var(--mono);font-size:14px;text-align:right;line-height:1.25}
+  .devval b{font-weight:500}
+  .devval span{display:block;font-size:10px;color:var(--muted);margin-top:3px;white-space:nowrap}
+  .devprice{font-family:var(--mono);font-size:13px;text-align:right;line-height:1.25;color:var(--ink-dim)}
+  .devprice b{font-weight:500;color:var(--ink)}
+  .devprice span{display:block;font-size:10px;color:var(--muted);margin-top:3px;white-space:nowrap}
+  .devhead{display:grid;grid-template-columns:230px 1fr 108px 156px;gap:16px;padding:0 0 6px}
+  .devhead span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5f6469}
+  .devhead span:last-child,.devhead span:nth-child(3){text-align:right}
+
+  /* ── Colossus ──────────────────────────── */
+  .colossus{border:1px solid #24413d;background:#0b1211;padding:24px 22px 20px;margin-top:26px}
+  .colossus .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--world)}
+  .colossus h3{font-family:var(--serif);font-size:26px;font-weight:400;margin:6px 0 18px;letter-spacing:-.01em}
+  .colstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#1b2a28}
+  .colstats>div{background:#0b1211;padding:14px 14px}
+  .colstats b{display:block;font-family:var(--mono);font-size:22px;font-weight:500;color:var(--world);letter-spacing:-.02em}
+  .colstats span{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:5px;line-height:1.4}
+  .colossus p{margin:16px 0 0;font-size:14.5px;color:var(--ink-dim);line-height:1.55;max-width:88ch}
+  .colossus p b{color:var(--ink);font-weight:500}
+  @media (max-width:820px){ .colstats{grid-template-columns:1fr 1fr} }
+  @media (max-width:520px){ .colstats{grid-template-columns:1fr} }
+  .devrow.hl{background:#0f1518;box-shadow:inset 2px 0 0 var(--world)}
+  @media (max-width:820px){
+    .devrow{grid-template-columns:1fr;gap:6px;padding:12px 0}
+    .devval{text-align:left}
+    .devname span{margin-top:0}
+  }
+
+  /* ── perché i numeri non sono comparabili ── */
+  .whybox{border:1px solid #3a3020;background:#12100b;padding:22px 22px 20px;margin-top:26px}
+  .whybox h3{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pc);margin:0 0 10px;font-weight:500}
+  .whylede{margin:0 0 16px;font-size:15.5px;color:var(--ink-dim);line-height:1.55;max-width:80ch}
+  .whylede b{color:var(--ink);font-weight:500}
+  table.why{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:13.5px}
+  table.why th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    text-align:left;padding:8px 12px;border-bottom:1px solid #2c2a22;background:transparent;position:static}
+  table.why td{padding:8px 12px;border-bottom:1px solid #1e1c16;color:#c9c3b6;white-space:normal;line-height:1.45;text-align:left}
+  table.why td:first-child{color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.04em;white-space:nowrap}
+  table.why b{color:var(--pc);font-weight:600}
+  .whyfoot{margin:16px 0 0;font-size:14.5px;color:var(--muted);line-height:1.55;max-width:80ch}
+  .whyfoot b{color:var(--ink-dim)}
+
+  /* ── barra aziende ─────────────────────── */
+  .stackbox{border:1px solid var(--rule);background:var(--panel);padding:22px 22px 18px}
+  .stackbar{display:flex;height:72px;border-radius:2px;overflow:hidden}
+  .stackbar div{position:relative;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:11px;color:#08090a;font-weight:600;transition:filter .15s}
+  .stackbar div:hover{filter:brightness(1.15)}
+  .stacklegend{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:9px 20px;margin-top:18px}
+  .stacklegend span{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--ink-dim)}
+  .stacklegend i{width:10px;height:10px;border-radius:2px;flex:0 0 auto}
+  @media (max-width:780px){ .stackbar{height:54px} .stackbar div{font-size:0} }
+  .stacklegend b{color:var(--ink);font-weight:500}
+
+  /* ── cursori / verdetto ────────────────── */
+  .controls{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px;border:1px solid var(--rule);background:var(--panel);padding:22px}
+  .controls label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .controls label b{display:block;font-family:var(--mono);font-size:22px;letter-spacing:-.01em;color:var(--ink);margin:7px 0 12px;text-transform:none;font-weight:500}
+  .controls input[type=range]{width:100%;accent-color:var(--pc);height:22px}
+  .verdict{grid-column:1/-1;border-top:1px solid var(--rule-soft);padding-top:18px}
+  .verdict .y{font-family:var(--mono);font-size:clamp(44px,7.4vw,78px);line-height:1;letter-spacing:-.035em;color:var(--world)}
+  .verdict .y small{font-size:14px;color:var(--muted);letter-spacing:0;display:block;margin-top:10px;font-family:var(--sans)}
+  .verdict .t{font-size:15px;color:var(--ink-dim);margin-top:12px;max-width:74ch;line-height:1.55}
+  .verdict .t b{color:var(--ink);font-weight:500}
+  @media (max-width:760px){.controls{grid-template-columns:1fr}}
+
+  /* ── decade / comparison ────────────────── */
+  .decade-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:900px){.decade-grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--rule);background:var(--panel);padding:20px 20px 18px}
+  .card .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center}
+  .card .big{font-family:var(--mono);font-size:34px;line-height:1.1;margin:12px 0 0;letter-spacing:-.02em}
+  .card .big small{font-size:13px;color:var(--muted);letter-spacing:0}
+  .card .cmp{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .card .cmp b{color:var(--ink);font-weight:500}
+  .ruler{position:relative;height:54px;margin:16px 0 0}
+  .ruler .track{position:absolute;left:0;right:0;top:15px;height:1px;background:var(--rule)}
+  .ruler .seg{position:absolute;top:14px;height:3px;background:currentColor;opacity:.28}
+  .ruler .tick{position:absolute;top:11px;width:1px;height:9px;background:#333a42}
+  .ruler .pt{position:absolute;top:11px;width:9px;height:9px;border-radius:50%;transform:translate(-50%,0);box-shadow:0 0 0 3px #0e1012}
+  .ruler .pt.old{background:#4a525b}
+  .ruler .pt.pc{background:var(--pc)}
+  .ruler .pt.world{background:var(--world)}
+  .ruler .lbl{position:absolute;top:26px;font-family:var(--mono);font-size:9.5px;color:#5f6469;transform:translateX(-50%);white-space:nowrap}
+
+  .pull{
+    font-family:var(--serif);font-size:clamp(21px,2.9vw,31px);line-height:1.34;letter-spacing:-.01em;
+    border-left:2px solid var(--world);padding:6px 0 6px 24px;margin:44px 0 0;max-width:46ch;color:var(--ink)
+  }
+  .pull b{color:var(--world);font-weight:400}
+
+  /* ── table ──────────────────────────────── */
+  .tablewrap{max-height:460px;overflow:auto;border:1px solid var(--rule);background:var(--panel)}
+  table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+  caption{text-align:left;padding:14px 16px;color:var(--muted);font-family:var(--sans);font-size:13px;border-bottom:1px solid var(--rule-soft)}
+  th,td{padding:7px 16px;text-align:right;border-bottom:1px solid var(--rule-soft);white-space:nowrap}
+  th{position:sticky;top:0;background:#0b0d0f;color:var(--muted);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;z-index:1}
+  th:first-child,td:first-child{text-align:left}
+  tbody tr:hover{background:#101316}
+  tr.hl td{background:#12161a;color:#fff}
+  td.wc{color:var(--world)} td.pcc{color:var(--pc)}
+  #aziende .unit-grid{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:900px){#aziende .unit-grid{grid-template-columns:1fr}}
+  @media (min-width:821px){
+    #aziende table td:nth-child(2),#aziende table th:nth-child(2){text-align:left;white-space:normal;line-height:1.45}
+    #aziende table td{padding-top:10px;padding-bottom:10px}
+  }
+  #aziende table td:first-child{color:var(--ink);font-weight:600}
+  #quanto table{table-layout:auto}
+  @media (min-width:821px){
+    #quanto table td{white-space:normal;line-height:1.45;padding-top:10px;padding-bottom:10px}
+    #quanto table td:first-child,#quanto table td:last-child,#quanto table td:nth-child(2){white-space:nowrap}
+  }
+  .btn{
+    appearance:none;background:transparent;border:1px solid var(--rule);color:var(--ink-dim);
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    padding:9px 14px;cursor:pointer;border-radius:2px
+  }
+  .btn:hover{color:var(--ink);border-color:var(--ink-dim)}
+
+  /* ── method ─────────────────────────────── */
+  .method{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+  .method>div{background:var(--panel);padding:22px 20px}
+  .method h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pc);margin:0 0 10px;font-weight:500}
+  .method p{margin:0;font-size:14.5px;color:var(--ink-dim);line-height:1.55}
+  .method p+p{margin-top:10px}
+  @media (max-width:900px){.method{grid-template-columns:1fr}}
+  .warn{border:1px solid #3a2f1c;background:#14100a;padding:16px 18px;margin-top:22px;font-size:14.5px;color:#d9c9a8}
+  .warn b{color:#f0c987;font-weight:600}
+  .sources{margin:26px 0 0;padding:0;list-style:none;font-size:14px;color:var(--ink-dim)}
+  .sources li{padding:9px 0;border-top:1px solid var(--rule-soft);display:flex;gap:14px;line-height:1.5}
+  .sources li span:first-child{font-family:var(--mono);font-size:11px;color:var(--muted);flex:0 0 92px;padding-top:3px}
+  footer{padding:44px 0 70px;font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
+
+  :focus-visible{outline:2px solid var(--world);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">Silicio <b>/</b> 1971—2026</div>
+    <nav>
+      <a href="#unita">Unità</a>
+      <a href="#pc">PC</a>
+      <a href="#mondo">Mondo</a>
+      <a href="#chip">Chip</a>
+      <a href="#riferimenti">Esempi</a>
+      <a href="#aziende">Aziende</a>
+      <a href="#quanto">Quanto</a>
+      <a href="#llm">LLM</a>
+      <a href="#dieci">10 anni</a>
+      <a href="#dati">Dati</a>
+      <a href="#metodo">Metodo</a>
+    </nav>
+    <div class="stamp">agg. 25 nov 2026</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Cinquantacinque anni di calcolo · 1971 → 2026</p>
+    <h1>Dal 4004 al <em>zettaflop</em></h1>
+    <p class="lede">
+      Quanta capacità di calcolo c'è in un personal computer medio — e quanta ce n'è
+      in tutto il mondo messo insieme? Due curve sulla stessa scala, anno per anno,
+      dal primo microprocessore al silicio che oggi addestra i modelli.
+      <b>Un'unità sola per tutto: operazioni al secondo, di picco.</b>
+    </p>
+
+    <div class="statgrid">
+      <div class="stat">
+        <div class="k"><span class="dot pc"></span>PC medio in circolazione</div>
+        <div class="v" data-big="pc">—</div>
+        <div class="u">operazioni al secondo</div>
+        <div class="d">2016: <b data-y2016="pc">—</b>op/s → oggi <span class="x" data-mult="pc">—</span></div>
+      </div>
+      <div class="stat w">
+        <div class="k"><span class="dot world"></span>Potenza di calcolo mondiale</div>
+        <div class="v" data-big="world">—</div>
+        <div class="u">operazioni al secondo, silicio installato</div>
+        <div class="d">2016: <b data-y2016="world">—</b>op/s → oggi <span class="x" data-mult="world">—</span></div>
+      </div>
+      <div class="stat">
+        <div class="k"><span class="dot world"></span>Pro capite</div>
+        <div class="v" data-big="cap">—</div>
+        <div class="u">operazioni al secondo per abitante</div>
+        <div class="d">2016: <b data-y2016="cap">—</b>op/s → oggi <span class="x" data-mult="cap">—</span></div>
+      </div>
+    </div>
+
+    <div class="hero-note">
+      <span>1 &laquo;op/s&raquo; = un'operazione elementare al secondo</span>
+      <span>stima mondiale con banda ±40%</span>
+      <span>fonti: Earth Compute · Hilbert &amp; López 2011 · TOP500 · specifiche</span>
+    </div>
+  </div>
+</header>
+
+<section id="unita">
+  <div class="wrap">
+    <div class="sechead"><span class="num">01 — Le unità</span></div>
+    <h2>Un'operazione, otto prefissi</h2>
+    <p class="sub">
+      Ogni cifra di questa pagina è nella stessa unità: <b>operazioni elementari al secondo</b>.
+      Un'operazione è una somma o una moltiplicazione, eseguita una volta. Il 4004 ne faceva 92.000 al
+      secondo; una scheda B300 del 2026 ne fa 2.500.000.000.000.000. Per non contare gli zeri si usano
+      i prefissi del SI, che salgono di mille in mille.
+    </p>
+
+    <div class="chartbox">
+      <div class="chartwrap" id="ladderBox" style="padding:2px 0 0"></div>
+    </div>
+
+    <div class="unit-grid">
+      <div>
+        <h3>1 · L'unità</h3>
+        <p><b>op/s</b> — operazioni al secondo. Non «istruzioni al secondo»: un'istruzione di una GPU
+        moderna esegue 128 moltiplicazioni in un colpo, un'istruzione del 4004 ne esegue una. Contare
+        le istruzioni (i vecchi MIPS) renderebbe i chip di oggi 128 volte più lenti di quanto sono.</p>
+        <p><b>FLOPS</b> è la stessa cosa riferita ai soli numeri decimali: 1 FLOPS = 1 op/s in virgola
+        mobile. <b>TOPS</b> invece conta operazioni su interi: è un'unità diversa, e i TOPS di un
+        telefono non si confrontano con i FLOPS di una GPU senza una conversione.</p>
+      </div>
+      <div>
+        <h3>2 · La precisione</h3>
+        <p>Più il numero è corto, più il chip corre: FP64 → FP32 → TF32 → <b>BF16/FP16</b> → FP8 → FP4.
+        Ogni gradino verso il basso raddoppia circa la velocità, senza aggiungere un transistor — è il
+        modo più semplice di gonfiare un numero di catalogo.</p>
+        <p>Qui tutto è normalizzato a <b>BF16 denso</b>: mezza precisione, quella con cui girano davvero
+        i modelli. Dove la fonte dichiara solo FP32 o FP64, la conversione è indicata.</p>
+      </div>
+      <div>
+        <h3>3 · Denso o sparso</h3>
+        <p>I numeri di marketing assumono che metà dei pesi sia zero (sparsità 2:1) e raddoppiano.
+        Un B200 è «20 PFLOPS» in FP4 sparso, ma fa <b>2,25 Pop/s</b> in BF16 denso: il cartellino è
+        circa nove volte il lavoro reale.</p>
+        <p>Il caso estremo: il Cerebras WSE-3 dichiara 125 Pop/s, che densi sono <b>15,6</b> — un
+        fattore 8. Sommare le cifre di catalogo, come ricorda Earth Compute, gonfia il mondo di 5-9 volte.</p>
+      </div>
+      <div>
+        <h3>4 · Picco o sostanza</h3>
+        <p>Il picco è il limite di velocità, non la velocità. Un acceleratore tiene il 35-50% su un
+        training vero, una scheda da gioco il 5%, un telefono lo 0,1%: il silicio del pianeta, pesato
+        per quanto è effettivamente occupato, vale il <b>16%</b> del dichiarato.</p>
+        <p>E un'operazione del 4004 non è un'operazione del 2026: una è intera a 4 bit, l'altra è una
+        moltiplicazione di matrici. L'unità misura <b>quanto silicio c'è</b>, non quanto è utile.</p>
+      </div>
+    </div>
+
+    <h3 class="subhead">I formati, uno per uno</h3>
+    <p class="sub" style="margin-bottom:20px">
+      Un numero in virgola mobile è fatto di tre pezzi: <b>un segno</b>, un <b>esponente</b> che dice
+      quanto è grande, e una <b>mantissa</b> che dice quanto è preciso. Più bit dai all'esponente, più
+      ampio l'intervallo; più ne dai alla mantissa, più cifre significative hai. Non puoi avere entrambi:
+      i bit sono quelli che sono.
+    </p>
+
+    <div class="fmtbox">
+      <div class="fmthead">
+        <span></span>
+        <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5f6469">i bit, uno per uno, alla stessa scala</span>
+        <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5f6469;text-align:right">composizione</span>
+      </div>
+      <div id="fmtStrips"></div>
+      <div class="fmtkey">
+        <span><i style="background:#6b7280"></i> segno · 1 bit</span>
+        <span><i style="background:var(--world)"></i> esponente · quanta dinamica</span>
+        <span><i style="background:var(--pc)"></i> mantissa · quante cifre</span>
+        <span><i style="background:#9b7ede"></i> intero · valore esatto</span>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="max-height:none;margin-top:22px">
+      <table class="fmt">
+        <caption>Lo stesso formato, quattro domande diverse: quanto spazio, quanto range, quante cifre, dove si usa.</caption>
+        <thead><tr><th>Formato</th><th>Bit</th><th>Intervallo</th><th>Cifre decimali</th><th>Dove si usa</th><th>Velocità</th></tr></thead>
+        <tbody>
+          <tr><td>FP64</td><td>64 (1+11+52)</td><td>±1,8×10³⁰⁸</td><td>≈16</td><td>clima, fisica, fluidodinamica, TOP500</td><td>1×</td></tr>
+          <tr><td>FP32</td><td>32 (1+8+23)</td><td>±3,4×10³⁸</td><td>≈7</td><td>grafica, CAD, simulazione, PC</td><td>2×</td></tr>
+          <tr><td>BF16</td><td>16 (1+8+7)</td><td>±3,4×10³⁸ — <b>come FP32</b></td><td>≈2-3</td><td>training e inferenza ML: <b>l'unità di questa pagina</b></td><td>56×</td></tr>
+          <tr><td>FP16</td><td>16 (1+5+10)</td><td>±65.504</td><td>≈3-4</td><td>inferenza su GPU consumer</td><td>56×</td></tr>
+          <tr><td>FP8</td><td>8 (1+4+3)</td><td>±448</td><td>≈1</td><td>inferenza e training Blackwell</td><td>112×</td></tr>
+          <tr><td>FP4</td><td>4 (1+2+1)</td><td>±6</td><td>&lt;1</td><td>inferenza estrema: solo 0 · 0,5 · 1 · 1,5 · 2 · 3 · 4 · 6</td><td>225×</td></tr>
+          <tr><td>INT8</td><td>8 (1+7)</td><td>−128 … 127</td><td>esatta, con una scala</td><td>inferenza quantizzata, i «TOPS» di telefoni e Tesla</td><td>112×</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tablewrap" style="max-height:none;margin-top:18px">
+      <table>
+        <caption>Tre test, per vedere la differenza invece di leggerla.</caption>
+        <thead><tr><th>Cosa calcoli</th><th>⅓</th><th>0,1 + 0,2</th><th>2²⁴ + 1</th></tr></thead>
+        <tbody>
+          <tr><td>FP64</td><td>0,3333333333333333</td><td>0,30000000000000004</td><td>16.777.217 ✓</td></tr>
+          <tr><td>FP32</td><td>0,33333334</td><td>0,30000001</td><td>16.777.216 ✗ (perde 1)</td></tr>
+          <tr><td>FP16</td><td>0,33325195</td><td>0,30004883</td><td><b style="color:#e05c56">infinito</b> — fuori scala</td></tr>
+          <tr><td>BF16</td><td>0,33398438</td><td>0,30078125</td><td>16.777.216 ✗</td></tr>
+          <tr><td>FP8</td><td>0,34375</td><td>0,3125</td><td><b style="color:#e05c56">448</b> — satura</td></tr>
+          <tr><td>INT8</td><td>85 su 255 → 0,33333</td><td>77 su 255 → 0,30196</td><td>non rappresentabile</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption" style="max-width:82ch">
+      Tre cose da portare a casa. <b>1)</b> BF16 e FP16 occupano gli stessi 16 bit ma non sono lo stesso
+      formato: BF16 tiene l'intervallo di FP32 e perde cifre (0,20% di errore su ⅓), FP16 fa il contrario
+      (0,02% di errore ma tutto sopra 65.504 diventa infinito). <b>2)</b> Ogni volta che dimezzi i bit
+      raddoppi la velocità: sulla stessa B200, FP64 fa 40 TFLOPS e BF16 2.250 — 56 volte tanto, ed è il
+      motivo per cui i modelli girano in BF16. <b>3)</b> INT8 non è un numero in virgola mobile: è un intero
+      con una scala decisa prima. Per questo i «70 TOPS» di un telefono non si sommano ai TFLOPS di una
+      scheda: stanno contando un'altra cosa.
+    </p>
+
+    <div class="kidbox">
+      <div class="kidtag">La stessa cosa, spiegata a un bambino di otto anni</div>
+      <h3>Perché con INT8 il computer corre</h3>
+      <p class="klede">
+        Un numero, dentro un computer, è solo una fila di interruttori accesi e spenti. La differenza fra
+        INT8 e un float non è «quanto è grande il numero»: è <b>quanti passaggi servono per fare una somma</b>.
+      </p>
+
+      <div class="race">
+        <div class="raceRow">
+          <div class="rc"><b>CON I FLOAT</b>2,5 × 10³ + 1,2 × 10²</div>
+          <div class="steps">
+            <div class="step"><i>1</i><b>Allinea le virgole</b><small>1,2 × 10² → 0,12 × 10³</small></div>
+            <div class="step"><i>2</i><b>Somma</b><small>2,5 + 0,12 = 2,62</small></div>
+            <div class="step"><i>3</i><b>Rimetti in forma</b><small>2,62 × 10³</small></div>
+            <div class="step"><i>4</i><b>Arrotonda</b><small>2,6 × 10³</small></div>
+          </div>
+        </div>
+        <div class="raceRow">
+          <div class="rc"><b>CON GLI INTERI</b>2500 + 120</div>
+          <div class="steps">
+            <div class="step ok"><i>1</i><b>Somma</b><small>2620. Fine.</small></div>
+            <div class="spare">gli altri tre passaggi non servono</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kidnotes">
+        <div>
+          <h4>1 · La scatola</h4>
+          <p>Con <b>8 interruttori</b> scrivi 256 cose diverse: abbastanza per dire «questo pezzo conta 37».
+          Con 32 interruttori scrivi numeri enormi e con la virgola, ma occupi <b>quattro volte tanto spazio</b>.</p>
+        </div>
+        <div>
+          <h4>2 · La virgola fa perdere tempo</h4>
+          <p>Un float è un numero scritto in modo furbo, tipo «2,5 × 10³». Per sommarlo a un altro devi prima
+          <b>spostare la virgola</b> per metterli d'accordo, poi sommare, poi rimettere a posto, poi arrotondare.
+          Quattro mestieri per un conto solo.</p>
+        </div>
+        <div>
+          <h4>3 · Meno bit, più conti insieme</h4>
+          <p>Il chip ha banchi di lavoro larghi 32 bit. Se i numeri sono da 8, in un banco ce ne stanno
+          <b>quattro</b>: quattro somme in un colpo invece di una. Come portare quattro bicchieri per volta.</p>
+        </div>
+      </div>
+
+      <p class="klede" style="margin:22px 0 0">
+        E allora perché le reti neurali usano INT8? Perché i loro numeri dicono solo <b>«quanto è importante
+        questo collegamento»</b>, da −128 a 127: non serve la virgola. Si decide una scala una volta
+        («1 unità vale 0,0078»), si arrotondano i pesi e poi si fanno miliardi di somme intere, quattro alla
+        volta. Il modello non se ne accorge — finché non si esagera con l'arrotondamento.
+      </p>
+    </div>
+
+    <div class="tablewrap" style="max-height:none;margin-top:22px">
+      <table>
+        <caption>Gli stessi prefissi, applicati a cose riconoscibili.</caption>
+        <thead><tr><th>Prefisso</th><th>Simbolo</th><th>Valore</th><th>A cosa corrisponde</th></tr></thead>
+        <tbody>
+          <tr><td>kilo</td><td>k</td><td>10³ · 1.000</td><td>una calcolatrice tascabile del 1975</td></tr>
+          <tr><td>mega</td><td>M</td><td>10⁶ · un milione</td><td>un 386 del 1987</td></tr>
+          <tr><td>giga</td><td>G</td><td>10⁹ · un miliardo</td><td>un PC del 2000</td></tr>
+          <tr><td>tera</td><td>T</td><td>10¹² · mille miliardi</td><td>il PC medio del 2026, una PS5</td></tr>
+          <tr><td>peta</td><td>P</td><td>10¹⁵</td><td>mezza scheda B300</td></tr>
+          <tr><td>exa</td><td>E</td><td>10¹⁸</td><td>400 schede B300</td></tr>
+          <tr><td>zetta</td><td>Z</td><td>10²¹</td><td>400.000 schede B300; 1/93 del mondo di oggi</td></tr>
+          <tr><td>yotta</td><td>Y</td><td>10²⁴</td><td>undici volte tutto il mondo di oggi</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="pc">
+  <div class="wrap">
+    <div class="sechead"><span class="num">02 — Il PC</span></div>
+    <h2>La macchina sul tavolo</h2>
+    <p class="sub">
+      Nel 1971 il primo microprocessore al silicio eseguiva 92.000 operazioni al secondo.
+      Il PC medio di oggi ne esegue <b>circa 24 milioni di volte tante</b> — e nel frattempo
+      la macchina ha smesso di essere una sola CPU: dentro c'è una GPU, un motore neurale,
+      una NPU.
+    </p>
+
+    <div class="chartbox">
+      <div class="chartbar">
+        <div class="t" id="pcTitle">PC medio · op/s · scala logaritmica</div>
+        <div class="seg" role="group" aria-label="Scala">
+          <button type="button" data-scale="log" aria-pressed="true">Log</button>
+          <button type="button" data-scale="lin" aria-pressed="false">Lineare</button>
+        </div>
+      </div>
+      <div class="chartwrap" id="chartPC"><div class="tip" id="tipPC"></div></div>
+      <div class="legend">
+        <span><i class="ln" style="border-color:var(--pc)"></i> PC medio installato (ricostruzione da schede tecniche)</span>
+      </div>
+      <div class="readout" id="roPC"></div>
+    </div>
+    <p class="caption">
+      Valori di <b>picco teorico</b> di una macchina rappresentativa dell'anno (CPU, poi CPU+GPU integrata),
+      interpolati in scala logaritmica; l'estremo 2026 è la media della flotta mondiale secondo
+      Earth&nbsp;Compute (≈1,8 miliardi di macchine attive × ≈2,2 Top/s, ≈4 Zop/s in totale). Fino agli anni '80 sono
+      operazioni intere (molti chip non avevano virgola mobile): la curva misura la taglia del
+      silicio accessibile, non la velocità su un benchmark unico. La storia comincia dodici anni
+      prima del 4004, con il primo circuito integrato al silicio (Noyce, 1959).
+    </p>
+  </div>
+</section>
+
+<section id="mondo">
+  <div class="wrap">
+    <div class="sechead"><span class="num w">03 — Il pianeta</span></div>
+    <h2>Tutto il silicio del mondo</h2>
+    <p class="sub">
+      Somma di ogni processore installato: acceleratori nei datacenter, sette miliardi di
+      telefoni, schede grafiche nei PC da gioco, console, server, chip nelle auto.
+      Dal 2008 al 2026 è cresciuta di <b>542 volte</b>; l'ultimo anno da solo ha aggiunto
+      l'equivalente di <b>11 volte tutta la potenza esistente nel 2016</b>.
+    </p>
+
+    <div class="chartbox">
+      <div class="chartbar">
+        <div class="t">Silicio installato nel mondo · op/s · scala logaritmica</div>
+        <div class="seg" role="group" aria-label="Grandezza">
+          <button type="button" data-series="peak" aria-pressed="true">Picco</button>
+          <button type="button" data-series="deliv" aria-pressed="false">Realmente usato</button>
+        </div>
+      </div>
+      <div class="chartwrap" id="chartWorld"><div class="tip" id="tipWorld"></div></div>
+      <div class="legend">
+        <span><i class="ln" style="border-color:var(--world)"></i> <span id="lgWorld">capacità installata (picco dense BF16)</span></span>
+        <span><i class="ln dash" style="border-color:#566"></i> ricostruzione 1971–2007 (non misurata)</span>
+        <span><i class="ln" style="border-color:#2f4a48;border-top-style:dotted"></i> banda di incertezza ±40%</span>
+      </div>
+      <div class="readout" id="roWorld"></div>
+    </div>
+    <p class="caption">
+      Dal 2008 la serie è misurata (Earth&nbsp;Compute, 433 punti mensili, normalizzati a BF16 di picco).
+      Prima del 2008 la curva è <b>estrapolata all'indietro</b> con il tasso del 58%/anno misurato da
+      Hilbert &amp; López su 1986–2007, agganciata al valore 2008: è un ordine di grandezza, non una misura.
+      La linea &laquo;realmente usato&raquo; pesa ogni pezzo di silicio per quanto è effettivamente occupato:
+      il 16% del picco.
+    </p>
+  </div>
+</section>
+
+<section id="chip">
+  <div class="wrap">
+    <div class="sechead"><span class="num">04 — Un chip solo</span></div>
+    <h2>Il mondo dentro un pezzo di silicio</h2>
+    <p class="sub">
+      Oggi servono <b>37 milioni</b> di schede come una B300 per rifare tutta la potenza di calcolo
+      installata nel mondo. Ma una scheda raddoppia ogni anno e mezzo, mentre il pianeta cresce «solo»
+      del 40% all'anno. Prima o poi le due curve si incontrano: <b>quando?</b> Dipende da due numeri,
+      e quei due numeri sono i due cursori qui sotto.
+    </p>
+
+    <div class="chartbox">
+      <div class="chartbar">
+        <div class="t" id="chipTitle">Mondo contro singolo chip · op/s · scala logaritmica</div>
+        <div class="seg" id="segChip" role="group" aria-label="Tipo di confronto">
+          <button type="button" data-target="fixed" aria-pressed="true">Obiettivo fisso</button>
+          <button type="button" data-target="chase" aria-pressed="false">Inseguimento</button>
+        </div>
+      </div>
+      <div class="chartwrap" id="chartChip"><div class="tip" id="tipChip"></div></div>
+      <div class="legend">
+        <span><i class="ln" style="border-color:var(--world)"></i> potenza mondiale installata</span>
+        <span><i class="ln" style="border-color:var(--pc)"></i> il chip più veloce in commercio</span>
+        <span><i class="ln dash" style="border-color:#5b636b"></i> proiezione dal 2026</span>
+      </div>
+      <div class="readout" id="roChip"></div>
+    </div>
+
+    <div class="controls">
+      <label for="slD"><span>Raddoppio del chip</span><b id="lblD">1,5 anni</b>
+        <input id="slD" type="range" min="1" max="4" step="0.1" value="1.5"></label>
+      <label for="slG"><span>Crescita del mondo</span><b id="lblG">40 %/anno</b>
+        <input id="slG" type="range" min="0" max="80" step="2" value="40"></label>
+      <div class="verdict" id="verdict"></div>
+    </div>
+
+    <p class="caption">
+      <b>Obiettivo fisso</b> = il chip deve pareggiare la potenza che il mondo ha <i>oggi</i> (92,8 Zop/s,
+      una fotografia che non cresce). <b>Inseguimento</b> = il chip deve raggiungere il mondo <i>mentre
+      anche il mondo cresce</i>: se il pianeta corre più della legge di Moore, non lo prende mai.
+      Il chip di riferimento del 2026 è una B300 a 2,5 Pop/s densi BF16, e i valori storici sono il
+      chip più veloce di quell'anno (FP32 prima del 2016, quando non esistevano unità a mezza precisione).
+      <b>Nessuna di queste date è una previsione:</b> sono l'aritmetica di due tassi tenuti costanti, e i
+      tassi non restano costanti — né la legge di Moore né la corsa all'AI sono garantite per 40 anni.
+    </p>
+  </div>
+</section>
+
+<section id="riferimenti">
+  <div class="wrap">
+    <div class="sechead"><span class="num">05 — Riferimenti</span></div>
+    <h2>Quanto è 2,5 Pop/s?</h2>
+    <p class="sub">
+      I numeri da soli non dicono niente. Ecco le stesse cifre applicate a macchine riconoscibili:
+      un telefono, un PC, una workstation degli anni '90, un supercomputer, una scheda da gioco.
+      <b>L'ordine non è cronologico</b> — e questa è già la prima sorpresa.
+    </p>
+
+    <div class="devchart">
+      <div class="devhead"><span>Macchina</span><span>operazioni al secondo</span><span>potenza</span><span>prezzo · per Top/s</span></div>
+      <div class="devrow devaxis"><span></span><div class="devtrack" id="devAxis"></div><span></span><span></span></div>
+      <div id="devBars"></div>
+    </div>
+
+    <div class="chartbox" style="margin-top:22px">
+      <div class="chartbar"><div class="t">Quanto costa un Top/s · dollari per 10¹² operazioni al secondo</div></div>
+      <div class="chartwrap" id="chartCost"><div class="tip" id="tipCost"></div></div>
+      <div class="legend">
+        <span><i class="ln" style="border-color:var(--pc)"></i> prezzo d'acquisto dell'epoca ÷ potenza dell'epoca</span>
+        <span><i class="dot world"></i> macchine del 2026</span>
+      </div>
+    </div>
+
+
+    <p class="caption">
+      Picco teorico dichiarato, alla precisione migliore disponibile per ogni macchina (indicata sotto il
+      nome): FP64 per Cray e SGI, FP32 per Pentium e iPhone 1, INT8 per il motore neurale dell'iPhone 18,
+      BF16 denso per 5090 e B300. Le cifre dei telefoni sono <b>stime</b>: nel 2007 nessuno pubblicava
+      FLOPS per un telefono, e Apple non dichiara i TOPS del A20 Pro. I prezzi sono quelli d'acquisto
+      dell'epoca, non attualizzati: i 60 dollari del 4004 sono circa 477 dollari di oggi, i 499 dell'iPhone 1
+      circa 770. Per la NASA il prezzo è l'intero complesso: 186 milioni per cinque System/360-75, il software
+      e cinque anni di assistenza.
+    </p>
+
+    <p class="caption" style="max-width:74ch;margin-top:22px;font-size:15.5px;color:var(--ink-dim)">
+      Detto in modo più diretto: <b>una sola B300 contiene</b> 36 iPhone 18 Pro, 12 RTX 5090,
+      2,5 milioni di iPhone del 2007, 1,3 milioni di Cray-2, 8,3 milioni di SGI POWER Indigo²
+      e 19 milioni di PC con Pentium. Tutto dentro 1.000 watt e due mani.
+      E il mondo intero ne contiene 37 milioni.
+    </p>
+
+    <div class="whybox">
+      <h3>Perché un iPhone 18 non è «un terzo di una 5090»</h3>
+      <p class="whylede">
+        Nella scala qui sopra il telefono e la scheda distano tre millimetri. Nella realtà non sono la stessa
+        cosa: il numero del telefono conta operazioni <b>intere</b> su un motore specializzato che lavora a
+        intermittenza; quello della scheda conta virgola mobile a mezza precisione su un processore generale
+        che lavora sempre.
+      </p>
+      <table class="why">
+        <thead><tr><th></th><th>iPhone 18 Pro</th><th>GeForce RTX 5090</th></tr></thead>
+        <tbody>
+          <tr><td>Cifra di catalogo</td><td>≈70 TOPS INT8 <i>(stima: Apple non la dichiara)</i></td><td>209,5 TFLOPS BF16 densi</td></tr>
+          <tr><td>Unità</td><td>operazioni su interi, motore neurale</td><td>virgola mobile, tensor core</td></tr>
+          <tr><td>Potenza elettrica</td><td>≈5 W</td><td>575 W · <b>≈100 volte</b></td></tr>
+          <tr><td>Memoria</td><td>12 GB condivisi con la CPU · ~60 GB/s</td><td>32 GB dedicati · 1.792 GB/s · <b>30 volte</b></td></tr>
+          <tr><td>Cosa ci gira</td><td>modelli da pochi miliardi di parametri, in inferenza</td><td>training e modelli da centinaia di miliardi, qualsiasi carico</td></tr>
+          <tr><td>Per quanto</td><td>secondi, poi scalda e cala</td><td>ore a pieno regime</td></tr>
+        </tbody>
+      </table>
+      <p class="whyfoot">
+        Morale: il rapporto nominale è <b>1 a 3</b>; quello pratico — per watt, per banda di memoria, per
+        dimensione dei modelli — è <b>1 a 100 o più</b>. È esattamente il punto della sezione 01:
+        l'unità misura quanto silicio c'è, non quanto lavoro esce.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="aziende">
+  <div class="wrap">
+    <div class="sechead"><span class="num">06 — Chi produce</span></div>
+    <h2>Chi possiede il calcolo del pianeta</h2>
+    <p class="sub">
+      Nessuno pubblica questa classifica: quella che segue è una <b>stima</b> — potenza installata per
+      segmento (Earth Compute) moltiplicata per la quota di mercato del produttore in quel segmento.
+      L'ordine però non è in dubbio: <b>NVIDIA da sola vale più di tutti i telefoni del mondo messi
+      insieme</b>; <b>Intel e AMD insieme valgono quanto Google da sola</b>; e i tre nomi che fanno i chip
+      degli Android valgono più del doppio di Intel.
+    </p>
+
+    <div class="stackbox">
+      <div class="stackbar" id="stackBar"></div>
+      <div class="stacklegend" id="stackLegend"></div>
+    </div>
+
+    <div class="tablewrap" style="max-height:none;margin-top:22px">
+      <table>
+        <caption>Potenza di calcolo installata per produttore · totale 90,8 Zop/s · novembre 2026 · stima</caption>
+        <thead><tr><th>Produttore</th><th>Dove sta la sua potenza</th><th>Zop/s</th><th>Quota</th></tr></thead>
+        <tbody>
+          <tr><td>NVIDIA</td><td>21 ZF nei datacenter AI (62% di tutto il calcolo AI del mondo), 14,6 ZF nelle GPU da gioco, il resto nelle console Nintendo</td><td>35,8</td><td>39,4%</td></tr>
+          <tr><td>Google</td><td>9,6 ZF di TPU, tutti interni: nessuno li compra, nessuno li vede</td><td>9,6</td><td>10,6%</td></tr>
+          <tr><td>Apple</td><td>≈31% del calcolo dei telefoni (iPhone) più i Mac con silicio proprio</td><td>8,5</td><td>9,4%</td></tr>
+          <tr><td>MediaTek</td><td>SoC Android di fascia media e bassa: la metà degli smartphone del pianeta</td><td>8,3</td><td>9,1%</td></tr>
+          <tr><td>Qualcomm</td><td>Snapdragon, la fascia alta degli Android</td><td>7,4</td><td>8,1%</td></tr>
+          <tr><td>AMD</td><td>Instinct nei datacenter, Radeon, le APU di PS5 e Xbox, CPU per PC e server</td><td>6,9</td><td>7,6%</td></tr>
+          <tr><td>Amazon</td><td>Trainium e Inferentia, solo dentro AWS: 4,6 ZF in cinque anni</td><td>4,6</td><td>5,1%</td></tr>
+          <tr><td>Intel</td><td>CPU per PC e server, più le GPU Arc: il 3% di un mondo che nel 2000 era tutto suo</td><td>2,9</td><td>3,2%</td></tr>
+          <tr><td>Altri</td><td>Huawei Ascend, Meta MTIA, Microsoft Maia, Samsung, Cerebras, Groq, chip embedded</td><td>6,8</td><td>7,5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="colossus">
+      <div class="tag">Il più grande datacenter del mondo</div>
+      <h3>Colossus 2 · Memphis, Tennessee</h3>
+      <div class="colstats">
+        <div><b>440.000</b><span>GPU in esercizio: 330.000 B300 + 110.000 B200</span></div>
+        <div><b>1,10 Zop/s</b><span>1,2% di tutto il calcolo del pianeta</span></div>
+        <div><b>946 MW</b><span>di potenza IT (il sito dichiara 1,7 GW di capacità)</span></div>
+        <div><b>$35,8 mld</b><span>di capitale investito</span></div>
+      </div>
+      <p>
+        Un solo campus vale <b>500 milioni di PC medi</b>, il 38% di Intel messa insieme, il 12% di Google.
+        Entro fine 2026 arriva a 1,2 milioni di GPU Blackwell; la proiezione per il primo trimestre 2027 è
+        <b>1,82 milioni di H100-equivalenti, 1,53 GW e 58 miliardi di dollari</b>. Costa <b>32 dollari per
+        Top/s</b> contro i 24 di una B300 nuda: la differenza è cemento, energia e raffreddamento.
+      </p>
+    </div>
+
+    <div class="unit-grid" style="margin-top:26px">
+      <div>
+        <h3>La concentrazione</h3>
+        <p>NVIDIA controlla il <b>62%</b> di tutto il calcolo AI installato. Ma la filiera è ancora più
+        stretta: i suoi chip si stampano quasi solo da <b>TSMC</b> (≈90% del 3 e 2 nanometri), che a sua
+        volta dipende da una sola macchina, l'EUV di <b>ASML</b> (100% del mercato).</p>
+        <p>Tre aziende, tre paesi, un collo di bottiglia. È la filiera più concentrata dell'economia moderna.</p>
+      </div>
+      <div>
+        <h3>Il calcolo che serve all'AI</h3>
+        <p>Un training di frontiera costa <b>2×10²⁵ FLOP</b> (GPT-4, stima Epoch) e il consumo cresce di
+        <b>4-5 volte all'anno</b>: raddoppia ogni 5,2 mesi dal 2020.</p>
+        <p>Tradotto in silicio: ≈<b>8.000 B300</b> accese al 40% per un mese, cioè 10 MW. Un modello, un
+        capannone, una centrale elettrica.</p>
+      </div>
+      <div>
+        <h3>Chi cresce, e quanto</h3>
+        <p>Nell'ultimo anno: NVIDIA <b>+160%</b>, TPU di Google <b>+296%</b>, Trainium di Amazon
+        <b>+340%</b>, AMD <b>+224%</b>. Dall'altra parte: telefoni <b>+19%</b>, PC <b>+10%</b>, console
+        <b>+6%</b>.</p>
+        <p>Il calcolo AI raddoppia ogni dieci mesi; tutto il resto del silicio ogni cinque anni. La
+        classifica qui sopra avrà un'altra faccia fra tre anni.</p>
+      </div>
+    </div>
+
+    <p class="caption">
+      Metodo: le quote per segmento sono quelle pubbliche (Epoch AI per gli acceleratori, Jon Peddie per le
+      GPU, IDC/Canalys per i PC, Counterpoint per i telefoni), applicate alle dimensioni dei segmenti
+      misurate da Earth Compute. L'errore è grosso — direi <b>±30% per riga</b> — perché la quota di calcolo
+      dei telefoni dipende da quante macchine di ogni fascia sono accese, e nessuno le conta. La somma
+      delle righe è per costruzione il totale del mondo: 90,8 Zop/s.
+    </p>
+  </div>
+</section>
+
+<section id="quanto">
+  <div class="wrap">
+    <div class="sechead"><span class="num">07 — Il quanto</span></div>
+    <h2>La macchina che non entra in questa scala</h2>
+    <p class="sub">
+      Un computer quantistico non è un computer più veloce: è un altro tipo di macchina, e per questo
+      <b>non ha un numero di op/s</b>. Non esegue una sequenza di operazioni su un registro: prepara uno
+      stato in cui 100 qubit descrivono 2¹⁰⁰ ampiezze contemporaneamente. Confrontarlo con i FLOPS è come
+      misurare una gru in cavalli vapore.
+    </p>
+
+    <div class="unit-grid">
+      <div>
+        <h3>Perché non c'è un numero</h3>
+        <p>Un qubit non è un bit più veloce: è un bit che può stare in sovrapposizione. Su un problema
+        adatto (fattorizzare, simulare molecole) la macchina fa in ore quello che un supercomputer farebbe
+        in millenni; su tutto il resto non fa nulla, o fa peggio.</p>
+        <p>L'unico confronto onesto è <b>per compito</b>: su quale problema, con quanti qubit, con quale
+        tasso di errore.</p>
+      </div>
+      <div>
+        <h3>Dove siamo, novembre 2026</h3>
+        <p>Il chip più avanzato è <b>Willow</b> di Google: 105 qubit, porte con fedeltà 99,97% (singolo
+        qubit) e 99,88% (a due qubit). Con l'algoritmo <i>Quantum Echoes</i> ha eseguito in 2 ore un calcolo
+        che Frontier stimava in 3,2 anni — <b>13.000 volte più lento</b> — con un risultato verificabile.</p>
+        <p>IBM ha <b>Nighthawk r2</b>: 120 qubit logici programmabili (458 fisici), 7.500 operazioni,
+        100.000 circuiti al secondo.</p>
+      </div>
+      <div>
+        <h3>Cosa cambia, e quando</h3>
+        <p>Nel 2026 il vantaggio quantistico è <b>dimostrato ma inutile</b>: batte il classico su compiti
+        costruiti apposta. Il salto è il <b>2029</b>, quando IBM promette Starling: 200 qubit logici,
+        100 milioni di operazioni, errori corretti — la prima macchina che può risolvere problemi reali.</p>
+        <p>Per la crittografia serve molto di più: rompere RSA-2048 richiede oggi una stima di
+        <b>100.000-1.000.000 di qubit fisici</b> (era un miliardo nel 2012).</p>
+      </div>
+    </div>
+
+    <div class="chartbox" style="margin-top:26px">
+      <div class="chartbar"><div class="t">Dove siamo e cosa manca · 2019 → 2036</div></div>
+      <div class="chartwrap" id="chartQuantum"></div>
+      <div class="legend">
+        <span><i class="dot world"></i> fatto, misurato</span>
+        <span><i class="dot" style="background:#3d454e"></i> previsione dei costruttori</span>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="max-height:none;margin-top:24px">
+      <table>
+        <caption>Lo stato dell'arte e le tappe dichiarate.</caption>
+        <thead><tr><th>Sistema</th><th>Qubit</th><th>Cosa sa fare</th><th>Quando</th></tr></thead>
+        <tbody>
+          <tr><td>Google Willow</td><td>105</td><td>Quantum Echoes: 13.000× un supercomputer, risultato verificabile</td><td>ott 2025</td></tr>
+          <tr><td>IBM Nighthawk r2</td><td>120 logici (458 fisici)</td><td>7.500 operazioni per circuito, 100.000 circuiti/s</td><td>2026</td></tr>
+          <tr><td>IBM Nighthawk r3 ×2</td><td>520 → 1.040</td><td>10.000 operazioni, due chip collegati</td><td>2027</td></tr>
+          <tr><td><b>IBM Starling</b></td><td>200 logici</td><td>100 milioni di operazioni con errori corretti — il primo computer quantistico utile</td><td>2029</td></tr>
+          <tr><td>IBM Blue Jay</td><td>2.000 logici</td><td>1 miliardo di operazioni, chimica e materiali</td><td>2033+</td></tr>
+          <tr><td>RSA-2048 spezzato</td><td>100.000-1.000.000 fisici</td><td>rompe la crittografia a chiave pubblica di oggi</td><td>2030-2040?</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption">
+      Nella scala di questa pagina il quanto non ha posto: 200 qubit logici non sono 10²³ op/s, sono
+      <b>un tipo di calcolo che il silicio classico non sa fare</b>. È l'unico punto in cui la curva
+      esponenziale del mondo potrebbe prendere una scorciatoia invece di salire ancora. Le date oltre il
+      2026 sono impegni dei costruttori, non fatti: la storia dei computer quantistici è piena di
+      traguardi spostati in avanti.
+    </p>
+  </div>
+</section>
+
+<section id="llm">
+  <div class="wrap">
+    <div class="sechead"><span class="num">08 — I modelli</span></div>
+    <h2>Da ELIZA a quello che gira sul tuo portatile</h2>
+    <p class="sub">
+      Un modello linguistico è <b>un file di numeri</b> che, dato un pezzo di testo, indovina la parola
+      successiva. Non c'è altro dentro. Tutto quello che sembra intelligenza esce da lì — e dalla scala:
+      più numeri, più cose riesce a fare.
+    </p>
+
+    <div class="tablewrap" style="max-height:none">
+      <table class="desc">
+        <caption>Sessant'anni di «parlare con una macchina», in sei righe.
+        <thead><tr><th>Anno</th><th>Cosa</th><th>Dimensione</th><th>Cosa sapeva fare</th></tr></thead>
+        <tbody>
+          <tr><td>1966</td><td>ELIZA</td><td>0 parametri</td><td>regole scritte a mano: faceva domande, non capiva niente</td></tr>
+          <tr><td>2013</td><td>word2vec</td><td>milioni</td><td>impara che «re» e «regina» stanno vicini nello spazio dei numeri</td></tr>
+          <tr><td>2017</td><td>Transformer</td><td>—</td><td>l'architettura su cui girano tutti i modelli di oggi</td></tr>
+          <tr><td>2020</td><td>GPT-3</td><td>175 miliardi</td><td>scrive testi credibili su quasi tutto, senza aver mai cercato nulla</td></tr>
+          <tr><td>2025</td><td>gpt-oss-120b</td><td>117 miliardi</td><td>la prima frontiera «aperta»: pesi scaricabili, gira su una macchina sola</td></tr>
+          <tr><td>2026</td><td>Kimi K3.1 · Qwen3.8 · GPT-6</td><td>1.000+ miliardi</td><td>ragiona, scrive codice, usa strumenti per ore — e i migliori sono chiusi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">Cosa vuol dire «quantizzato»</h3>
+    <p class="sub" style="margin-bottom:18px">
+      Un modello da 27 miliardi di parametri è un file di 27 miliardi di numeri. A 16 bit l'uno sono
+      <b>54 GB</b>: non ci sta in nessuna scheda da gioco. Quantizzare significa <b>arrotondare quei numeri
+      a una scala più corta</b> — 8 bit, 5, 4 — così il file scende a 18 GB e ci sta. È la stessa idea della
+      sezione 01, applicata ai pesi invece che alle somme: perdi un po' di precisione, guadagni memoria e
+      velocità. Nella pratica il modello legge tutti i pesi a ogni parola: metà byte, il doppio della velocità.
+    </p>
+
+    <div class="tablewrap" style="max-height:none">
+      <table class="desc">
+        <caption>Quanto pesa un modello, secondo come lo arrotondi.
+        <thead><tr><th>Quantizzazione</th><th>bit per peso</th><th>9 B</th><th>27 B</th><th>120 B</th><th>Qualità</th></tr></thead>
+        <tbody>
+          <tr><td>FP16</td><td>16</td><td>18 GB</td><td>54 GB</td><td>240 GB</td><td>il riferimento, quello che ha allenato l'azienda</td></tr>
+          <tr><td>Q8</td><td>8</td><td>9 GB</td><td>27 GB</td><td>120 GB</td><td>indistinguibile a occhio</td></tr>
+          <tr><td>Q6</td><td>6</td><td>7 GB</td><td>20 GB</td><td>90 GB</td><td>praticamente identico</td></tr>
+          <tr><td><b>Q4_K_M</b></td><td>≈4,5</td><td>6,6 GB</td><td><b>18 GB</b></td><td>65 GB</td><td><b>il compromesso standard</b>: perdi l'1-2%, dimezzi la memoria</td></tr>
+          <tr><td>Q3</td><td>3</td><td>5 GB</td><td>12 GB</td><td>48 GB</td><td>si sente, ma su un portatile vecchio è meglio di niente</td></tr>
+          <tr><td>Q2</td><td>2</td><td>3 GB</td><td>8 GB</td><td>32 GB</td><td>sconsigliato: il modello comincia a «rincretinire»</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">
+      Oltre ai pesi c'è la <b>KV cache</b>, la memoria che serve per ricordare il testo già letto: cresce con
+      la lunghezza della conversazione e va sommata. Un 27B a Q4 sta in 18 GB, ma con 32.000 token di contesto
+      te ne servono altri 2-4.
+    </p>
+
+    <h3 class="subhead">Quanto è intelligente, in locale e in frontiera</h3>
+    <p class="sub" style="margin-bottom:18px">
+      Il test più usato è <b>GPQA Diamond</b>: 198 domande di fisica, chimica e biologia a livello di
+      dottorato, scritte apposta per non essere risolvibili con una ricerca. Un professore del settore, con
+      Google aperto, ne azzecca il <b>65-75%</b>. Uno di un'altra disciplina il 34%.
+    </p>
+
+    <div class="tablewrap" style="max-height:none">
+      <table class="desc">
+        <caption>GPQA Diamond, novembre 2026. Più alto è meglio.
+        <thead><tr><th>Chi</th><th>GPQA</th><th>Dove gira</th><th>Quanto costa</th></tr></thead>
+        <tbody>
+          <tr><td>Professore esperto, con Google</td><td>65-75%</td><td>un cervello</td><td>—</td></tr>
+          <tr><td>Gemma 4 12B</td><td>78,8%</td><td>un portatile da 16 GB</td><td>0</td></tr>
+          <tr><td>Qwen3.5 9B</td><td>81,7%</td><td>una scheda da 8 GB</td><td>0</td></tr>
+          <tr><td><b>Qwen3.8 27B</b> · il migliore «da scrivania»</td><td><b>89,2%</b></td><td>una RTX 5090, 18 GB</td><td>0</td></tr>
+          <tr><td>Kimi K3.1 Pro · frontiera aperta</td><td>94,2%</td><td>8 GPU in un datacenter</td><td>a token</td></tr>
+          <tr><td>GPT-6 Astra · frontiera chiusa</td><td>96,8%</td><td>un datacenter, non si sa dove</td><td>≈$20 per milione di token</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="pull" style="border-color:var(--pc)">
+      Un modello da 27 miliardi che gira sulla tua scheda video batte un professore con Google
+      <b>89 a 70</b>. Ma è un quiz: una domanda, una risposta, fine.
+    </p>
+
+    <p class="caption" style="margin-top:22px">
+      Sui lavori lunghi il divario si riapre. Sull'indice Artificial Analysis — che misura compiti agentici,
+      ore di lavoro, uso di strumenti — il 27B locale prende <b>20</b> e il miglior modello aperto <b>46</b>,
+      più del doppio. La differenza fra locale e frontiera non è «intelligente o scemo»: è
+      <b>quanto a lungo riesce a lavorare senza perdersi</b>, quanto contesto tiene in testa e quanto è
+      affidabile quando la risposta non è in un quiz.
+    </p>
+
+    <h3 class="subhead">E nel datacenter di una volta?</h3>
+    <p class="sub" style="margin-bottom:18px">
+      Prendi quel file da 18 GB — il 27B quantizzato, quello che sta in una 5090 — e mettilo nel computer
+      che portò l'uomo sulla Luna. Una risposta di 300 parole richiede circa
+      <b>1,6 × 10¹³ operazioni</b>: due per parametro per ogni parola.
+    </p>
+
+    <div class="tablewrap" style="max-height:none">
+      <table class="desc">
+        <caption>Lo stesso modello, la stessa risposta: cambia solo il silicio sotto.
+        <thead><tr><th>Dove</th><th>op/s</th><th>Una risposta di 300 parole</th></tr></thead>
+        <tbody>
+          <tr><td>NASA RTCC · 1969</td><td>5 M</td><td><b style="color:#e05c56">37 giorni</b></td></tr>
+          <tr><td>Cray-2 · 1985</td><td>1,9 G</td><td>2 ore e 20</td></tr>
+          <tr><td>SGI POWER Indigo² · 1994</td><td>300 M</td><td>15 ore</td></tr>
+          <tr><td>PC con Pentium 133 · 1995</td><td>130 M</td><td>35 ore</td></tr>
+          <tr><td>iPhone 1 · 2007</td><td>1 G</td><td>4 ore e mezza</td></tr>
+          <tr><td>iPhone 18 · 2026 <small>(con un 9B, che è quello che ci sta)</small></td><td>70 T</td><td>≈ 1 minuto</td></tr>
+          <tr><td>RTX 5090 · 2025</td><td>210 T</td><td>≈ 10 secondi</td></tr>
+          <tr><td>B300 · 2026</td><td>2,5 P</td><td>≈ 2 secondi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption">
+      Conti fatti solo sul calcolo, ignorando la memoria — che sulle macchine vecchie era il vero muro, e su
+      quelle nuove è il collo di bottiglia: un modello locale passa il tempo a <b>leggere i pesi</b>, non a
+      moltiplicarli. Per questo quantizzare lo velocizza: metà byte da leggere, il doppio dei token al secondo.
+      E per questo una 5090 da 210 Top/s non è 100 volte più veloce di un iPhone: 1.800 GB/s contro 60.
+    </p>
+  </div>
+</section>
+
+<section id="dieci">
+  <div class="wrap">
+    <div class="sechead"><span class="num w">09 — Dieci anni</span></div>
+    <h2>Dieci anni fa / oggi</h2>
+    <p class="sub">
+      2016 → 2026. Il PC in scrivania è cresciuto di poco più di <b>tre volte</b>.
+      Il mondo, nello stesso periodo, di <b>quasi trenta</b>. È la storia del decennio:
+      il calcolo non è entrato nei nostri PC, è uscito dalle nostre case.
+    </p>
+
+    <div class="decade-grid" id="decadeCards"></div>
+
+    <p class="pull">
+      Nel 2016 tutta la potenza di calcolo del pianeta equivaleva a
+      <b>4,5 miliardi</b> di PC medi. Oggi ne vale <b>42 miliardi</b>.
+    </p>
+
+    <div class="chartbox" style="margin-top:34px">
+      <div class="chartbar"><div class="t">Crescita annua della potenza mondiale · %</div></div>
+      <div class="chartwrap" id="chartGrowth"><div class="tip" id="tipGrowth"></div></div>
+      <div class="legend"><span><i class="ln" style="border-color:var(--world)"></i> variazione anno su anno</span>
+      <span><i class="ln" style="border-color:#6b5a3a"></i> era pre-AI (&lt;2023)</span></div>
+    </div>
+    <p class="caption">
+      Dal 2009 la crescita annua oscilla fra il 28% e il 54%, rallenta nel 2022–2024 e poi risale
+      al 60,5% dell'ultimo anno, quando a trainare è il silicio AI (3,3× l'anno contro il 10–16%
+      del silicio di consumo). Non è un trend che può durare all'infinito: energia, interconnessioni
+      e capacità delle fab sono i limiti fisici.
+    </p>
+  </div>
+</section>
+
+<section id="dati">
+  <div class="wrap">
+    <div class="sechead"><span class="num">10 — I dati</span></div>
+    <h2>Anno per anno</h2>
+    <p class="sub">Le due serie complete, con il rapporto: quanti PC medi servono per eguagliare il mondo in quell'anno.</p>
+    <div class="tablewrap">
+      <table id="tbl">
+        <caption>Operazioni al secondo, di picco. Anni evidenziati: 2016 e 2026.</caption>
+        <thead><tr><th>Anno</th><th>PC medio</th><th>Mondo</th><th>Mondo / PC</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn" id="dl">Scarica CSV</button>
+      <span class="mono" style="font-size:11px;color:var(--muted);align-self:center" id="dlNote"></span>
+    </div>
+  </div>
+</section>
+
+<section id="metodo">
+  <div class="wrap">
+    <div class="sechead"><span class="num">11 — Metodo</span></div>
+    <h2>Cosa è solido e cosa è stima</h2>
+
+    <div class="method">
+      <div>
+        <h3>L'unità</h3>
+        <p>Un'operazione elementare al secondo, capacità di picco: la stessa grandezza per il 4004 del 1971
+        e per un acceleratore del 2026. Per il mondo è BF16 denso; per i PC è la somma di CPU, GPU
+        integrata e NPU dichiarate dal costruttore.</p>
+        <p>Il picco è un limite di velocità, non una velocità: pesato per l'utilizzo reale il mondo
+        scende a 14,9 Zop/s, il 16% del totale.</p>
+      </div>
+      <div>
+        <h3>Le due scale</h3>
+        <p>Le curve sono su asse logaritmico perché in cinquantacinque anni la potenza mondiale è passata
+        da 10¹³ a 10²³ op/s: dieci ordini di grandezza, che su scala lineare sarebbero una riga piatta
+        schiacciata sull'asse. Una retta qui significa crescita esponenziale a tasso costante.</p>
+        <p>PC medio e mondo non si sommano: il primo è un'unità di misura, il secondo è il totale
+        che la contiene.</p>
+      </div>
+      <div>
+        <h3>Gli errori</h3>
+        <p>La stima mondiale ha una banda ±40% dichiarata dalla fonte, calcolata simulando 200.000 volte
+        le incertezze su base installata e throughput per dispositivo.</p>
+        <p>La curva del PC è una ricostruzione da schede tecniche di macchine rappresentative:
+        ordine di grandezza corretto, non il singolo valore.</p>
+      </div>
+    </div>
+
+    <div class="warn">
+      <b>Da non sommare.</b> Le cifre della sezione 05 sono &laquo;di picco, alla precisione migliore&raquo;: un iPhone
+      conta operazioni intere (INT8) e una Cray-2 virgola mobile a 64 bit. Su questi ordini di grandezza la
+      differenza di unità sposta il numero di 2-8 volte, non di 10: la classifica regge, il decimale no.
+      Il mining Bitcoin esegue circa 900 EH/s di hash SHA-256 — più &laquo;operazioni&raquo;
+      al secondo di tutta la capacità in virgola mobile del pianeta, ma una sola funzione, per sempre.
+      Non è calcolo. Stessa regola per i 500 supercomputer TOP500: 15 EFLOP/s FP64, lo 0,016% del totale,
+      e sono già contati dentro gli acceleratori.
+    </div>
+
+    <ul class="sources">
+      <li><span>Mondo</span><span>Earth Compute — inventario del silicio installato, serie 2008–2026, unità BF16 denso di picco. <a href="https://earthcompute.org/history">earthcompute.org/history</a></span></li>
+      <li><span>1971–2007</span><span>Hilbert &amp; López, <i>The World's Technological Capacity to Store, Communicate, and Compute Information</i>, Science 332 (2011): 6,4·10¹⁸ istruzioni/s nel 2007, +58%/anno.</span></li>
+      <li><span>Supercomputer</span><span>TOP500, 66ª lista, novembre 2025: 14,99 EFLOP/s aggregati Rmax, El Capitan 1,809 EFLOP/s.</span></li>
+      <li><span>PC</span><span>Specifiche Intel 4004 (92.000 op/s), IBM PC, 386/486, Pentium, Core, e media flotta Earth Compute 2026 (≈2,2 Top/s per macchina).</span></li>
+      <li><span>Chip singolo</span><span>Schede del costruttore: 4004, GeForce GTX 280, Tesla K20X, P100, V100, A100 (312 Top/s BF16 densi), H100 (989 Top/s), B200 (2,25 Pop/s), B300/GB300 (2,5 Pop/s densi, 5 sparsi). Cerebras WSE-3: 125 Pop/s sparsi = 15,6 densi.</span></li>
+      <li><span>Dispositivi</span><span>Cray-2 (1,9 GFLOPS), SGI POWER Indigo² R8000 (300 MFLOPS, guida prodotto SGI 1994), IBM System/360-75 del RTCC Apollo (1 MIPS ×5), Commodore 64 (MOS 6510), iPhone 1 (ARM1176 + PowerVR MBX), iPhone 18 Pro/A20 Pro, Tesla FSD Computer (144 TOPS), RTX 5090 (209,5 TFLOPS BF16 densi), B300.</span></li>
+      <li><span>Quanto</span><span>Google Quantum AI, <i>Quantum Echoes</i> (Nature, ott 2025); IBM Quantum roadmap (Nighthawk r2/r3, Starling 2029, Blue Jay 2033+); stime sui qubit per RSA-2048: Gidney 2025 (~900.000), Webster 2026 (~100.000), tracker post-quantumsecurity.org.</span></li>
+      <li><span>Popolazione</span><span>ONU, World Population Prospects: 7,45 mld (2016) → 8,23 mld (2026).</span></li>
+    </ul>
+
+    <p class="caption" style="margin-top:26px">
+      I valori 2016 sono al 31 dicembre 2016; i valori 2026 al 25 novembre 2026. Il confronto
+      &laquo;10 anni&raquo; copre quindi 9 anni e 11 mesi.
+    </p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div>Silicio / 1971—2026 · pagina statica, nessuna dipendenza esterna</div>
+  <div>dati: Earth Compute · Hilbert &amp; López · TOP500</div>
+</footer>
+
+<script>
+const DATA = {"years":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026],"pc":[92000.0,128486.6,179443.6,250609.8,350000.0,418330.0,500000.0,523317.6,547722.6,573265.7,600000.0,814325.3,1105209.4,1500000.0,2080083.8,2884499.1,4000000.0,6214465.0,9654893.8,15000000.0,23811015.8,37797631.5,60000000.0,94868329.8,150000000.0,262074139.4,457885697.0,800000000.0,1414213562.4,2500000000.0,3968502629.9,6299605249.5,10000000000.0,15874010519.7,25198420997.9,40000000000.0,54288352331.9,73680629972.8,100000000000.0,144224957030.7,208008382305.2,300000000000.0,367171023102.5,449381867353.8,550000000000.0,692956577442.2,873070578582.5,1100000000000.0,1271778358861.1,1470381994606.8,1700000000000.0,1794634226362.6,1894536474371.8,2000000000000.0,2097617696340.3,2200000000000.0],"world":[9652943000000.0,15251650000000.0,24097610000000.0,38074220000000.0,60157260000000.0,95048480000000.0,150176600000000.0,237279000000000.0,374900800000000.0,592343300000000.0,935902500000000.0,1478726000000000.0,2336387000000000.0,3691491000000000.0,5832556000000000.0,9215439000000000.0,1.456039e+16,2.300542e+16,3.634857e+16,5.743074e+16,9.074056e+16,1.433701e+17,2.265247e+17,3.579091e+17,5.654964e+17,8.934842e+17,1.411705e+18,2.230494e+18,3.524181e+18,5.568205e+18,8.797765e+18,1.390047e+19,2.196274e+19,3.470113e+19,5.482778e+19,8.66279e+19,1.368721e+20,2.162579e+20,2.808634e+20,3.685517e+20,4.914759e+20,6.76956e+20,9.486288e+20,1.386415e+21,2.137747e+21,3.139522e+21,4.667576e+21,7.08184e+21,1.002162e+22,1.410565e+22,1.98391e+22,2.588691e+22,3.427267e+22,4.374972e+22,5.781518e+22,9.276969e+22],"delivered":[357907900000.0,565494400000.0,893481200000.0,1411700000000.0,2230486000000.0,3524169000000.0,5568186000000.0,8797735000000.0,13900420000000.0,21962660000000.0,34701010000000.0,54827600000000.0,86627600000000.0,136871600000000.0,216257100000000.0,341686300000000.0,539864300000000.0,852985700000000.0,1347717000000000.0,2129393000000000.0,3364442000000000.0,5315818000000000.0,8398992000000000.0,1.327041e+16,2.096724e+16,3.312824e+16,5.234263e+16,8.270135e+16,1.306681e+17,2.064556e+17,3.261999e+17,5.153959e+17,8.143255e+17,1.286634e+18,2.032882e+18,3.211954e+18,5.074887e+18,8.018322e+18,1.050778e+19,1.385011e+19,1.836325e+19,2.404009e+19,3.165674e+19,4.251153e+19,5.842857e+19,8.078199e+19,1.154033e+20,1.686141e+20,2.413849e+20,3.534039e+20,5.372356e+20,8.597907e+20,1.613578e+21,2.902002e+21,5.427045e+21,1.489181e+22],"pop":[3790000000,3862222222,3934444444,4006666667,4078888889,4151111111,4223333333,4295555556,4367777778,4440000000,4528000000,4616000000,4704000000,4792000000,4880000000,4968000000,5056000000,5144000000,5232000000,5320000000,5403000000,5486000000,5569000000,5652000000,5735000000,5818000000,5901000000,5984000000,6067000000,6150000000,6234000000,6318000000,6402000000,6486000000,6570000000,6654000000,6738000000,6822000000,6906000000,6990000000,7066666667,7143333333,7220000000,7296666667,7373333333,7450000000,7547500000,7645000000,7742500000,7840000000,7905000000,7970000000,8035000000,8100000000,8165000000,8230000000],"measuredFrom":2008,"growth":[[2009,29.9],[2010,31.2],[2011,33.4],[2012,37.7],[2013,40.1],[2014,46.1],[2015,54.2],[2016,46.9],[2017,48.7],[2018,51.7],[2019,41.5],[2020,40.8],[2021,40.6],[2022,30.5],[2023,32.4],[2024,27.7],[2025,32.1],[2026,60.5]]};
+</script>
+<script>
+(function(){
+  "use strict";
+
+  /* ── formato numerico italiano ─────────────────────────────── */
+  const nf = new Intl.NumberFormat('it-IT', {maximumFractionDigits:2});
+  const nf0 = new Intl.NumberFormat('it-IT', {maximumFractionDigits:0});
+  const SUP = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+  const sup = n => String(n).split('').map(c=>SUP[c]||c).join('');
+
+  function sci(v, digits){
+    if(v<=0) return '0';
+    const e = Math.floor(Math.log10(v));
+    const m = v/Math.pow(10,e);
+    return nf.format(Number(m.toFixed(digits===undefined?2:digits))) + ' · 10' + sup(e);
+  }
+  const PREF = [[1e24,'Y'],[1e21,'Z'],[1e18,'E'],[1e15,'P'],[1e12,'T'],[1e9,'G'],[1e6,'M'],[1e3,'k'],[1,'']];
+  function human(v){
+    if(v<=0) return '0';
+    for(const [b,s] of PREF){
+      if(v>=b){
+        const m=v/b;
+        const d = m>=100?0 : m>=10?1 : 2;
+        const t = new Intl.NumberFormat('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}).format(m);
+        return t+' '+s+'op/s';
+      }
+    }
+    return nf0.format(v)+' op/s';
+  }
+  function humanShort(v){
+    if(v<=0) return '0';
+    for(const [b,s] of PREF){
+      if(v>=b){
+        const m=v/b;
+        const d = m>=100?0 : m>=10?1 : 2;
+        return new Intl.NumberFormat('it-IT',{maximumFractionDigits:d}).format(m)+' '+s;
+      }
+    }
+    return nf0.format(v);
+  }
+  const mult = r => '×' + new Intl.NumberFormat('it-IT',{maximumFractionDigits: r<10?1:0}).format(r);
+
+  /* ── serie ─────────────────────────────────────────────────── */
+  const years = DATA.years;
+  const pc = DATA.pc;
+  const world = DATA.world;
+  const deliv = DATA.delivered;
+  const MEASURED_FROM = DATA.measuredFrom;
+
+  const seriesFor = key => key==='pc' ? pc : key==='deliv' ? deliv : world;
+
+  /* ── hero ──────────────────────────────────────────────────── */
+  const i2016 = years.indexOf(2016), iNow = years.length-1;
+  const nowPc = pc[iNow], nowWorld = world[iNow], oldPc = pc[i2016], oldWorld = world[i2016];
+  const nowCap = world[iNow]/DATA.pop[iNow], oldCap = world[i2016]/DATA.pop[i2016];
+
+  document.querySelector('[data-big="pc"]').textContent = humanShort(nowPc)+'op/s';
+  document.querySelector('[data-big="world"]').textContent = humanShort(nowWorld)+'op/s';
+  document.querySelector('[data-big="cap"]').textContent = humanShort(nowCap)+'op/s';
+  document.querySelector('[data-y2016="pc"]').textContent = humanShort(oldPc);
+  document.querySelector('[data-y2016="world"]').textContent = humanShort(oldWorld);
+  document.querySelector('[data-y2016="cap"]').textContent = humanShort(oldCap);
+  document.querySelector('[data-mult="pc"]').textContent = mult(nowPc/oldPc);
+  document.querySelector('[data-mult="world"]').textContent = mult(nowWorld/oldWorld);
+  document.querySelector('[data-mult="cap"]').textContent = mult(nowCap/oldCap);
+
+  /* ── motore grafico ────────────────────────────────────────── */
+  const NS='http://www.w3.org/2000/svg';
+  function el(tag,attrs){const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);return n;}
+
+  function makeChart(host, tip, cfg){
+    const W=1080, H=cfg.height||430;
+    const pad={l:74,r:26,t:30,b:44};
+    const svg = el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':cfg.aria});
+    const pw = W-pad.l-pad.r, ph = H-pad.t-pad.b;
+    const xMin=cfg.xMin, xMax=cfg.xMax;
+    const x = y => pad.l + (y-xMin)/(xMax-xMin)*pw;
+
+    let lo,hi;
+    if(cfg.scale==='log'){
+      lo = Math.log10(cfg.yMin); hi = Math.log10(cfg.yMax);
+    } else { lo = 0; hi = cfg.yMax; }
+    const y = v => {
+      if(cfg.scale==='log'){
+        const lv=Math.log10(Math.max(v,1e-6));
+        return pad.t + (1-(lv-lo)/(hi-lo))*ph;
+      }
+      return pad.t + (1-v/hi)*ph;
+    };
+
+    // grid
+    const g = el('g',{});
+    if(cfg.scale==='log'){
+      for(let e=Math.ceil(lo); e<=Math.floor(hi); e++){
+        const yy = y(Math.pow(10,e));
+        g.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:yy,y2:yy,class:'gridline major'}));
+        const t = el('text',{x:pad.l-12,y:yy+3.5,class:'axislabel','text-anchor':'end'});
+        t.textContent = '10'+sup(e);
+        g.appendChild(t);
+      }
+    } else {
+      const step = cfg.linStep || Math.pow(10, Math.floor(Math.log10(cfg.yMax)));
+      for(let v=0; v<=cfg.yMax; v+=step/2){
+        const yy=y(v);
+        g.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:yy,y2:yy,class:'gridline'}));
+        const t=el('text',{x:pad.l-12,y:yy+3.5,class:'axislabel','text-anchor':'end'});
+        t.textContent=v===0?'0':humanShort(v);
+        g.appendChild(t);
+      }
+    }
+    // decade highlight (2016-2026)
+    if(cfg.highlight){
+      const a=x(cfg.highlight[0]), b=x(cfg.highlight[1]);
+      g.appendChild(el('rect',{x:a,y:pad.t,width:b-a,height:ph,fill:'#ffffff',opacity:.028}));
+      g.appendChild(el('line',{x1:a,x2:a,y1:pad.t,y2:pad.t+ph,stroke:'#2a3037','stroke-dasharray':'2 4'}));
+      const lbl = el('text',{x:(a+b)/2,y:pad.t-12,class:'annot','text-anchor':'middle'});
+      lbl.textContent='ultimi 10 anni';
+      g.appendChild(lbl);
+    }
+    // x ticks
+    const xstep = cfg.xStep||10;
+    for(let yr=Math.ceil(xMin/xstep)*xstep; yr<=xMax; yr+=xstep){
+      const xx=x(yr);
+      g.appendChild(el('line',{x1:xx,x2:xx,y1:pad.t+ph,y2:pad.t+ph+5,stroke:'#2b3138'}));
+      const t=el('text',{x:xx,y:pad.t+ph+20,class:'axislabel','text-anchor':'middle'});
+      t.textContent=yr;
+      g.appendChild(t);
+    }
+    svg.appendChild(g);
+
+    // uncertainty band (measured range only)
+    if(cfg.band){
+      const s=seriesFor('peak');
+      const upt=[],dnt=[];
+      for(let i=0;i<years.length;i++){
+        if(years[i]<MEASURED_FROM) continue;
+        upt.push([x(years[i]), y(s[i]*1.4)]);
+        dnt.push([x(years[i]), y(s[i]*0.6)]);
+      }
+      const d = 'M'+upt.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L')
+              + 'L'+dnt.reverse().map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L')+'Z';
+      const bp = el('path',{d,fill:cfg.color,opacity:.07});
+      bp.dataset.band='1';
+      svg.appendChild(bp);
+    }
+
+    // series
+    const paths=[];
+    cfg.series.forEach((s,idx)=>{
+      const vals = seriesFor(s.key);
+      const pts = [];
+      for(let i=0;i<years.length;i++){
+        const isEst = (years[i] < MEASURED_FROM && s.splitEst && s.key!=='pc');
+        pts.push({x:x(years[i]), y:y(vals[i]), est:isEst, yr:years[i], v:vals[i]});
+      }
+      // solid part (measured or full)
+      const solid = pts.filter(p=>!p.est);
+      const est = pts.filter(p=>p.est);
+      const mk = (arr,attrs)=>{
+        if(!arr.length) return null;
+        const d='M'+arr.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join('L');
+        const path=el('path',Object.assign({d,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},attrs));
+        svg.appendChild(path); paths.push(path); return path;
+      };
+      if(est.length>1){
+        const pe = mk(est,{stroke:s.estColor||'#5b636b','stroke-width':1.6,'stroke-dasharray':'4 5',opacity:.9});
+        if(pe) pe.dataset.dash='1';
+      }
+      if(solid.length>1){
+        const p=mk(solid,{stroke:cfg.color,'stroke-width':2.2});
+        p.dataset.main='1';
+        if(solid.length>0){
+          const last=solid[solid.length-1];
+          const ed=el('circle',{cx:last.x,cy:last.y,r:3.5,fill:cfg.color});
+          ed.dataset.main='1';
+          svg.appendChild(ed);
+        }
+      }
+    });
+
+    // annotations
+    const annotsG = el('g',{'data-annots':'1'});
+    svg.appendChild(annotsG);
+    (cfg.annots||[]).forEach(a=>{
+      if(cfg.scale==='lin' && !a.keepLin) return;
+      const xx=x(a.y);
+      const s=seriesFor(a.key||cfg.series[0].key);
+      const idx=years.indexOf(a.y);
+      if(xx===undefined||idx<0) return;
+      const yy=y(s[idx]);
+      const dy = (cfg.scale==='lin' && a.dyLin!==undefined) ? a.dyLin : (a.dy||26);
+      const ty = yy - dy;
+      annotsG.appendChild(el('line',{x1:xx,y1:yy-5,x2:xx,y2:ty+6,class:'lead'}));
+      annotsG.appendChild(el('circle',{cx:xx,cy:yy,r:2.6,fill:'#0b0d0f',stroke:cfg.color,'stroke-width':1.4}));
+      const t=el('text',{x:xx+(a.dx||0),y:ty,class:a.strong?'annot annot-b':'annot','text-anchor':a.anchor||'middle'});
+      t.textContent=a.t;
+      annotsG.appendChild(t);
+      if(a.t2){
+        const t2=el('text',{x:xx+(a.dx||0),y:ty-13,class:'annot','text-anchor':a.anchor||'middle'});
+        t2.textContent=a.t2; annotsG.appendChild(t2);
+      }
+    });
+
+    // hover layer
+    const hover = el('g',{});
+    const vline = el('line',{y1:pad.t,y2:pad.t+ph,stroke:'#4a525a','stroke-width':1,opacity:0});
+    hover.appendChild(vline);
+    const hdots = cfg.series.map(s=>{
+      const c=el('circle',{r:4,fill:cfg.color,stroke:'#08090a','stroke-width':2,opacity:0});
+      hover.appendChild(c); return c;
+    });
+    svg.appendChild(hover);
+
+    const overlay = el('rect',{x:pad.l,y:pad.t,width:pw,height:ph,fill:'transparent',style:'cursor:crosshair'});
+    svg.appendChild(overlay);
+    host.insertBefore(svg, host.firstChild);
+    host._svg = svg; host._geo={x,y,pad,W,H};
+
+    let active=false;
+    function show(evt){
+      const r = svg.getBoundingClientRect();
+      const px = (evt.clientX - r.left) * (W / r.width);
+      let yr = xMax;
+      for(let i=0;i<years.length;i++){
+        if(x(years[i])>=px){ yr=years[i]; break; }
+      }
+      const i=years.indexOf(yr);
+      const xx=x(yr);
+      vline.setAttribute('x1',xx); vline.setAttribute('x2',xx); vline.setAttribute('opacity',.55);
+      let rows='';
+      cfg.series.forEach((s,k)=>{
+        const v=seriesFor(s.key)[i];
+        hdots[k].setAttribute('cx',xx); hdots[k].setAttribute('cy',y(v)); hdots[k].setAttribute('opacity',1);
+        rows += '<div class="r"><i>'+s.label+'</i><span>'+humanShort(v)+'op/s</span></div>';
+      });
+      if(cfg.tipExtra) rows += cfg.tipExtra(i);
+      tip.innerHTML = '<div class="y">'+yr+'</div>'+rows;
+      const hr = host.getBoundingClientRect(), sr = svg.getBoundingClientRect();
+      const scx = sr.width/W, scy = sr.height/H;
+      const tpx = Math.min(Math.max(xx*scx, 86), sr.width-86);
+      const tpy = Math.max(46, Math.min(...cfg.series.map(s=>y(seriesFor(s.key)[i])))*scy);
+      tip.style.left = (sr.left-hr.left + tpx)+'px';
+      tip.style.top  = (sr.top-hr.top + tpy)+'px';
+      tip.style.opacity = 1;
+    }
+    overlay.addEventListener('pointermove', show);
+    overlay.addEventListener('pointerenter', show);
+    overlay.addEventListener('pointerleave', ()=>{
+      tip.style.opacity=0; vline.setAttribute('opacity',0); hdots.forEach(c=>c.setAttribute('opacity',0));
+    });
+
+    // animate draw
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && paths.length){
+      paths.forEach(p=>{
+        if(p.dataset.dash) { p.dataset.skip='1'; return; }
+        let len=0;
+        try{ len=p.getTotalLength(); }catch(e){ len=2000; }
+        if(!len) len=2000;
+        p.style.strokeDasharray = len+' '+len;
+        p.style.strokeDashoffset = len;
+      });
+      const io = new IntersectionObserver((ents,obs)=>{
+        ents.forEach(e=>{
+          if(e.isIntersecting){
+            paths.forEach((p,k)=>{
+              p.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(.2,.7,.2,1) '+(k*0.12)+'s';
+              p.style.strokeDashoffset = 0;
+            });
+            obs.disconnect();
+          }
+        });
+      },{threshold:.25});
+      io.observe(svg);
+    }
+    return svg;
+  }
+
+  /* ── chart PC ──────────────────────────────────────────────── */
+  const hostPC = document.getElementById('chartPC');
+  const tipPC = document.getElementById('tipPC');
+  const cfgPC = {
+    xMin:1970, xMax:2026, yMin:1e4, yMax:3e13,
+    scale:'log', color:'#f2a33c', highlight:[2016,2026], xStep:10,
+    aria:'Capacità di calcolo di un personal computer medio, 1971-2026',
+    series:[{key:'pc', label:'PC medio', splitEst:false}],
+    annots:[
+      {y:1971,t:'Intel 4004',t2:'92.000 op/s · 2.300 transistor',dy:76,dyLin:20,dx:14,anchor:'start',strong:true,keepLin:true},
+      {y:1981,t:'IBM PC',dy:26,dx:-10,anchor:'end'},
+      {y:1993,t:'Pentium',dy:-24,anchor:'middle'},
+      {y:2006,t:'Core 2 Duo',dy:32,anchor:'middle'},
+      {y:2016,t:'2016',dy:30,dyLin:22,anchor:'middle',keepLin:true},
+      {y:2026,t:'oggi',dy:-26,dyLin:-24,dx:-8,anchor:'end',strong:true,keepLin:true}
+    ]
+  };
+  function renderPC(scale){
+    const old = hostPC.querySelector('svg'); if(old) old.remove();
+    cfgPC.scale = scale;
+    cfgPC.yMax = scale==='log' ? 3e13 : 2.6e12;
+    const tt=document.getElementById('pcTitle');
+    if(tt) tt.textContent = 'PC medio · op/s · ' + (scale==='log'?'scala logaritmica':'scala lineare');
+    makeChart(hostPC, tipPC, cfgPC);
+  }
+  renderPC('log');
+  const segPC = document.querySelector('#pc .seg');
+  segPC.addEventListener('click', ev=>{
+    const b=ev.target.closest('button'); if(!b) return;
+    [...segPC.children].forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    renderPC(b.dataset.scale);
+  });
+
+  /* ── chart mondo ───────────────────────────────────────────── */
+  const hostW = document.getElementById('chartWorld');
+  const cfgWorld = {
+    xMin:1971, xMax:2026, yMin:1e12, yMax:1e25,
+    scale:'log', color:'#54cfc3', highlight:[2016,2026], xStep:10, band:true,
+    aria:'Potenza di calcolo installata nel mondo, 1971-2026',
+    series:[{key:'peak', label:'installato', splitEst:true}],
+    annots:[
+      {y:2007,t:'Hilbert & López',dy:-30,dx:-56,anchor:'end',strong:true},
+      {y:2012,t:'AlexNet',dy:-44,dx:-18,anchor:'end'},
+      {y:2017,t:'Transformer',dy:38,anchor:'middle'},
+      {y:2026,t:'92,8 Zop/s',dy:-32,dx:-6,anchor:'end',strong:true}
+    ]
+  };
+  const svgWorld = makeChart(hostW, document.getElementById('tipWorld'), cfgWorld);
+
+  /* toggle picco / consegnato */
+  const segW = document.querySelector('#mondo .seg');
+  segW.addEventListener('click', ev=>{
+    const b=ev.target.closest('button'); if(!b) return;
+    [...segW.children].forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    const key=b.dataset.series;
+    // rebuild only the main line
+    const svg=hostW.querySelector('svg');
+    svg.querySelectorAll('[data-main]').forEach(n=>n.remove());
+    const vals = seriesFor(key);
+    const geo=hostW._geo;
+    let d='';
+    for(let i=0;i<years.length;i++){
+      if(years[i]<MEASURED_FROM) continue;
+      d += (d?'L':'M')+geo.x(years[i]).toFixed(1)+','+geo.y(vals[i]).toFixed(1);
+    }
+    const p=el('path',{d,fill:'none',stroke: key==='deliv' ? '#7fa8a3' : '#54cfc3','stroke-width':2.2,'stroke-linecap':'round'});
+    p.dataset.main='1';
+    const geo2=hostW._geo;
+    const lastY=years[years.length-1];
+    const dot=el('circle',{cx:geo2.x(lastY),cy:geo2.y(vals[vals.length-1]),r:3.5,fill:key==='deliv'?'#7fa8a3':'#54cfc3'});
+    dot.dataset.main='1';
+    const anchor=svg.querySelector('rect[fill="transparent"]');
+    svg.insertBefore(p, anchor); svg.insertBefore(dot, anchor);
+    const lg=document.getElementById('lgWorld');
+    if(lg) lg.textContent = key==='deliv' ? 'capacità realmente in uso (16% del picco)' : 'capacità installata (picco dense BF16)';
+    cfgWorld.series[0].key=key;
+    cfgWorld.series[0].label = key==='deliv' ? 'realmente usato' : 'installato';
+    const ag=svg.querySelector('[data-annots]'); if(ag) ag.style.display = key==='deliv' ? 'none':'inline';
+    const bp=svg.querySelector('[data-band]'); if(bp) bp.style.display = key==='deliv' ? 'none':'inline';
+    updateWorldReadout(key);
+  });
+
+  /* ── readout strips ────────────────────────────────────────── */
+  function readout(id, items){
+    const host=document.getElementById(id);
+    host.innerHTML = items.map(it=>'<div><div class="k">'+it.k+'</div><div class="v">'+it.v+'</div></div>').join('');
+  }
+  readout('roPC',[
+    {k:'1971 · Intel 4004',v:'92.000 op/s'},
+    {k:'oggi · PC medio',v:humanShort(nowPc)+'op/s'},
+    {k:'in 55 anni',v:mult(nowPc/pc[0])}
+  ]);
+  function updateWorldReadout(key){
+    const s = seriesFor(key==='deliv'?'deliv':'peak');
+    const i8 = years.indexOf(2008), iN = years.length-1;
+    readout('roWorld',[
+      {k:'2008 · '+(key==='deliv'?'in uso':'picco'),v:humanShort(s[i8])+'op/s'},
+      {k:'oggi · '+(key==='deliv'?'in uso':'picco'),v:humanShort(s[iN])+'op/s'},
+      {k:'rispetto al picco',v: key==='deliv' ? '16,1 %' : '100 %'}
+    ]);
+  }
+  updateWorldReadout('peak');
+
+  /* ── cards 10 anni ─────────────────────────────────────────── */
+  const cards = [
+    {k:'PC medio', cls:'pc', old:oldPc, now:nowPc, extra:'un computer da scrivania, nel 2016 come oggi'},
+    {k:'Mondo', cls:'world', old:oldWorld, now:nowWorld, extra:'acceleratori AI, telefoni, GPU, console, server'},
+    {k:'Pro capite', cls:'world', old:oldCap, now:nowCap, extra:'potenza mondiale divisa per gli abitanti'},
+    {k:'Mondo in PC medi', cls:'pc', old:oldWorld/oldPc, now:nowWorld/nowPc, unit:' PC', extra:'quanti PC medi equivalgono a tutto il silicio del pianeta'}
+  ];
+  const hostD = document.getElementById('decadeCards');
+  hostD.innerHTML = cards.map((c,ci)=>{
+    const domainLo = Math.log10(Math.min(c.old,c.now)*0.55);
+    const domainHi = Math.log10(Math.max(c.old,c.now)*1.9);
+    const pos = v => ((Math.log10(v)-domainLo)/(domainHi-domainLo))*100;
+    let ticks='';
+    for(let e=Math.ceil(domainLo); e<=Math.floor(domainHi); e++){
+      const pp=Math.min(96,Math.max(4,pos(Math.pow(10,e))));
+      ticks += '<i class="tick" style="left:'+pp.toFixed(2)+'%"></i>'
+            + '<span class="lbl" style="left:'+pp.toFixed(2)+'%">10'+sup(e)+'</span>';
+    }
+    const pOld=pos(c.old), pNow=pos(c.now);
+    return '<div class="card">'
+      + '<div class="k"><i class="dot '+c.cls+'"></i>'+c.k+'</div>'
+      + '<div class="big">'+mult(c.now/c.old)+' <small>in dieci anni</small></div>'
+      + '<div class="cmp"><span>2016<br><b>'+(c.unit?humanShort(c.old)+c.unit:humanShort(c.old)+'op/s')+'</b></span>'
+      + '<span style="text-align:right">oggi<br><b>'+(c.unit?humanShort(c.now)+c.unit:humanShort(c.now)+'op/s')+'</b></span></div>'
+      + '<div class="ruler" style="color:var(--'+c.cls+')">'
+      + '<i class="track"></i>'+ticks
+      + '<i class="seg" style="left:'+Math.min(pOld,pNow).toFixed(2)+'%;width:'+Math.abs(pNow-pOld).toFixed(2)+'%"></i>'
+      + '<i class="pt old" style="left:'+pOld.toFixed(2)+'%"></i>'
+      + '<i class="pt '+c.cls+'" style="left:'+pNow.toFixed(2)+'%"></i>'
+      + '</div>'
+      + '<div class="u" style="font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px">'+c.extra+'</div>'
+      + '</div>';
+  }).join('');
+
+  /* ── crescita annua ────────────────────────────────────────── */
+  (function(){
+    const host=document.getElementById('chartGrowth');
+    const tip=document.getElementById('tipGrowth');
+    const rows=DATA.growth; // [[year, pct], ...]
+    const W=1080,H=300,pad={l:54,r:24,t:26,b:34};
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Crescita annua della potenza di calcolo mondiale'});
+    const pw=W-pad.l-pad.r, ph=H-pad.t-pad.b;
+    const maxP=Math.max(...rows.map(r=>r[1]))*1.15;
+    const bw=pw/rows.length*0.6;
+    rows.forEach((r,i)=>{
+      const xx=pad.l+(i+0.5)*pw/rows.length;
+      const h=r[1]/maxP*ph;
+      const ai = r[0]>=2023;
+      svg.appendChild(el('rect',{x:xx-bw/2,y:pad.t+ph-h,width:bw,height:h,fill:ai?'#54cfc3':'#4a3f2c',opacity:ai?.95:.8}));
+      if(r[0]%2===1||i===rows.length-1){
+        const t=el('text',{x:xx,y:pad.t+ph+16,class:'axislabel','text-anchor':'middle'});
+        t.textContent=r[0]; svg.appendChild(t);
+      }
+    });
+    svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:pad.t+ph,y2:pad.t+ph,stroke:'#2b3138'}));
+    for(let p=0;p<=maxP;p+=20){
+      const yy=pad.t+ph-(p/maxP)*ph;
+      svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:yy,y2:yy,class:'gridline'}));
+      const t=el('text',{x:pad.l-10,y:yy+3.5,class:'axislabel','text-anchor':'end'});
+      t.textContent=p+'%'; svg.appendChild(t);
+    }
+    host.insertBefore(svg, host.firstChild);
+    const overlay=el('rect',{x:pad.l,y:pad.t,width:pw,height:ph,fill:'transparent'});
+    svg.appendChild(overlay);
+    overlay.addEventListener('pointermove', ev=>{
+      const rr=svg.getBoundingClientRect();
+      const px=(ev.clientX-rr.left)*(W/rr.width);
+      let idx=Math.floor((px-pad.l)/(pw/rows.length));
+      idx=Math.max(0,Math.min(rows.length-1,idx));
+      const r=rows[idx];
+      tip.innerHTML='<div class="y">'+r[0]+'</div><div class="r"><i>variazione</i><span>'+new Intl.NumberFormat('it-IT',{maximumFractionDigits:1}).format(r[1])+' %</span></div>';
+      tip.style.left=(pad.l+(idx+0.5)*pw/rows.length)*(host.clientWidth/W)+'px';
+      tip.style.top=(pad.t+20)+'px';
+      tip.style.opacity=1;
+    });
+    overlay.addEventListener('pointerleave',()=>tip.style.opacity=0);
+  })();
+
+  /* ── tabella ───────────────────────────────────────────────── */
+  (function(){
+    const tb=document.querySelector('#tbl tbody');
+    const frag=document.createDocumentFragment();
+    for(let i=years.length-1;i>=0;i--){
+      const tr=document.createElement('tr');
+      if(years[i]===2016||years[i]===2026) tr.className='hl';
+      tr.innerHTML='<td>'+years[i]+'</td>'
+        + '<td class="pcc">'+humanShort(pc[i])+'op/s</td>'
+        + '<td class="wc">'+humanShort(world[i])+'op/s</td>'
+        + '<td>'+sci(world[i]/pc[i],1)+'</td>';
+      frag.appendChild(tr);
+    }
+    tb.appendChild(frag);
+    document.getElementById('dlNote').textContent = years.length+' righe · 1971—2026';
+
+    document.getElementById('dl').addEventListener('click',()=>{
+      let csv='anno,pc_medio_op_s,mondo_op_s,rapporto\n';
+      for(let i=0;i<years.length;i++){
+        csv+=years[i]+','+pc[i].toExponential(6)+','+world[i].toExponential(6)+','+(world[i]/pc[i]).toExponential(4)+'\n';
+      }
+      const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download='potenza-di-calcolo-1971-2026.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+    });
+  })();
+
+  /* ── scala delle grandezze ─────────────────────────────────── */
+  (function(){
+    const host=document.getElementById('ladderBox');
+    if(!host) return;
+    const W=880,H=184,pad={l:54,r:54},pw=W-pad.l-pad.r,base=120;
+    const x=v=>pad.l+(Math.log10(v)/24)*pw;
+    const svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Scala delle grandezze da 1 op/s a 1 yottaop/s'});
+    svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:base,y2:base,stroke:'#2b3138'}));
+    const NM=['op/s','kop/s','Mop/s','Gop/s','Top/s','Pop/s','Eop/s','Zop/s','Yop/s'];
+    for(let e=0;e<=24;e++){
+      const xx=x(Math.pow(10,e)), major=e%3===0;
+      svg.appendChild(el('line',{x1:xx,x2:xx,y1:base,y2:base+(major?13:6),stroke:major?'#3d454e':'#282e35'}));
+      if(major){
+        const t=el('text',{x:xx,y:base+30,class:'axislabel','text-anchor':'middle'});
+        t.textContent=NM[e/3];
+        svg.appendChild(t);
+        const t2=el('text',{x:xx,y:base+44,class:'axislabel','text-anchor':'middle'});
+        t2.setAttribute('font-size','9.5');
+        t2.setAttribute('fill','#4a5057');
+        t2.textContent='10'+sup(e);
+        svg.appendChild(t2);
+      }
+    }
+    const ANCH=[
+      [9.2e4,'Intel 4004 · 92.000 op/s','1971',64,'start',0],
+      [1e12,'una PS5 · 1 Top/s','10,3 TFLOPS FP32',94,'middle',0],
+      [2.5e15,'una B300 · 2,5 Pop/s','densa, BF16',36,'end',0],
+      [9.28e22,'il mondo intero · 92,8 Zop/s','novembre 2026',94,'end',0]
+    ];
+    ANCH.forEach(a=>{
+      const [v,txt,sub,ty,anch]=a;
+      const xx=x(v);
+      svg.appendChild(el('line',{x1:xx,x2:xx,y1:base-4,y2:ty+6,class:'lead'}));
+      svg.appendChild(el('circle',{cx:xx,cy:base,r:4,fill:'#0b0d0f',stroke:'#8b9096','stroke-width':1.6}));
+      const t=el('text',{x:xx+4,y:ty,class:'annot annot-b','text-anchor':anch,'font-size':'11'});
+      t.textContent=txt; svg.appendChild(t);
+      const s=el('text',{x:xx+4,y:ty+13,class:'annot','text-anchor':anch,'font-size':'9.5'});
+      s.textContent=sub; svg.appendChild(s);
+    });
+    host.insertBefore(svg,host.firstChild);
+  })();
+
+  /* ── il mondo in un chip ───────────────────────────────────── */
+  const DEV_ANCH=[[1971,9.2e4],[1978,3.3e5],[1985,4.0e6],[1993,1.0e8],[1999,2.0e9],[2006,5.0e10],
+    [2008,9.3e11],[2012,3.95e12],[2016,1.9e13],[2017,1.25e14],[2020,3.12e14],[2022,9.89e14],
+    [2024,2.25e15],[2026,2.5e15]];
+  function interpLog(a,y){
+    for(let i=0;i<a.length-1;i++){
+      const y0=a[i][0],v0=a[i][1],y1=a[i+1][0],v1=a[i+1][1];
+      if(y>=y0&&y<=y1){
+        const t=(y-y0)/(y1-y0);
+        return Math.exp(Math.log(v0)+(Math.log(v1)-Math.log(v0))*t);
+      }
+    }
+    return a[0][1];
+  }
+  const device = years.map(y=>interpLog(DEV_ANCH,y));
+  const NOW_Y = years[years.length-1];
+  const DEV_NOW = device[device.length-1];
+  const WORLD_NOW = world[world.length-1];
+  const chipState = {target:'fixed', dbl:1.5, growth:40};
+
+  /* l'anno in cui un solo chip equivale al mondo di allora */
+  const eqDev = (function(){
+    const g = Math.pow(world[1]/world[0],1); // fattore annuo della ricostruzione pre-2008
+    return 1971 + Math.log(DEV_NOW/world[0])/Math.log(g);
+  })();
+
+  function chipCalc(){
+    const d=chipState.dbl, gr=chipState.growth/100;
+    const k=Math.log2(WORLD_NOW/DEV_NOW);
+    if(chipState.target==='fixed') return {year:NOW_Y+k*d, never:false, k};
+    const a=Math.LN2/d, b=Math.log(1+gr);
+    if(a<=b) return {year:null, never:true, k};
+    return {year:NOW_Y+(k*Math.LN2)/(a-b), never:false, k};
+  }
+
+  const chipHost=document.getElementById('chartChip');
+  const chipTip=document.getElementById('tipChip');
+
+  function drawChip(){
+    const res=chipCalc();
+    const d=chipState.dbl, gr=chipState.growth/100;
+    const worldAt=t=>WORLD_NOW*Math.pow(1+gr,t-NOW_Y);
+    const devAt=t=>DEV_NOW*Math.pow(2,(t-NOW_Y)/d);
+    const fixed = chipState.target==='fixed';
+    let xMax = res.never ? 2126 : Math.min(2200, Math.max(2085, Math.ceil((res.year+10)/10)*10));
+    const yTop = fixed ? WORLD_NOW*200 : worldAt(xMax)*2.5;
+    const yBot = 1e4;
+
+    const W=1080,H=470,pad={l:78,r:30,t:34,b:44};
+    const pw=W-pad.l-pad.r, ph=H-pad.t-pad.b;
+    const old=chipHost.querySelector('svg'); if(old) old.remove();
+    const svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Potenza mondiale contro singolo chip, proiezione'});
+    const X=t=>pad.l+(t-1970)/(xMax-1970)*pw;
+    const l0=Math.log10(yBot), l1=Math.log10(yTop);
+    const Y=v=>pad.t+(1-(Math.log10(v)-l0)/(l1-l0))*ph;
+
+    // griglia
+    for(let e=Math.ceil(l0);e<=Math.floor(l1);e++){
+      const yy=Y(Math.pow(10,e));
+      svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:yy,y2:yy,class:'gridline'+(e%3===0?' major':'')}));
+      if(e%3===0){
+        const t=el('text',{x:pad.l-12,y:yy+3.5,class:'axislabel','text-anchor':'end'});
+        t.textContent='10'+sup(e); svg.appendChild(t);
+      }
+    }
+    // asse x
+    const step=xMax>2150?25:20;
+    for(let yr=1980;yr<=xMax;yr+=step){
+      const xx=X(yr);
+      svg.appendChild(el('line',{x1:xx,x2:xx,y1:pad.t+ph,y2:pad.t+ph+5,stroke:'#2b3138'}));
+      const t=el('text',{x:xx,y:pad.t+ph+20,class:'axislabel','text-anchor':'middle'});
+      t.textContent=yr; svg.appendChild(t);
+    }
+    // zona futuro
+    svg.appendChild(el('rect',{x:X(NOW_Y),y:pad.t,width:X(xMax)-X(NOW_Y),height:ph,fill:'#ffffff',opacity:.026}));
+    const fl=el('text',{x:(X(NOW_Y)+X(xMax))/2,y:pad.t-14,class:'annot','text-anchor':'middle'});
+    fl.textContent='proiezione'; svg.appendChild(fl);
+
+    function pathOf(pts,attrs){
+      if(pts.length<2) return;
+      const dd='M'+pts.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('L');
+      svg.appendChild(el('path',Object.assign({d:dd,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},attrs)));
+    }
+    // storico
+    const wHist=[], dHist=[];
+    for(let i=0;i<years.length;i++){ wHist.push([years[i],world[i]]); dHist.push([years[i],device[i]]); }
+    pathOf(wHist,{stroke:'#54cfc3','stroke-width':2.2});
+    pathOf(dHist,{stroke:'#f2a33c','stroke-width':2.2});
+    svg.appendChild(el('circle',{cx:X(NOW_Y),cy:Y(world[world.length-1]),r:3.6,fill:'#54cfc3'}));
+    svg.appendChild(el('circle',{cx:X(NOW_Y),cy:Y(DEV_NOW),r:3.6,fill:'#f2a33c'}));
+
+    // proiezioni
+    const wp=[],dp=[];
+    for(let t=NOW_Y;t<=xMax+0.001;t+=0.5){
+      const wv = fixed ? WORLD_NOW : worldAt(t);
+      if(wv<=yTop*1.05) wp.push([t,wv]);
+      const dv=devAt(t);
+      if(dv<=yTop*1.05) dp.push([t,dv]);
+    }
+    pathOf(wp,{stroke:'#54cfc3','stroke-width':1.6,'stroke-dasharray':'5 5',opacity:.85});
+    pathOf(dp,{stroke:'#f2a33c','stroke-width':1.6,'stroke-dasharray':'5 5',opacity:.85});
+
+    // salto oggi
+    const gx=X(NOW_Y)-1, gy1=Y(WORLD_NOW), gy2=Y(DEV_NOW);
+    svg.appendChild(el('line',{x1:gx,x2:gx,y1:gy1,y2:gy2,stroke:'#3d454e','stroke-width':1}));
+    svg.appendChild(el('line',{x1:gx-4,x2:gx+4,y1:gy1,y2:gy1,stroke:'#3d454e'}));
+    svg.appendChild(el('line',{x1:gx-4,x2:gx+4,y1:gy2,y2:gy2,stroke:'#3d454e'}));
+    const gt=el('text',{x:gx+10,y:(gy1+gy2)/2,class:'annot annot-b','font-size':'10.5'});
+    gt.textContent='×'+new Intl.NumberFormat('it-IT',{maximumFractionDigits:0}).format(WORLD_NOW/DEV_NOW);
+    svg.appendChild(gt);
+
+    // incrocio
+    if(res.year && res.year<=xMax){
+      const cx=X(res.year), cy=Y(fixed?WORLD_NOW:worldAt(res.year));
+      svg.appendChild(el('line',{x1:cx,x2:cx,y1:cy,y2:pad.t+ph,stroke:'#54cfc3','stroke-width':1,'stroke-dasharray':'2 4',opacity:.55}));
+      svg.appendChild(el('circle',{cx:cx,cy:cy,r:7,fill:'none',stroke:'#fff','stroke-width':1.6}));
+      svg.appendChild(el('circle',{cx:cx,cy:cy,r:2.5,fill:'#fff'}));
+      const t1=el('text',{x:cx-12,y:cy-16,class:'annot annot-b','text-anchor':'end','font-size':'12'});
+      t1.textContent=Math.round(res.year);
+      svg.appendChild(t1);
+      const t2=el('text',{x:cx-12,y:cy-30,class:'annot','text-anchor':'end','font-size':'10'});
+      t2.textContent='un chip = tutto il mondo';
+      svg.appendChild(t2);
+    } else if(res.never){
+      const t=el('text',{x:W-pad.r,y:pad.t+16,class:'annot annot-b','text-anchor':'end','font-size':'11.5'});
+      t.textContent='il chip non lo prende mai: il pianeta corre più veloce';
+      svg.appendChild(t);
+    } else if(res.year>2200){
+      const t=el('text',{x:W-pad.r,y:pad.t+16,class:'annot annot-b','text-anchor':'end','font-size':'11.5'});
+      t.textContent='oltre il 2200 — fuori da qualsiasi previsione sensata';
+      svg.appendChild(t);
+    }
+
+    // annotazione 1983
+    const eqIdx=Math.round(eqDev);
+    if(eqIdx>=1971&&eqIdx<=2026){
+      const yEq=Y(DEV_NOW);
+      svg.appendChild(el('line',{x1:X(eqIdx),x2:X(NOW_Y),y1:yEq,y2:yEq,stroke:'#6b6a63','stroke-width':1,'stroke-dasharray':'1 4',opacity:.85}));
+      svg.appendChild(el('circle',{cx:X(eqIdx),cy:yEq,r:2.8,fill:'#0b0d0f',stroke:'#54cfc3','stroke-width':1.4}));
+      const midX=Math.max((X(eqIdx)+X(NOW_Y))/2, pad.l+150);
+      const t=el('text',{x:midX,y:yEq+18,class:'annot','text-anchor':'middle','font-size':'10'});
+      t.textContent='un solo chip del 2026 = tutto il mondo del '+eqIdx;
+      svg.appendChild(t);
+    }
+
+    // hover
+    const vline=el('line',{y1:pad.t,y2:pad.t+ph,stroke:'#4a525a',opacity:0});
+    svg.appendChild(vline);
+    const hd1=el('circle',{r:4,fill:'#54cfc3',stroke:'#08090a','stroke-width':2,opacity:0});
+    const hd2=el('circle',{r:4,fill:'#f2a33c',stroke:'#08090a','stroke-width':2,opacity:0});
+    svg.appendChild(hd1); svg.appendChild(hd2);
+    const ov=el('rect',{x:pad.l,y:pad.t,width:pw,height:ph,fill:'transparent',style:'cursor:crosshair'});
+    svg.appendChild(ov);
+    chipHost.insertBefore(svg, chipHost.firstChild);
+
+    ov.addEventListener('pointermove',ev=>{
+      const r=svg.getBoundingClientRect();
+      const px=(ev.clientX-r.left)*(W/r.width);
+      let t=Math.round(1970+(px-pad.l)/pw*(xMax-1970));
+      t=Math.max(1971,Math.min(xMax,t));
+      const wv = t<=NOW_Y ? world[t-1971] : (fixed?WORLD_NOW:worldAt(t));
+      const dv = t<=NOW_Y ? device[t-1971] : devAt(t);
+      const xx=X(t);
+      vline.setAttribute('x1',xx); vline.setAttribute('x2',xx); vline.setAttribute('opacity',.5);
+      hd1.setAttribute('cx',xx); hd1.setAttribute('cy',Y(wv)); hd1.setAttribute('opacity',1);
+      hd2.setAttribute('cx',xx); hd2.setAttribute('cy',Y(dv)); hd2.setAttribute('opacity',1);
+      chipTip.innerHTML='<div class="y">'+t+(t>NOW_Y?' · proiezione':'')+'</div>'
+        +'<div class="r"><i>mondo</i><span>'+humanShort(wv)+'op/s</span></div>'
+        +'<div class="r"><i>un chip</i><span>'+humanShort(dv)+'op/s</span></div>';
+      const hr=chipHost.getBoundingClientRect(), sr=svg.getBoundingClientRect();
+      chipTip.style.left=(sr.left-hr.left+Math.min(Math.max(xx*(sr.width/W),80),sr.width-80))+'px';
+      chipTip.style.top=(sr.top-hr.top+Math.min(Y(wv),Y(dv))*(sr.height/H))+'px';
+      chipTip.style.opacity=1;
+    });
+    ov.addEventListener('pointerleave',()=>{chipTip.style.opacity=0;vline.setAttribute('opacity',0);hd1.setAttribute('opacity',0);hd2.setAttribute('opacity',0);});
+
+    // verdetto + readout
+    const grImg = 100*(Math.pow(2,1/d)-1);
+    const yLabel = res.never ? 'mai' : (res.year>2200 ? 'oltre il 2200' : String(Math.round(res.year)));
+    const yearsTo = res.year ? Math.round(res.year-NOW_Y) : null;
+    let verdict;
+    if(fixed){
+      verdict = '<div class="y">'+yLabel+'<small>anno in cui un solo chip pareggia il mondo del 2026</small></div>'
+        + '<div class="t">Con un raddoppio ogni <b>'+nf.format(d)+' anni</b> una scheda cresce del '
+        + nf0.format(grImg)+'% all\'anno: partendo da 37 milioni di volte sotto, arriva al traguardo in '
+        + '<b>'+yearsTo+' anni</b>. Da quel giorno la potenza di calcolo che oggi è distribuita su tutto il '
+        + 'pianeta starebbe in una mano.</div>';
+    } else if(res.never){
+      verdict = '<div class="y">mai<small>il chip non raggiunge il mondo mentre il mondo cresce</small></div>'
+        + '<div class="t">Se il pianeta cresce del <b>'+chipState.growth+'% all\'anno</b>, va più veloce di una '
+        + 'scheda che raddoppia ogni '+nf.format(d)+' anni ('+nf0.format(grImg)+'%/anno). Il rapporto di 37 milioni '
+        + 'si allarga invece di chiudersi: nessun chip, per quanto veloce, può contenere un mondo che cresce più in fretta.</div>';
+    } else {
+      verdict = '<div class="y">'+yLabel+'<small>anno in cui un solo chip raggiunge il mondo di allora</small></div>'
+        + '<div class="t">Il chip cresce del <b>'+nf0.format(grImg)+'% all\'anno</b>, il mondo del <b>'+chipState.growth+'%</b>: '
+        + 'la scheda è più veloce, ma il vantaggio è di pochi punti e la distanza da colmare è di 25 raddoppi. '
+        + 'Ci vogliono <b>'+yearsTo+' anni</b>. Basta che il pianeta tenga il 60% dell\'ultimo anno perché il chip non arrivi mai.</div>';
+    }
+    document.getElementById('verdict').innerHTML=verdict;
+
+    const mln = WORLD_NOW/DEV_NOW;
+    readout('roChip',[
+      {k:'oggi · il mondo vale', v:new Intl.NumberFormat('it-IT',{maximumFractionDigits:1}).format(mln/1e6)+' milioni di B300'},
+      {k:'oggi · un chip vale', v:'il mondo del '+Math.round(eqDev)},
+      {k:'distanza da colmare', v:'×'+new Intl.NumberFormat('it-IT',{maximumFractionDigits:0}).format(mln)}
+    ]);
+  }
+
+  document.getElementById('segChip').addEventListener('click',ev=>{
+    const b=ev.target.closest('button'); if(!b) return;
+    [...ev.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    chipState.target=b.dataset.target;
+    drawChip();
+  });
+  document.getElementById('slD').addEventListener('input',ev=>{
+    chipState.dbl=parseFloat(ev.target.value);
+    document.getElementById('lblD').textContent=nf.format(chipState.dbl)+' anni';
+    drawChip();
+  });
+  document.getElementById('slG').addEventListener('input',ev=>{
+    chipState.growth=parseFloat(ev.target.value);
+    document.getElementById('lblG').textContent=nf0.format(chipState.growth)+' %/anno';
+    drawChip();
+  });
+  drawChip();
+
+  /* ── barre dei dispositivi ─────────────────────────────────── */
+  (function(){
+    const host=document.getElementById('devBars'); if(!host) return;
+    const DEV=[
+      [1971,'Intel 4004','primo microprocessore',9.2e4,'interi',60],
+      [1982,'Commodore 64','MOS 6510 a 1 MHz',5.0e5,'interi',595],
+      [1969,'NASA RTCC · Apollo 11','cinque System/360-75',5.0e6,'istruzioni',186e6],
+      [1995,'PC con Pentium 133','la macchina di casa',1.3e8,'FP32',2500],
+      [1994,'SGI POWER Indigo²','il desktop più potente',3.0e8,'FP64',50000],
+      [2007,'iPhone · 1ª generazione','ARM11 + GPU PowerVR',1.0e9,'FP32 stima',499],
+      [1985,'Cray-2','supercomputer più veloce',1.9e9,'FP64',17.5e6],
+      [2026,'iPhone 18 Pro · A20 Pro','32 core neurali',7.0e13,'INT8 stima',1099],
+      [2019,'Tesla FSD Computer','il chip che guida l\'auto',1.44e14,'INT8',2500],
+      [2025,'GeForce RTX 5090','la GPU da gioco più veloce',2.1e14,'BF16',1999],
+      [2026,'NVIDIA B300','il chip per AI più veloce',2.5e15,'BF16',60000]
+    ];
+    const LO=4, HI=16;
+    const pos=v=>((Math.log10(v)-LO)/(HI-LO))*100;
+    let grid='', labs='';
+    for(let e=LO;e<=HI;e++){
+      const p=pos(Math.pow(10,e)).toFixed(2);
+      grid+='<span class="devgrid" style="left:'+p+'%"></span>';
+      if(e%2===0) labs+='<span class="devlab" style="left:'+p+'%">10'+sup(e)+'</span>';
+    }
+    const axis=document.getElementById('devAxis');
+    if(axis) axis.innerHTML=grid+labs;
+    const REF=2.5e15;
+    const fmtR=r=>{
+      if(r<10) return '×'+new Intl.NumberFormat('it-IT',{maximumFractionDigits:1}).format(r);
+      if(r<1e6) return '×'+nf0.format(r);
+      if(r<1e9) return '×'+new Intl.NumberFormat('it-IT',{maximumFractionDigits:1}).format(r/1e6)+' mln';
+      return '×'+new Intl.NumberFormat('it-IT',{maximumFractionDigits:1}).format(r/1e9)+' mld';
+    };
+    const fmt1=x=>new Intl.NumberFormat('it-IT',{maximumFractionDigits:1}).format(x);
+    const grp=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+    const money=v=>v>=1e9?'$'+fmt1(v/1e9)+' mld':v>=1e6?'$'+fmt1(v/1e6)+' mln':'$'+grp(v);
+    host.innerHTML=DEV.map(d=>{
+      const yr=d[0],name=d[1],sub=d[2],val=d[3],prec=d[4],price=d[5];
+      const w=Math.min(99.4,pos(val)).toFixed(2);
+      const hi=val>=2.5e15;
+      const pt=price/val*1e12;   // dollari per Top/s
+      const ptxt = pt>=1e12 ? '$'+fmt1(pt/1e12)+' mila mld'
+                 : pt>=1e9 ? '$'+fmt1(pt/1e9)+' mld'
+                 : pt>=1e6 ? '$'+fmt1(pt/1e6)+' mln'
+                 : pt>=1e4 ? '$'+grp(pt)
+                 : '$'+fmt1(pt);
+      return '<div class="devrow'+(hi?' hl':'')+'">'
+        +'<div class="devname"><b>'+name+'</b><span>'+yr+' · '+sub+' · '+prec+'</span></div>'
+        +'<div class="devtrack">'+grid+'<i class="'+(hi?'hi':'')+'" style="width:'+w+'%"></i></div>'
+        +'<div class="devval"><b>'+humanShort(val)+'op/s</b><span>'+fmtR(REF/val)+' in una B300</span></div>'
+        +'<div class="devprice"><b>'+money(price)+'</b><span>'+ptxt+' per Top/s</span></div>'
+        +'</div>';
+    }).join('');
+  })();
+
+  /* ── timeline quantistica ──────────────────────────────────── */
+  (function(){
+    const host=document.getElementById('chartQuantum'); if(!host) return;
+    const W=1080,H=330,pad={l:168,r:36,t:44,b:34};
+    const pw=W-pad.l-pad.r, x0=2019, x1=2040;
+    const X=t=>pad.l+(t-x0)/(x1-x0)*pw;
+    const svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Dove sono i computer quantistici e cosa manca'});
+    const lanes=[
+      [96,'Vantaggio dimostrato','batte il classico su un compito'],
+      [176,'Vantaggio utile','batte il classico su un problema reale'],
+      [256,'Crittografia','RSA-2048 diventa attaccabile']
+    ];
+    for(let yy=2020;yy<=2040;yy+=2){
+      const xx=X(yy);
+      svg.appendChild(el('line',{x1:xx,x2:xx,y1:56,y2:H-26,stroke:'#141a1f'}));
+      const t=el('text',{x:xx,y:H-10,class:'axislabel','text-anchor':'middle'});t.textContent=yy;
+      svg.appendChild(t);
+    }
+    lanes.forEach(l=>{
+      svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:l[0],y2:l[0],stroke:'#2b3138'}));
+      const t=el('text',{x:14,y:l[0]-16,class:'annot annot-b','font-size':'11.5'});t.textContent=l[1];
+      svg.appendChild(t);
+      const s=el('text',{x:14,y:l[0]-3,class:'annot','font-size':'9.5'});s.textContent=l[2];
+      svg.appendChild(s);
+    });
+    // oggi
+    svg.appendChild(el('line',{x1:X(2026),x2:X(2026),y1:52,y2:H-24,stroke:'#54cfc3','stroke-width':1,'stroke-dasharray':'2 4',opacity:.55}));
+    const og=el('text',{x:X(2026)+7,y:34,class:'annot annot-b','font-size':'10'});og.textContent='oggi';svg.appendChild(og);
+
+    function dot(t,lane,label,above,col){
+      const xx=X(t), yy=lane;
+      svg.appendChild(el('circle',{cx:xx,cy:yy,r:5,fill:'#0b0d0f',stroke:col||'#54cfc3','stroke-width':2}));
+      const t1=el('text',{x:xx,y:above?yy-27:yy+35,class:'annot annot-b','text-anchor':'middle','font-size':'10.5'});
+      t1.textContent=label; svg.appendChild(t1);
+      const t2=el('text',{x:xx,y:above?yy-14:yy+22,class:'annot','text-anchor':'middle','font-size':'9'});
+      t2.textContent=t; svg.appendChild(t2);
+    }
+    function band(a,b,lane,label,sub){
+      const xa=X(a), xb=X(b);
+      svg.appendChild(el('rect',{x:xa,y:lane-14,width:xb-xa,height:28,fill:'#161b20',stroke:'#2f363d','stroke-dasharray':'3 4'}));
+      const t=el('text',{x:xa+10,y:lane+4,class:'annot','text-anchor':'start','font-size':'9.5'});
+      t.textContent=label; svg.appendChild(t);
+      if(sub){
+        const s=el('text',{x:(xa+xb)/2,y:lane+30,class:'annot','text-anchor':'middle','font-size':'9'});
+        s.textContent=sub; svg.appendChild(s);
+      }
+    }
+    band(2027,2031,176,'stime dei costruttori','200 qubit logici · 100 milioni di operazioni');
+    band(2032,2040,256,'quando? nessuno lo sa','100.000-1.000.000 qubit fisici');
+    dot(2019,96,'Sycamore',true);
+    dot(2025,96,'Willow · Quantum Echoes',true);
+    dot(2026,96,'IBM · 3 dimostrazioni',false);
+    dot(2029,176,'Starling',true);
+
+    host.insertBefore(svg,host.firstChild);
+  })();
+
+  /* ── barra dei produttori ──────────────────────────────────── */
+  (function(){
+    const bar=document.getElementById('stackBar');
+    const leg=document.getElementById('stackLegend');
+    if(!bar) return;
+    const V=[
+      ['NVIDIA','#8bc34a',35.8],
+      ['Google','#5b8def',9.6],
+      ['Apple','#d8d8d8',8.5],
+      ['MediaTek','#f0a04b',8.3],
+      ['Qualcomm','#9b7ede',7.4],
+      ['AMD','#e05c56',6.9],
+      ['Amazon','#f6c453',4.6],
+      ['Intel','#46a8c8',2.9],
+      ['Altri','#39424b',6.8]
+    ];
+    const T=V.reduce((a,b)=>a+b[2],0);
+    bar.innerHTML=V.map(v=>{
+      const w=v[2]/T*100;
+      return '<div title="'+v[0]+' · '+v[2].toFixed(1)+' Zop/s · '+w.toFixed(1)+'%" style="width:'+w.toFixed(2)+'%;background:'+v[1]+'">'
+        +(w>=8?w.toFixed(1)+'%':'')+'</div>';
+    }).join('');
+    leg.innerHTML=V.map(v=>{
+      const w=v[2]/T*100;
+      return '<span><i style="background:'+v[1]+'"></i>'+v[0]+' <b>'+v[2].toFixed(1)+' Z</b> · '+w.toFixed(1)+'%</span>';
+    }).join('');
+  })();
+
+  /* ── curva del costo per Top/s ─────────────────────────────── */
+  (function(){
+    const host=document.getElementById('chartCost'); if(!host) return;
+    const tip=document.getElementById('tipCost');
+    const P=[
+      [1969,'NASA RTCC',3.72e13],
+      [1971,'Intel 4004',6.52e8],
+      [1982,'Commodore 64',1.19e9],
+      [1985,'Cray-2',9.21e9],
+      [1994,'SGI Indigo²',1.67e8],
+      [1995,'Pentium 133',1.92e7],
+      [2007,'iPhone 1',4.99e5],
+      [2019,'Tesla FSD',17.4],
+      [2025,'RTX 5090',9.52],
+      [2026,'iPhone 18 Pro',15.7],
+      [2026,'B300',24]
+    ].sort((a,b)=>a[0]-b[0]);
+    const W=1080,H=400,pad={l:78,r:34,t:60,b:42};
+    const pw=W-pad.l-pad.r, ph=H-pad.t-pad.b;
+    const x0=1965,x1=2030;
+    const X=t=>pad.l+(t-x0)/(x1-x0)*pw;
+    const l0=0,l1=14;
+    const Y=v=>pad.t+(1-(Math.log10(v)-l0)/(l1-l0))*ph;
+    const svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Costo di un Top/s dal 1969 al 2026'});
+    for(let e=0;e<=14;e++){
+      const yy=Y(Math.pow(10,e));
+      svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:yy,y2:yy,class:'gridline'+(e%3===0?' major':'')}));
+      if(e%3===0){
+        const t=el('text',{x:pad.l-12,y:yy+3.5,class:'axislabel','text-anchor':'end'});
+        t.textContent='10'+sup(e); svg.appendChild(t);
+      }
+    }
+    for(let yr=1970;yr<=2030;yr+=10){
+      const xx=X(yr);
+      svg.appendChild(el('line',{x1:xx,x2:xx,y1:pad.t+ph,y2:pad.t+ph+5,stroke:'#2b3138'}));
+      const t=el('text',{x:xx,y:pad.t+ph+20,class:'axislabel','text-anchor':'middle'});
+      t.textContent=yr; svg.appendChild(t);
+    }
+    // linea
+    const d='M'+P.map(p=>X(p[0]).toFixed(1)+','+Y(p[2]).toFixed(1)).join('L');
+    svg.appendChild(el('path',{d,fill:'none',stroke:'#f2a33c','stroke-width':1.4,'stroke-dasharray':'3 4',opacity:.55}));
+    // punti
+    P.forEach(p=>{
+      const now=p[0]>=2025;
+      svg.appendChild(el('circle',{cx:X(p[0]),cy:Y(p[2]),r:now?4.5:3.6,
+        fill:now?'#54cfc3':'#0b0d0f',stroke:now?'#54cfc3':'#f2a33c','stroke-width':1.6}));
+    });
+    // etichette
+    const LAB=[[1969,'NASA · $37 mila mld',-4,-16,'end'],[1985,'Cray-2 · $9,2 mld',0,-13,'middle'],
+               [1995,'Pentium · $19 mln',0,20,'middle'],[2007,'iPhone 1 · $500 mila',0,-13,'middle'],
+               [2026,'5090 $9,50 · B300 $24',-10,-20,'end']];
+    LAB.forEach(l=>{
+      const t=el('text',{x:X(l[0])+l[2],y:Y(P.find(p=>p[0]===l[0])[2])+l[3],class:'annot annot-b','text-anchor':l[4],'font-size':'10.5'});
+      t.textContent=l[1]; svg.appendChild(t);
+    });
+    // callout
+    const co=el('text',{x:pad.l+10,y:pad.t+ph-12,class:'annot','font-size':'11'});
+    co.textContent='3,9 × 10¹² volte meno in cinquantasette anni';
+    svg.appendChild(co);
+    // hover
+    const ov=el('rect',{x:pad.l,y:pad.t,width:pw,height:ph,fill:'transparent',style:'cursor:crosshair'});
+    svg.appendChild(ov);
+    ov.addEventListener('pointermove',ev=>{
+      const r=svg.getBoundingClientRect();
+      const px=(ev.clientX-r.left)*(W/r.width);
+      let best=P[0],bd=1e9;
+      P.forEach(p=>{const dd=Math.abs(X(p[0])-px); if(dd<bd){bd=dd;best=p;}});
+      const txt=best[2]>=1e12?'$'+(best[2]/1e12).toFixed(1)+' mila mld':best[2]>=1e9?'$'+(best[2]/1e9).toFixed(1)+' mld':best[2]>=1e6?'$'+(best[2]/1e6).toFixed(1)+' mln':best[2]>=1e4?'$'+Math.round(best[2]).toLocaleString('it-IT'):'$'+best[2].toFixed(2);
+      tip.innerHTML='<div class="y">'+best[0]+'</div><div class="r"><i>'+best[1]+'</i><span>'+txt+'</span></div><div class="r"><i>per Top/s</i></div>';
+      const hr=host.getBoundingClientRect(), sr=svg.getBoundingClientRect();
+      tip.style.left=(sr.left-hr.left+Math.min(Math.max(X(best[0])*(sr.width/W),80),sr.width-80))+'px';
+      tip.style.top=(sr.top-hr.top+Y(best[2])*(sr.height/H))+'px';
+      tip.style.opacity=1;
+    });
+    ov.addEventListener('pointerleave',()=>tip.style.opacity=0);
+    host.insertBefore(svg,host.firstChild);
+  })();
+
+  /* ── strisce dei formati numerici ──────────────────────────── */
+  (function(){
+    const host=document.getElementById('fmtStrips'); if(!host) return;
+    const F=[['FP64',64,1,11,52],['FP32',32,1,8,23],['BF16',16,1,8,7],['FP16',16,1,5,10],
+             ['FP8',8,1,4,3],['FP4',4,1,2,1],['INT8',8,1,0,7]];
+    host.innerHTML=F.map(f=>{
+      const n=f[0],tot=f[1],s=f[2],e=f[3],m=f[4];
+      const cells='<i class="s" style="flex:'+s+'"></i>'
+        + (e?'<i class="e" style="flex:'+e+'"></i>':'')
+        + '<i class="'+(e?'m':'g')+'" style="flex:'+m+'"></i>';
+      return '<div class="fmtrow"><div class="fmtname">'+n+'</div>'
+        +'<div class="strip" style="width:'+(tot/64*100).toFixed(1)+'%">'+cells+'</div>'
+        +'<div class="fmtsize">'+tot+' bit · '+(e?'1+'+e+'+'+m:'1+'+m)+'</div></div>';
+    }).join('');
+  })();
+
+})();
+</script>
+</body>
+</html>
