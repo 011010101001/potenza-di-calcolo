@@ -6,10 +6,21 @@ potenza di calcolo**, dal primo microprocessore al silicio che addestra i modell
 Tutto è espresso in una sola unità — **operazioni elementari al secondo, di picco** — per poter
 mettere sullo stesso asse il 4004 del 1971 (92.000 op/s) e il mondo intero del 2026 (92,8 Zop/s).
 
-**Aprire la pagina:** doppio clic su `index.html`. Nessun server, nessuna build, nessuna
-connessione: funziona offline.
+**Online:** <https://potenza.apice.me/>
+**In locale:** doppio clic su `index.html`. Nessun server, nessuna build, nessuna connessione:
+funziona offline.
 
 ---
+
+## Come sta online
+
+Il file è servito dal PC con un server statico su `127.0.0.1:8099` e pubblicato su
+`potenza.apice.me` da un tunnel Cloudflare dedicato (tunnel `potenza`, config
+`C:\Users\UTENTE\.cloudflared\potenza.yml`). Lo avvia `C:\Users\UTENTE\tools\potenza-site\start.ps1`,
+richiamato all'accesso dal file `PotenzaSite.vbs` nella cartella Esecuzione automatica.
+
+Se il PC è spento o in sospensione il sito non risponde: la pagina resta comunque nel repo e si
+apre in locale con un doppio clic.
 
 ## Cosa contiene
 
