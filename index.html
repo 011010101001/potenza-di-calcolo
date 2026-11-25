@@ -212,6 +212,27 @@
   }
 
 
+
+  .racewrap{display:grid;grid-template-columns:600px 1fr;gap:22px;align-items:start}
+  .genome{border:1px solid #24413d;background:#0b1211;padding:20px 20px 16px;height:600px;display:flex;flex-direction:column}
+  .genome .gtag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--world)}
+  .genome h4{font-family:var(--serif);font-size:23px;font-weight:400;margin:6px 0 8px;letter-spacing:-.01em}
+  .genome .gnote{font-size:13.5px;color:var(--ink-dim);line-height:1.5;margin:0 0 14px}
+  .genome .gnote b{color:var(--ink);font-weight:500}
+  .grows{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+  .grow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:baseline;padding:5px 0;border-bottom:1px solid #14201e}
+  .grow:last-child{border-bottom:0}
+  .grow b{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink);display:block}
+  .grow span{font-family:var(--mono);font-size:9.5px;color:var(--muted);display:block;margin-top:3px}
+  .grow .gn{font-family:var(--mono);font-size:19px;color:var(--world);text-align:right;letter-spacing:-.02em}
+  .grow.old .gn{color:#7a6236}
+  .genome .gfoot{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 0 0;padding-top:12px;border-top:1px solid #14201e}
+  @media (max-width:1180px){
+    .racewrap{grid-template-columns:1fr}
+    .genome{height:auto}
+    .grows{gap:10px}
+  }
+
   /* ── arena 10 secondi ──────────────────── */
   .arena{aspect-ratio:1/1;max-width:600px;border:1px solid var(--rule);background:var(--panel);
     padding:20px 20px 18px;display:flex;flex-direction:column;margin-top:6px}
@@ -811,6 +832,7 @@
       alle altre — su scala logaritmica, altrimenti il 4004 non si vedrebbe nemmeno.
     </p>
 
+    <div class="racewrap">
     <div class="arena">
       <div class="atop">
         <div class="clock"><span id="aT">0,0</span> <small>/ 10 s</small></div>
@@ -821,6 +843,22 @@
       <div class="averdict" id="aVerdict">
         Dieci secondi di silicio, uno accanto all'altro. Il contatore parte al clic.
       </div>
+    </div>
+
+    <aside class="genome">
+      <div class="gtag">Lo stesso lavoro, in genomi</div>
+      <h4>Quanti genomi umani in dieci secondi</h4>
+      <p class="gnote">
+        Un genoma a 30× (allineamento + chiamata delle varianti) costa circa <b>600 ore di CPU</b>
+        — 32 core per 20 ore — cioè nell'ordine di <b>2×10¹⁵ operazioni</b>. Ecco quanti ne
+        completi nei dieci secondi della gara.
+      </p>
+      <div class="grows" id="gRows"></div>
+      <p class="gfoot" id="gFoot">
+        A picco e senza colli di bottiglia: i programmi di genomica non girano alle velocità
+        dichiarate di queste schede. L'ordine di grandezza, però, è quello.
+      </p>
+    </aside>
     </div>
 
     <div class="whybox">
@@ -2268,6 +2306,21 @@ const DATA = {"years":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,19
     const rows=[...host.querySelectorAll('.arow')].map((r,i)=>({
       rate:D[i][2], val:r.querySelector('[data-v]'), bar:r.querySelector('[data-b]')
     }));
+    const COST=2e15;
+    function timeFor(s){
+      const y=s/3.15576e7, d=s/86400, h=s/3600;
+      if(y>=1) return '1 genoma in '+fmtIt(y, y<10?1:0)+' anni';
+      if(d>=1) return '1 genoma in '+fmtIt(d, d<10?1:0)+' giorni';
+      if(h>=1) return '1 genoma in '+fmtIt(h,1)+' ore';
+      return '1 genoma in '+fmtIt(s,1)+' secondi';
+    }
+    const gHost=document.getElementById('gRows');
+    if(gHost) gHost.innerHTML=D.map(d=>
+      '<div class="grow '+d[3]+'"><div><b>'+d[0]+'</b><span>'+timeFor(COST/d[2])+'</span></div>'
+      +'<div class="gn" data-g>0</div></div>'
+    ).join('');
+    const gVals=gHost?[...gHost.querySelectorAll('[data-g]')]:[];
+
     const tEl=document.getElementById('aT'), prog=document.getElementById('aProg');
     const btn=document.getElementById('aGo'), verdict=document.getElementById('aVerdict');
     let running=false;
@@ -2281,6 +2334,10 @@ const DATA = {"years":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,19
         const l=ops>0?Math.log10(ops):LO;
         r.bar.style.width=Math.max(0,Math.min(100,(l-LO)/(HI-LO)*100))+'%';
       });
+      gVals.forEach((el,i)=>{
+        const n=D[i][2]*t/COST;
+        el.textContent = n>=0.01 ? fmtIt(n,2) : (n>0 ? '<0,01' : '0');
+      });
     }
 
     function finish(){
@@ -2293,6 +2350,14 @@ const DATA = {"years":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,19
         +new Intl.NumberFormat('it-IT',{maximumFractionDigits:0}).format(anni)+' anni</b>. '
         +'E nei suoi dieci secondi il 4004 ha fatto '+humanShort(minR*10)
         +'op — meno di quante la B300 ne fa in <b>un microsecondo</b>.';
+
+      const g=document.getElementById('gFoot');
+      if(g){
+        const nB=rows[rows.length-1].rate*10/COST, n4=rows[0].rate*10/COST;
+        g.innerHTML='<b>In genomi:</b> la B300 ne ha finiti '+fmtIt(nB,2)
+          +', la 5090 '+fmtIt(rows[4].rate*10/COST,2)+'. Il 4004 avrebbe finito il suo primo genoma nel <b>'
+          +Math.round(1971+COST/rows[0].rate/3.15576e7)+'</b>.';
+      }
     }
 
     btn.addEventListener('click',()=>{
