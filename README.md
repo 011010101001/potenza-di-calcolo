@@ -24,9 +24,10 @@ connessione: funziona offline.
 | 07 | **Chi produce** | quota stimata della potenza mondiale per produttore (NVIDIA 39,4%, Google, Apple, MediaTek, Qualcomm, AMD, Amazon, Intel…), concentrazione della filiera, il calcolo che serve all'AI, Colossus 2 |
 | 08 | **Il quanto** | perché un computer quantistico non ha un numero di op/s, dove siamo (Willow, Nighthawk), la roadmap al 2029-2033, i qubit necessari per RSA-2048 |
 | 09 | **I modelli** | da ELIZA agli LLM di frontiera; cosa vuol dire *quantizzato*; il **metro umano** (GPQA, IMO, FrontierMath, Humanity's Last Exam con l'umano di riferimento accanto); i **problemi aperti risolti dall'AI** (AlphaTensor, FunSearch, IMO 2024-25, la congettura di Erdős 2026); e cosa succederebbe a far girare un 27B nel datacenter della NASA del 1969 |
-| 10 | **Dieci anni** | 2016 vs 2026 su quattro metriche, più la crescita annua della potenza mondiale |
-| 11 | **I dati** | tabella completa 1971–2026 con esportazione CSV |
-| 12 | **Metodo** | cosa è misurato, cosa è stima, cosa non va sommato, fonti |
+| 10 | **La rete** | la potenza mondiale come rete P2P: il conto della banda (NVLink 1,8 TB/s contro 7,5 MB/s di fibra), DisTrO e le corse distribuite vere (INTELLECT-1/2, Psyche con Hermes 4.3), i tre muri che restano |
+| 11 | **Dieci anni** | 2016 vs 2026 su quattro metriche, più la crescita annua della potenza mondiale |
+| 12 | **I dati** | tabella completa 1971–2026 con esportazione CSV |
+| 13 | **Metodo** | cosa è misurato, cosa è stima, cosa non va sommato, fonti |
 
 ## Fonti principali
 

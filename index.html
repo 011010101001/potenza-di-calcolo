@@ -176,6 +176,8 @@
   table.mem td,table.mem th{text-align:left}
   table.mem td:nth-child(4){white-space:normal;line-height:1.4}
   table.mem td:last-child,table.mem th:last-child{text-align:right;white-space:nowrap}
+  table.tri td,table.tri th{text-align:left}
+  table.tri td:nth-child(4){white-space:normal;line-height:1.45}
   table.desc td:first-child{white-space:nowrap}
   table.fmt td,table.fmt th{padding-left:12px;padding-right:12px}
   @media (min-width:700px){
@@ -244,6 +246,23 @@
     .ahead,.ghead{height:auto;padding-bottom:10px}
   }
 
+
+
+  /* ── banda: NVLink vs fibra ────────────── */
+  .bandbox{border:1px solid var(--rule);background:var(--panel);padding:20px 22px 16px;margin-top:6px}
+  .brow{display:grid;grid-template-columns:270px 1fr 150px;gap:16px;align-items:center;padding:7px 0}
+  .bname b{display:block;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+  .bname span{display:block;font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-top:2px}
+  .btrack{height:20px;background:#12161a;border-radius:1px;overflow:hidden}
+  .btrack i{display:block;height:20px;background:var(--world);border-radius:1px}
+  .btrack i.slow{background:var(--pc)}
+  .bval{font-family:var(--mono);font-size:14px;text-align:right;color:var(--ink)}
+  .bratio{margin-top:10px;padding-top:12px;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .bratio b{color:var(--world);font-weight:500}
+  @media (max-width:820px){
+    .brow{grid-template-columns:1fr;gap:6px}
+    .bval{text-align:left}
+  }
 
   /* ── pietre miliari della matematica ───── */
   .milestones{margin-top:10px;border-top:1px solid var(--rule-soft)}
@@ -451,6 +470,7 @@
       <a href="#aziende">Aziende</a>
       <a href="#quanto">Quanto</a>
       <a href="#llm">LLM</a>
+      <a href="#rete">Rete</a>
       <a href="#dieci">10 anni</a>
       <a href="#dati">Dati</a>
       <a href="#metodo">Metodo</a>
@@ -1382,9 +1402,109 @@
   </div>
 </section>
 
+<section id="rete">
+  <div class="wrap">
+    <div class="sechead"><span class="num">10 — La rete</span></div>
+    <h2>La potenza del mondo, messa in rete</h2>
+    <p class="sub">
+      Il pianeta ha 92,8 Zop/s installati e li usa per un quinto del tempo. La domanda è ovvia: perché non
+      metterli in rete e addestrare l'intelligenza di domani come si fa con Folding@home? La risposta è che
+      <b>la potenza c'è, il filo no</b> — e che negli ultimi due anni il filo è diventato molto meno
+      importante.
+    </p>
+
+    <div class="bandbox">
+      <div class="brow">
+        <div class="bname"><b>NVLink 5 · dentro un datacenter</b><span>fra due GPU della stessa macchina</span></div>
+        <div class="btrack"><i style="width:89%"></i></div>
+        <div class="bval">1.800.000 MB/s</div>
+      </div>
+      <div class="brow">
+        <div class="bname"><b>Fibra di casa · upload</b><span>fra due nodi qualsiasi della rete</span></div>
+        <div class="btrack"><i class="slow" style="width:12.5%"></i></div>
+        <div class="bval">7,5 MB/s</div>
+      </div>
+      <div class="bratio">
+        <span style="color:#5f6469">barre su scala logaritmica</span> · <b>×240.000</b> di banda,
+        <b>×20.000</b> di latenza (0,5 µs contro 20 ms). Ecco perché Bitcoin e
+        Folding@home funzionano — sono milioni di compiti indipendenti — e perché GPT no: a ogni passo tutti
+        i nodi devono scambiarsi i gradienti prima di andare avanti.
+      </div>
+    </div>
+
+    <p class="caption">
+      Il conto preciso l'ha fatto Epoch AI: con 60 Mbps in upload e sincronizzazioni sotto i dieci minuti,
+      il modello più grande addestrabile è <b>≈600 milioni di parametri</b> con gradienti a 32 bit. Un
+      telefono, non un modello linguistico.
+    </p>
+
+    <h3 class="subhead">Poi si è smesso di parlare tanto</h3>
+    <p class="sub" style="margin-bottom:18px">
+      La soluzione non è stata rendere la fibra più veloce, ma <b>far parlare meno i nodi</b>. La famiglia di
+      optimizer <b>DisTrO</b> (Nous Research, 2024) taglia la comunicazione fra GPU di <b>quattro ordini di
+      grandezza</b> senza perdere la convergenza; DeMo e DiLoCo fanno lo stesso per strade diverse. E il
+      reinforcement learning asincrono toglie di mezzo anche la latenza: mentre i nodi si scambiano i pesi,
+      gli altri stanno già generando tracce.
+    </p>
+
+    <div class="tablewrap" style="max-height:none">
+      <table class="desc tri">
+        <caption>Non è più teoria: tre corse vere, finite, con i pesi pubblicati.</caption>
+        <thead><tr><th>Quando</th><th>Corsa</th><th>Modello</th><th>Cosa ha dimostrato</th></tr></thead>
+        <tbody>
+          <tr><td>2024</td><td>INTELLECT-1</td><td>10 miliardi</td><td>pre-training distribuito su nodi sparsi per il mondo</td></tr>
+          <tr><td>2025</td><td>INTELLECT-2</td><td>32 miliardi, RL</td><td>RL asincrono su <b>800+ nodi</b>: la rete genera le tracce mentre gli altri si sincronizzano</td></tr>
+          <tr><td>2026</td><td>Psyche · Hermes 4.3</td><td>36 miliardi</td><td><b>24 nodi</b> su internet aperto, 144.000 token/s: le comunicazioni P2P sono <b>nascoste dal tempo di calcolo</b>, throughput pari a un training centralizzato</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="caption">
+      Hermes 4.3 è un modello di produzione, non un esperimento: l'ha addestrato per intero una rete
+      distribuita, con lo stato della corsa su una blockchain e i gradienti fuori banda su una mesh P2P.
+      Il modello che sta leggendo questa pagina, se è in locale, è un suo discendente.
+    </p>
+
+    <h3 class="subhead">I tre muri che restano</h3>
+    <div class="unit-grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+      <div>
+        <h3>1 · La banda</h3>
+        <p>Risolto a metà. Gli optimizer a bassa comunicazione pagano in efficienza, e più cresce il modello
+        più si paga: la sincronizzazione cresce col numero di parametri, la fibra no.</p>
+        <p>Un modello da 1.000 miliardi resta fuori portata — per ora.</p>
+      </div>
+      <div>
+        <h3>2 · La fiducia</h3>
+        <p>Come sai che un nodo sconosciuto ha calcolato davvero quel gradiente e non un numero a caso?
+        È il muro vero. La verifica costa: ridondanza, witness casuali scelti on-chain, enclave hardware.
+        Nessuno schema è maturo, e un solo nodo disonesto può avvelenare una corsa.</p>
+      </div>
+      <div>
+        <h3>3 · L'eterogeneità</h3>
+        <p>Schede diverse, velocità diverse, gente che spegne il PC: il nodo più lento detta il passo a tutti
+        gli altri. E chi presta la GPU vuole essere pagato in modo verificabile — che è di nuovo il muro 2.</p>
+      </div>
+    </div>
+
+    <p class="pull" style="border-color:var(--world)">
+      La capacità esiste: un training da 10²⁶ operazioni richiederebbe <b>due giorni</b> di tutte le GPU da
+      gioco del pianeta — anche usandole al 3%, come sono usate oggi.
+    </p>
+
+    <p class="caption" style="margin-top:22px">
+      Il punto non è mai stato la potenza: è l'<b>accoppiamento</b>. La frontiera del 2028 resterà un affare
+      da capannone con l'acqua che bolle, perché il costo di sincronizzare decine di migliaia di acceleratori
+      cresce con la dimensione del modello e la fisica non si aggira con l'entusiasmo. Ma la fascia 10-70
+      miliardi, che fino a ieri era roba da investitori, oggi è alla portata di una comunità — e quella è la
+      parte che sposta il potere: non «battiamo OpenAI», ma «non abbiamo più bisogno di loro per avere un
+      modello decente, trasparente e nostro».
+    </p>
+  </div>
+</section>
+
 <section id="dieci">
   <div class="wrap">
-    <div class="sechead"><span class="num w">10 — Dieci anni</span></div>
+    <div class="sechead"><span class="num w">11 — Dieci anni</span></div>
     <h2>Dieci anni fa / oggi</h2>
     <p class="sub">
       2016 → 2026. Il PC in scrivania è cresciuto di poco più di <b>tre volte</b>.
@@ -1416,7 +1536,7 @@
 
 <section id="dati">
   <div class="wrap">
-    <div class="sechead"><span class="num">11 — I dati</span></div>
+    <div class="sechead"><span class="num">12 — I dati</span></div>
     <h2>Anno per anno</h2>
     <p class="sub">Le due serie complete, con il rapporto: quanti PC medi servono per eguagliare il mondo in quell'anno.</p>
     <div class="tablewrap">
@@ -1435,7 +1555,7 @@
 
 <section id="metodo">
   <div class="wrap">
-    <div class="sechead"><span class="num">12 — Metodo</span></div>
+    <div class="sechead"><span class="num">13 — Metodo</span></div>
     <h2>Cosa è solido e cosa è stima</h2>
 
     <div class="method">
