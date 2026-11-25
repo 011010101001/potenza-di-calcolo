@@ -211,6 +211,34 @@
     .spare{grid-column:span 2}
   }
 
+
+  /* ── arena 10 secondi ──────────────────── */
+  .arena{aspect-ratio:1/1;max-width:600px;border:1px solid var(--rule);background:var(--panel);
+    padding:20px 20px 18px;display:flex;flex-direction:column;margin-top:6px}
+  .atop{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--rule-soft)}
+  .atop .clock{font-family:var(--mono);font-size:26px;letter-spacing:-.02em;color:var(--ink)}
+  .atop .clock small{font-size:12px;color:var(--muted);letter-spacing:0}
+  .atop button{margin-left:auto;appearance:none;border:1px solid var(--pc);background:transparent;color:var(--pc);
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-radius:2px}
+  .atop button:hover{background:var(--pc);color:#0b0a07}
+  .aprog{height:2px;background:var(--rule-soft);margin:10px 0 4px}
+  .aprog i{display:block;height:2px;width:0;background:var(--pc);transition:none}
+  .arows{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding-top:8px}
+  .arow{display:flex;flex-direction:column;gap:6px}
+  .arhead{display:flex;align-items:baseline;gap:10px}
+  .arhead b{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--ink)}
+  .arhead span{font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .arhead .val{margin-left:auto;font-family:var(--mono);font-size:16px;color:var(--ink);letter-spacing:-.02em}
+  .arhead .rel{font-family:var(--mono);font-size:9.5px;color:var(--muted);min-width:64px;text-align:right}
+  .abar{height:8px;background:#12161a;border-radius:1px;overflow:hidden}
+  .abar i{display:block;height:8px;width:0;border-radius:1px}
+  .arow.old .abar i{background:#7a6236}
+  .arow.new .abar i{background:var(--world)}
+  .arow.old .arhead .val{color:#c9b48a}
+  .averdict{margin-top:10px;padding-top:12px;border-top:1px solid var(--rule-soft);font-size:13px;line-height:1.5;color:var(--muted);min-height:52px}
+  .averdict b{color:var(--ink);font-weight:500}
+  @media (max-width:760px){ .arena{aspect-ratio:auto;height:auto;gap:6px} .arows{gap:14px} }
+
   /* ── barre dispositivi ─────────────────── */
   .devchart{border:1px solid var(--rule);background:var(--panel);padding:16px 18px 14px}
   .devrow{display:grid;grid-template-columns:230px 1fr 108px 156px;gap:16px;align-items:center;padding:9px 0}
@@ -775,6 +803,25 @@
       e 19 milioni di PC con Pentium. Tutto dentro 1.000 watt e due mani.
       E il mondo intero ne contiene 37 milioni.
     </p>
+
+    <h3 class="subhead">Dieci secondi, in diretta</h3>
+    <p class="sub" style="margin-bottom:20px">
+      La stessa domanda di prima, ma dal vivo. Premi <b>Via</b>: per dieci secondi ogni macchina accumula
+      operazioni al suo ritmo vero. Il contatore dice quante ne ha fatte, la barra dice dove sta rispetto
+      alle altre — su scala logaritmica, altrimenti il 4004 non si vedrebbe nemmeno.
+    </p>
+
+    <div class="arena">
+      <div class="atop">
+        <div class="clock"><span id="aT">0,0</span> <small>/ 10 s</small></div>
+        <button type="button" id="aGo">Via</button>
+      </div>
+      <div class="aprog"><i id="aProg"></i></div>
+      <div class="arows" id="aRows"></div>
+      <div class="averdict" id="aVerdict">
+        Dieci secondi di silicio, uno accanto all'altro. Il contatore parte al clic.
+      </div>
+    </div>
 
     <div class="whybox">
       <h3>Perché un iPhone 18 non è «un terzo di una 5090»</h3>
@@ -2192,6 +2239,76 @@ const DATA = {"years":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,19
         +'<div class="strip" style="width:'+(tot/64*100).toFixed(1)+'%">'+cells+'</div>'
         +'<div class="fmtsize">'+tot+' bit · '+(e?'1+'+e+'+'+m:'1+'+m)+'</div></div>';
     }).join('');
+  })();
+
+  /* ── arena: dieci secondi dal vivo ─────────────────────────── */
+  (function(){
+    const host=document.getElementById('aRows'); if(!host) return;
+    const D=[
+      ['Intel 4004','1971',9.2e4,'old'],
+      ['NASA RTCC','1969',5.0e6,'old'],
+      ['PC Pentium 133','1995',1.3e8,'old'],
+      ['Cray-2','1985',1.9e9,'old'],
+      ['GeForce RTX 5090','2025',2.1e14,'new'],
+      ['NVIDIA B300','2026',2.5e15,'new']
+    ];
+    const BASE=D[0][2];
+    const LO=4,HI=17;
+    const rel=r=>r<10?'×'+fmtIt(r,1):r<1e6?'×'+fmtIt(r,0):r<1e9?'×'+fmtIt(r/1e6,1)+' mln':'×'+fmtIt(r/1e9,1)+' mld';
+    function fmtIt(v,d){return new Intl.NumberFormat('it-IT',{maximumFractionDigits:d}).format(v);}
+    const fmtT=new Intl.NumberFormat('it-IT',{minimumFractionDigits:1,maximumFractionDigits:1});
+
+    host.innerHTML=D.map(d=>
+      '<div class="arow '+d[3]+'">'
+      +'<div class="arhead"><b>'+d[0]+'</b><span>'+d[1]+'</span>'
+      +'<span class="val" data-v>0 op</span><span class="rel">'+rel(d[2]/BASE)+'</span></div>'
+      +'<div class="abar"><i data-b></i></div></div>'
+    ).join('');
+
+    const rows=[...host.querySelectorAll('.arow')].map((r,i)=>({
+      rate:D[i][2], val:r.querySelector('[data-v]'), bar:r.querySelector('[data-b]')
+    }));
+    const tEl=document.getElementById('aT'), prog=document.getElementById('aProg');
+    const btn=document.getElementById('aGo'), verdict=document.getElementById('aVerdict');
+    let running=false;
+
+    function render(t){
+      tEl.textContent=fmtT.format(t);
+      prog.style.width=(t/10*100)+'%';
+      rows.forEach(r=>{
+        const ops=r.rate*t;
+        r.val.textContent= ops<1e3 ? Math.round(ops)+' op' : humanShort(ops)+'op';
+        const l=ops>0?Math.log10(ops):LO;
+        r.bar.style.width=Math.max(0,Math.min(100,(l-LO)/(HI-LO)*100))+'%';
+      });
+    }
+
+    function finish(){
+      running=false;
+      btn.textContent='Ripeti';
+      const maxR=rows[rows.length-1].rate, minR=rows[0].rate;
+      const anni=(10*(maxR/minR))/3.15576e7;
+      verdict.innerHTML='<b>Dieci secondi.</b> La B300 ha accumulato '+humanShort(maxR*10)
+        +'op: al 4004, per arrivare allo stesso numero, servirebbero <b>'
+        +new Intl.NumberFormat('it-IT',{maximumFractionDigits:0}).format(anni)+' anni</b>. '
+        +'E nei suoi dieci secondi il 4004 ha fatto '+humanShort(minR*10)
+        +'op — meno di quante la B300 ne fa in <b>un microsecondo</b>.';
+    }
+
+    btn.addEventListener('click',()=>{
+      if(running) return;
+      running=true; btn.textContent='Via…';
+      let t0=null;
+      render(0);
+      function step(ts){
+        if(t0===null) t0=ts;
+        const t=Math.min(10,(ts-t0)/1000);
+        render(t);
+        if(t<10) requestAnimationFrame(step); else finish();
+      }
+      requestAnimationFrame(step);
+    });
+    render(0);
   })();
 
 })();

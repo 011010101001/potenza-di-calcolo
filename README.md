@@ -19,7 +19,7 @@ connessione: funziona offline.
 | 02 | **Il PC** | potenza del personal computer medio, 1971–2026, con scala log/lineare |
 | 03 | **Il pianeta** | potenza di calcolo mondiale installata: serie misurata dal 2008, ricostruzione prima, banda ±40%, toggle picco/usato |
 | 04 | **Un chip solo** | quando un singolo chip raggiunge tutto il mondo: due cursori (raddoppio del chip, crescita del mondo) ricalcolano grafico e verdetto |
-| 05 | **Riferimenti** | 11 macchine riconoscibili (4004, Commodore 64, NASA Apollo, Cray-2, SGI, Pentium, iPhone 1 e 18, Tesla FSD, RTX 5090, B300) con prezzo d'epoca e costo per Top/s; curva del costo per Top/s 1969–2026; riquadro "perché un iPhone 18 non è un terzo di una 5090" |
+| 05 | **Riferimenti** | 11 macchine riconoscibili (4004, Commodore 64, NASA Apollo, Cray-2, SGI, Pentium, iPhone 1 e 18, Tesla FSD, RTX 5090, B300) con prezzo d'epoca e costo per Top/s; curva del costo per Top/s 1969–2026; **arena "dieci secondi"** in tempo reale (sei macchine che accumulano operazioni dal vivo, con il verdetto in anni di 4004); riquadro "perché un iPhone 18 non è un terzo di una 5090" |
 | 06 | **Chi produce** | quota stimata della potenza mondiale per produttore (NVIDIA 39,4%, Google, Apple, MediaTek, Qualcomm, AMD, Amazon, Intel…), concentrazione della filiera, il calcolo che serve all'AI, Colossus 2 |
 | 07 | **Il quanto** | perché un computer quantistico non ha un numero di op/s, dove siamo (Willow, Nighthawk), la roadmap al 2029-2033, i qubit necessari per RSA-2048 |
 | 08 | **I modelli** | da ELIZA agli LLM di frontiera; cosa vuol dire *quantizzato*; quanto è intelligente un modello locale (GPQA 89,2%) contro la frontiera (96,8%); e cosa succederebbe a far girare un 27B nel datacenter della NASA del 1969 |
