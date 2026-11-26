@@ -12,6 +12,20 @@ funziona offline.
 
 ---
 
+
+## Il modello della sezione 11
+
+Transformer char-level addestrato qui, in casa, in 3 minuti su CPU:
+
+- 3 blocchi, 4 teste, 96 dimensioni, contesto 96, vocabolario 98 caratteri
+- **353.184 parametri**, quantizzati int8 per riga (513 KB di pesi nel file)
+- corpus: 150 KB di prosa italiana del progetto (pagina, dialogo, README, scaletta, log della chat)
+- 1.300 passi, batch 32, AdamW con OneCycle, loss finale 1,56 / validazione 1,76
+
+L'inferenza è scritta a mano in JavaScript (nessuna libreria, nessun CDN): matvec su
+Float32Array, KV cache, GELU, softmax con temperatura. Un token qui è un carattere.
+Per addestrarlo di nuovo: `scratch/minillm/train.py` + `export_js.py`.
+
 ## Come sta online
 
 Il file è servito dal PC con un server statico su `127.0.0.1:8099` e pubblicato su
@@ -42,10 +56,11 @@ con un microscopio, il collo di bottiglia di oggi e se la velocità può avere u
 | 08 | **La sovranità** | nessuno è indipendente: la matrice delle dipendenze (chi sa fare cosa, paese per paese), la catena dei sette anelli da un chip al 2 nm, il caso Russia a 90 nm, e dove una nazione può davvero essere sovrana |
 | 09 | **Il quanto** | perché un computer quantistico non ha un numero di op/s, dove siamo (Willow, Nighthawk), la roadmap al 2029-2033, i qubit necessari per RSA-2048 |
 | 10 | **I modelli** | da ELIZA agli LLM di frontiera; cosa vuol dire *quantizzato*; il **metro umano** (GPQA, IMO, FrontierMath, Humanity's Last Exam con l'umano di riferimento accanto); i **problemi aperti risolti dall'AI** (AlphaTensor, FunSearch, IMO 2024-25, la congettura di Erdős 2026); e cosa succederebbe a far girare un 27B nel datacenter della NASA del 1969 |
-| 11 | **La rete** | la potenza mondiale come rete P2P: il conto della banda (NVLink 1,8 TB/s contro 7,5 MB/s di fibra), DisTrO e le corse distribuite vere (INTELLECT-1/2, Psyche con Hermes 4.3), i tre muri che restano |
-| 12 | **Dieci anni** | 2016 vs 2026 su quattro metriche, più la crescita annua della potenza mondiale |
-| 13 | **I dati** | tabella completa 1971–2026 con esportazione CSV |
-| 14 | **Metodo** | cosa è misurato, cosa è stima, cosa non va sommato, fonti |
+| 11 | **L'esperimento** | un transformer vero, 353.184 parametri, dentro la pagina: genera nel browser, misura i token al secondo della tua macchina, mostra le 4 teste di attenzione e le probabilità del prossimo carattere |
+| 12 | **La rete** | la potenza mondiale come rete P2P: il conto della banda (NVLink 1,8 TB/s contro 7,5 MB/s di fibra), DisTrO e le corse distribuite vere (INTELLECT-1/2, Psyche con Hermes 4.3), i tre muri che restano |
+| 13 | **Dieci anni** | 2016 vs 2026 su quattro metriche, più la crescita annua della potenza mondiale |
+| 14 | **I dati** | tabella completa 1971–2026 con esportazione CSV |
+| 15 | **Metodo** | cosa è misurato, cosa è stima, cosa non va sommato, fonti |
 
 ## Fonti principali
 
