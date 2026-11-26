@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialogo — sei domande dopo la pagina</title>
+<meta name="description" content="Le domande che restano dopo aver guardato 55 anni di potenza di calcolo: la rete peer-to-peer, il silicio, il quarzo, un chip fatto in casa, il collo di bottiglia.">
+<style>
+  :root{
+    --bg:#08090a; --panel:#0e1012; --panel-2:#14171a;
+    --ink:#ecebe7; --ink-dim:#a8a9a6; --muted:#75777a;
+    --rule:#22262b; --rule-soft:#191d21;
+    --pc:#f2a33c; --world:#54cfc3;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,"Liberation Mono",monospace;
+    --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;
+       -webkit-font-smoothing:antialiased}
+  .topbar{border-bottom:1px solid var(--rule);padding:14px 0;font-family:var(--mono);font-size:10.5px;
+          letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .topbar .in{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:24px}
+  .topbar a{color:var(--ink-dim);text-decoration:none}
+  .topbar a:hover{color:var(--world)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  header.head{padding:64px 0 40px}
+  .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--pc)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.6vw,56px);line-height:1.06;
+     letter-spacing:-.02em;margin:16px 0 20px}
+  h1 em{font-style:italic;color:var(--pc)}
+  .lede{font-size:17.5px;color:var(--ink-dim);max-width:64ch}
+  .lede b{color:var(--ink);font-weight:600}
+  article{padding-bottom:40px}
+  .qa{border-top:1px solid var(--rule);padding-top:34px;margin-top:44px}
+  .qn{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--muted)}
+  .q{font-family:var(--serif);font-size:clamp(22px,3.4vw,30px);line-height:1.22;margin:10px 0 22px;
+     letter-spacing:-.01em;color:var(--ink)}
+  p{margin:0 0 16px}
+  article p{color:var(--ink-dim)}
+  article p b,article li b{color:var(--ink);font-weight:600}
+  h2{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+     color:var(--world);font-weight:500;margin:32px 0 12px}
+  ul{margin:0 0 16px;padding-left:18px;color:var(--ink-dim)}
+  li{margin-bottom:7px}
+  .pull{border-left:2px solid var(--world);padding:6px 0 6px 18px;margin:26px 0;
+        font-family:var(--serif);font-size:19px;line-height:1.45;color:var(--ink)}
+  .tablewrap{overflow-x:auto;margin:22px 0;border:1px solid var(--rule);background:var(--panel)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:420px}
+  th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+  th{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+     color:var(--muted);font-weight:500;background:var(--panel-2)}
+  td{color:var(--ink-dim)}
+  td b{color:var(--ink);font-weight:600}
+  tr:last-child td{border-bottom:0}
+  .note{font-size:13px;color:var(--muted);font-family:var(--mono);line-height:1.6}
+  footer{border-top:1px solid var(--rule);margin-top:56px;padding:28px 0 60px;font-family:var(--mono);
+         font-size:11px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between}
+  footer a{color:var(--ink-dim);text-decoration:none}
+  footer a:hover{color:var(--world)}
+  @media (max-width:640px){
+    .wrap,.topbar .in{padding:0 20px}
+    header.head{padding:44px 0 24px}
+    .tablewrap{margin:18px -20px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="in">
+  <a href="./">← Silicio / 1971—2026</a>
+  <span>dialogo · nov 2026</span>
+</div></div>
+
+<header class="head wrap">
+  <div class="kicker">Sei domande che restano</div>
+  <h1>Quello che la pagina<br>non <em>dice</em></h1>
+  <p class="lede">
+    Dopo 13 sezioni e 55 anni di numeri, le domande vere arrivano dopo. Queste sei sono state
+    fatte davvero, e queste sono le risposte — con i conti, e con quello che non si sa.
+  </p>
+</header>
+
+<article class="wrap">
+
+  <div class="qa">
+    <div class="qn">01</div>
+    <div class="q">Tutta questa potenza si può mettere in rete peer-to-peer, per fare l'intelligenza di domani?</div>
+
+    <p><b>In parte sì, e la parte cresce in fretta.</b> Ma va separato in due problemi con fisiche diverse:
+    <b>addestrare</b> e <b>servire</b>.</p>
+
+    <p>La potenza c'è: il mondo ha 92,8 Zop/s installati e li usa per un quinto del tempo. Il muro è che
+    l'addestramento non è imbarazzantemente parallelo — a ogni passo tutti i nodi devono scambiarsi i
+    gradienti prima di procedere. Dentro un datacenter lo fanno a 1,8 TB/s con latenze sotto il
+    microsecondo. La fibra di casa no.</p>
+
+    <div class="tablewrap"><table>
+      <tr><th>Tratta</th><th>Banda</th><th>Latenza</th></tr>
+      <tr><td>NVLink 5, dentro un datacenter</td><td><b>1.800.000 MB/s</b></td><td>0,5 µs</td></tr>
+      <tr><td>Fibra di casa, upload</td><td><b>7,5 MB/s</b></td><td>20 ms</td></tr>
+    </table></div>
+
+    <p>×240.000 di banda, ×20.000 di latenza. È il motivo per cui Folding@home e Bitcoin funzionano — sono
+    milioni di compiti indipendenti — e GPT no. Il conto preciso l'ha fatto Epoch AI: con 60 Mbps e
+    sincronizzazioni sotto i dieci minuti, il modello più grande addestrabile è
+    <b>≈600 milioni di parametri</b>.</p>
+
+    <h2>Poi si è smesso di parlare tanto</h2>
+    <p>La soluzione non è stata rendere la fibra più veloce, ma far parlare meno i nodi. La famiglia di
+    optimizer <b>DisTrO</b> (Nous Research, 2024) taglia la comunicazione fra GPU di quattro ordini di
+    grandezza senza perdere la convergenza; il RL asincrono toglie di mezzo anche la latenza, perché
+    mentre i nodi si scambiano i pesi gli altri stanno già generando tracce.</p>
+
+    <p>I risultati non sono più esperimenti: <b>INTELLECT-1</b> (10B, 2024), <b>INTELLECT-2</b> (32B, RL
+    asincrono su 800+ nodi, 2025), e <b>Psyche</b>, dove <b>Hermes 4.3 — 36 miliardi di parametri — è
+    stato addestrato interamente su 24 nodi</b> con le comunicazioni P2P nascoste dal tempo di calcolo:
+    throughput pari a un training centralizzato.</p>
+
+    <p>Restano tre muri. La <b>banda</b>, risolta a metà: più cresce il modello, più si paga. La
+    <b>fiducia</b> — come sai che un nodo sconosciuto ha calcolato davvero quel gradiente? — che è il
+    muro vero. E l'<b>eterogeneità</b>: il nodo più lento detta il passo, e chi presta la GPU vuole essere
+    pagato in modo verificabile, che riporta al muro due.</p>
+
+    <p class="pull">La capacità esiste: un training da 10²⁶ operazioni richiederebbe due giorni di tutte
+    le GPU da gioco del pianeta, anche usandole al 3% come sono usate oggi. Il punto non è mai stato la
+    potenza, è l'accoppiamento.</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">02</div>
+    <div class="q">Alla fine il silicio è un minerale che sa contare un tot al secondo, giusto?</div>
+
+    <p>Quasi. La fisica è giusta, il soggetto è sbagliato.</p>
+
+    <p><b>Il silicio non conta.</b> Un transistor è una valvola: o passa corrente o non passa. Non somma,
+    non ricorda, non sa niente. Il conto non sta nel minerale, sta nella <b>geometria</b> — in quali atomi
+    di boro e fosforo hai ficcato nel reticolo e in come li hai collegati. Il silicio è il foglio, non la
+    scrittura.</p>
+
+    <p>E la prova è che lo stesso minerale conta duecentosettanta miliardi di volte di più a seconda di
+    come lo disegni:</p>
+
+    <div class="tablewrap"><table>
+      <tr><th>Chip</th><th>Op/s di picco</th></tr>
+      <tr><td>Intel 4004, 1971</td><td>92.000</td></tr>
+      <tr><td>B300, 2026</td><td><b>25.000.000.000.000.000</b></td></tr>
+    </table></div>
+
+    <p>Nessun atomo è cambiato: è cambiato il disegno. Quindi «un tot al secondo» non è una proprietà del
+    silicio, è una proprietà del progetto.</p>
+
+    <p>Il numero, poi, è un prodotto e non un valore: frequenza × quanti lavori in parallelo × quanta parte
+    non va sprecata. A 5 GHz il clock batte cinque miliardi di volte al secondo, ma un ciclo non è
+    un'operazione. E quel «tot» è un picco: quando il dato non è in cache la macchina aspetta 60
+    nanosecondi, che a 5 GHz sono <b>trecento cicli di vuoto</b>.</p>
+
+    <h2>Il silicio ha vinto per la ruggine</h2>
+    <p>Non perché sia il migliore a contare, ma perché il suo ossido — SiO₂ — cresce da solo, compatto,
+    senza difetti, e si può incidere con precisione atomica: è l'isolante perfetto che tiene insieme tutto.
+    Il germanio, che aveva i primi transistor, aveva un ossido poroso e solubile in acqua. Il mondo gira
+    sul silicio perché il silicio si ossida bene.</p>
+
+    <p>La parte vera è che non è il materiale: è il fatto che la materia <b>si può disporre per calcolare
+    qualsiasi cosa</b>. Questo è il miracolo — non il quarzo, la disposizione.</p>
+
+    <p>Sul verbo, però, va corretta una cosa: <b>non «sa» contare</b>. Non sa di contare, come una cascata
+    non sa di cadere. Il «sapere» è nostro, che guardiamo il risultato e lo chiamiamo conto. Ed è
+    esattamente la distanza che la sezione sui modelli lascia aperta: una macchina che commuta 10²³ volte
+    al secondo produce frasi che sembrano capite, e nessuno sa dire se quel «sembrano» è un «sono».</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">03</div>
+    <div class="q">Scusa, mi sbagliavo con il quarzo.</div>
+
+    <p>Niente scuse: si finisce nel posto giusto per sbaglio. Il quarzo <b>è</b> SiO₂ — la sabbia è quarzo,
+    e da lì si estrae il silicio. «Minerale» era giusto per il quarzo; il silicio è l'elemento che ci sta
+    dentro.</p>
+
+    <p>E il quarzo nel computer non è un dettaglio da museo: <b>c'è, e fa un mestiere preciso</b>. Un
+    pezzetto di quarzo tagliato a misura, per piezoelettricità, vibra a una frequenza esatta e diventa il
+    battito della macchina. La divisione del lavoro è netta:</p>
+
+    <ul>
+      <li>il <b>quarzo dà il tempo</b> — ma batte piano: 32.768 Hz in un orologio (2¹⁵, così si divide per
+      due in binario), 24-25 MHz sulla scheda madre di un PC;</li>
+      <li>il <b>silicio fa i conti</b> — e i 5 GHz della scatola non escono dal quarzo: sono un multiplo
+      sintetizzato da un PLL che moltiplica quel battito lento.</li>
+    </ul>
+
+    <p>Il minerale che scandisce e il minerale che calcola. In ogni computer ci sono entrambi, e vengono
+    dalla stessa pietra: sabbia → silicio metallurgico → policristallino → un monocristallo tirato su da
+    un crogiolo a 1.420 °C con un seme (Czochralski) → wafer.</p>
+
+    <p class="pull">Non è un minerale che sa contare: sono due minerali che si mettono d'accordo.
+    Uno tiene il tempo, l'altro esegue.</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">04</div>
+    <div class="q">Se dovessi fare un chip da me, senza grandi tecnologie produttive, che chip verrebbe fuori? Una calcolatrice?</div>
+
+    <p>Sì, una calcolatrice — e il numero esatto è <b>1971</b>. Non è una battuta: è la scala reale.</p>
+
+    <p>Il precedente esiste e ha un nome: <b>Sam Zeloof</b>, garage dei genitori nel New Jersey. Nel 2018 il
+    Z1, nel 2021 il Z2 — un array 10×10 di transistor su processo <b>10 µm</b>, gate in polisilicio, fatto
+    con un microscopio modificato in allineatore di maschere, un forno a diffusione e un impianto a vuoto
+    recuperato. I transistor sono grandi quanto un globulo rosso.</p>
+
+    <p>Dieci micrometri è esattamente il processo dell'Intel 4004: 2.300 transistor, 1971. Quindi il tetto
+    del garage non è «una calcolatrice», è <b>un 4004</b>. Nella pratica, con rese decenti: da qualche
+    centinaio a duemila transistor — un contatore BCD, un sommatore a 4 bit, un registro a scorrimento, un
+    comparatore, un piccolo operazionale, un sensore di luce.</p>
+
+    <h2>Perché si ferma lì</h2>
+    <p>Non è l'idea, è il <b>controllo della polvere</b>. A 10 µm un granello è un decimo della feature: si
+    sopravvive. A 1 µm è più grande del transistor: muore tutto. Per scendere servono un allineatore con
+    luce più corta, una camera bianca vera e il drogaggio per impianto ionico invece che per diffusione.</p>
+
+    <p>L'EUV costa dell'ordine dei 150-200 milioni, una fab moderna venti miliardi.
+    <b>La fisica è la stessa del garage: cambia solo quanto bene sai tenere fuori la polvere.</b></p>
+
+    <h2>Se vuoi davvero un chip tuo</h2>
+    <p><b>Tiny Tapeout</b> — disegni in Verilog, loro impacchettano il tuo blocco su un wafer condiviso da
+    centinaia di altri progetti e te lo spediscono: una tile da 160×100 µm su Sky130, <b>130 nanometri</b>,
+    70 € la tile più la scheda, ~385 € in tutto, sei-dodici mesi. Da 500 a 10.000 porte logiche. Non è un
+    processore, ma è silicio vero, 77 volte più fine del garage, per il prezzo di una cena.</p>
+
+    <p><b>FPGA</b> — 50 €, un weekend, 10⁵-10⁷ porte. È così che nasce il 99% dei chip veri prima della
+    maschera: si progetta, si prova, si butta, si rifà.</p>
+
+    <div class="tablewrap"><table>
+      <tr><th></th><th>transistor</th></tr>
+      <tr><td>garage</td><td>10² – 10⁴</td></tr>
+      <tr><td>Intel 4004, 1971</td><td>2,3 × 10³</td></tr>
+      <tr><td>un PC del 2026</td><td>10¹⁰</td></tr>
+      <tr><td>B300</td><td><b>10¹¹</b></td></tr>
+    </table></div>
+
+    <p>Otto ordini di grandezza. La distanza fra un garage e TSMC è tutta la storia dell'industria, e il
+    fatto che un ragazzo con un microscopio arrivi al 1971 — cioè al punto in cui la sabbia ha imparato a
+    contare — è la parte che commuove ogni volta.</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">05</div>
+    <div class="q">Dov'è il collo di bottiglia adesso? La velocità di calcolo può avere un salto?</div>
+
+    <p>Non è uno. Sono cinque, e vanno dal fisico all'economico:</p>
+
+    <div class="tablewrap"><table>
+      <tr><th>#</th><th>Il muro</th><th>Cosa lo misura</th><th>Quanto è duro</th></tr>
+      <tr><td>1</td><td><b>Watt</b></td><td>1,7 GW per un campus; 130 kW per rack</td><td>durissimo: la rete elettrica e l'acqua</td></tr>
+      <tr><td>2</td><td><b>Byte</b></td><td>0,3 byte per operazione (8 TB/s ÷ 25 Pop/s)</td><td>duro: la banda cresce, il rapporto peggiora</td></tr>
+      <tr><td>3</td><td><b>Filo</b></td><td>NVLink dentro il rack, Ethernet fuori</td><td>medio: la fotonica lo sposta</td></tr>
+      <tr><td>4</td><td><b>ns</b></td><td>60-80 ns di latenza DRAM</td><td><b>impossibile</b>: ferma dal 1990</td></tr>
+      <tr><td>5</td><td><b>$</b></td><td>costo per transistor</td><td>nuovo: ha smesso di scendere</td></tr>
+    </table></div>
+
+    <p>Il quinto è quello che nessuno dice ad alta voce: per cinquant'anni ogni nodo ha dato transistor più
+    economici. Dal 28 nm circa, no. Un wafer N2 costa il doppio di un N3 e contiene meno del doppio dei
+    chip. <b>La legge di Moore non è morta nella fisica: è morta nel conto della fabbrica.</b></p>
+
+    <h2>La latenza non scenderà</h2>
+    <p>Non è una questione di miniaturizzazione. Il tempo di accesso a una cella DRAM è il tempo che la
+    carica impiega a farsi sentire su un condensatore minuscolo attraverso un transistor che perde: decine
+    di nanosecondi. Puoi restringere la cella, ma non puoi far arrivare prima il segnale, perché stai
+    aspettando un fenomeno fisico, non una distanza.</p>
+
+    <p>Per questo la soluzione da trent'anni non è «accorciare l'attesa», è <b>non aspettare</b>: cache
+    sempre più grandi, prefetching, mille thread che lavorano mentre gli altri aspettano. È nascondere, non
+    curare. L'unica cura vera è togliere il viaggio — mettere il calcolo dentro la memoria (PIM, HBM-PIM),
+    ed è difficile perché la DRAM è ottimizzata per immagazzinare, non per calcolare.</p>
+
+    <h2>Il salto: sì, ma non in GHz</h2>
+    <p>La frequenza è morta nel 2004 e non c'è niente all'orizzonte che la resusciti. Il salto è avvenuto in
+    un'altra coordinata: <b>operazioni per joule</b>. Nella stessa precisione (FP32) la resa per watt è
+    cresciuta di circa 100 volte in diciotto anni; giocando sulle precisioni, di <b>10.000</b>.</p>
+
+    <ul>
+      <li><b>Precisione e sparsità</b> (FP4/FP6, MoE, potatura): ×2-4, già in produzione, la leva più
+      grossa e la meno raccontata.</li>
+      <li><b>Memoria 3D</b> (HBM4, 16 stack): ×2-3 di banda, 2027-2028.</li>
+      <li><b>Fotonica co-packaged</b>: ×4-8 sul collegamento fra package, 2026-2029. Non aumenta il
+      calcolo, toglie il muro tre.</li>
+      <li><b>Calcolo analogico in memoria</b> (crossbar di memristori): promette ×100, ma precisione e resa
+      sono ancora da laboratorio. È l'unica che sarebbe un salto vero, ed è l'unica che non so datare.</li>
+    </ul>
+
+    <h2>Il limite che conta</h2>
+    <p>Il pavimento fisico è il <b>principio di Landauer</b>: cancellare un bit costa almeno kT·ln2 ≈
+    3×10⁻²¹ joule. Un transistor moderno consuma circa 10⁻¹⁵ joule per commutazione: siamo
+    <b>cinque-sei ordini di grandezza sopra</b>. La fisica concede ancora un milione di volte; il CMOS no,
+    perché ci si avvicina solo con calcolo reversibile o con dispositivi diversi dal transistor.</p>
+
+    <p class="pull">Un salto di velocità sequenziale: no. Un salto di throughput per watt: sì, e sta già
+    avvenendo — ×10-30 a livello di package entro il 2029. Il tetto vero non è tecnico: è la presa di
+    corrente.</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">06</div>
+    <div class="q">E quindi?</div>
+
+    <p>La storia non è «i computer diventano più veloci». È che <b>ogni epoca sposta l'attesa di un piano,
+    e vince chi la nasconde meglio</b>: cache sopra la memoria, GPU sopra i core, batch sopra la latenza,
+    P2P sopra il filo. Oggi l'attesa si è spostata nel watt — e il watt è l'unica cosa che non si può
+    nascondere con l'ingegneria del software.</p>
+
+    <p class="note">Questa pagina nasce dalla stessa ricerca della pagina principale: i numeri sono gli
+    stessi, le fonti sono in fondo a quella. Le risposte 01-05 sono state scritte a novembre 2026 e valgono
+    come tali.</p>
+  </div>
+
+</article>
+
+<footer class="wrap">
+  <div>dialogo · sei domande dopo la pagina</div>
+  <div><a href="./">torna alla pagina principale →</a></div>
+</footer>
+
+</body>
+</html>

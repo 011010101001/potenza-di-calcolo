@@ -6,7 +6,7 @@ potenza di calcolo**, dal primo microprocessore al silicio che addestra i modell
 Tutto è espresso in una sola unità — **operazioni elementari al secondo, di picco** — per poter
 mettere sullo stesso asse il 4004 del 1971 (92.000 op/s) e il mondo intero del 2026 (92,8 Zop/s).
 
-**Online:** <https://potenza.apice.me/>
+**Online:** <https://potenza.apice.me/> — e il seguito, <https://potenza.apice.me/dialogo.html>
 **In locale:** doppio clic su `index.html`. Nessun server, nessuna build, nessuna connessione:
 funziona offline.
 
@@ -21,6 +21,12 @@ richiamato all'accesso dal file `PotenzaSite.vbs` nella cartella Esecuzione auto
 
 Se il PC è spento o in sospensione il sito non risponde: la pagina resta comunque nel repo e si
 apre in locale con un doppio clic.
+
+## Il dialogo
+
+`dialogo.html` è una pagina a parte, stessa veste tipografica: le sei domande che restano dopo i
+numeri — la potenza mondiale come rete peer-to-peer, il silicio e il quarzo, un chip fatto in casa
+con un microscopio, il collo di bottiglia di oggi e se la velocità può avere un salto.
 
 ## Cosa contiene
 
