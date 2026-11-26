@@ -38,9 +38,10 @@ apre in locale con un doppio clic.
 
 ## Il dialogo
 
-`dialogo.html` è una pagina a parte, stessa veste tipografica: le sei domande che restano dopo i
+`dialogo.html` è una pagina a parte, stessa veste tipografica: le nove domande che restano dopo i
 numeri — la potenza mondiale come rete peer-to-peer, il silicio e il quarzo, un chip fatto in casa
-con un microscopio, il collo di bottiglia di oggi e se la velocità può avere un salto.
+con un microscopio, il collo di bottiglia di oggi, quanti libri servono per addestrare un modello,
+cosa gli si dà in pasto davvero, e se l'efficienza dell'addestramento può migliorare.
 
 ## Cosa contiene
 

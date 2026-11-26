@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dialogo — sei domande dopo la pagina</title>
-<meta name="description" content="Le domande che restano dopo aver guardato 55 anni di potenza di calcolo: la rete peer-to-peer, il silicio, il quarzo, un chip fatto in casa, il collo di bottiglia.">
+<title>Dialogo — nove domande dopo la pagina</title>
+<meta name="description" content="Le domande che restano dopo aver guardato 55 anni di potenza di calcolo: la rete peer-to-peer, il silicio, il quarzo, un chip fatto in casa, il collo di bottiglia, i dati, l'efficienza.">
 <style>
   :root{
     --bg:#08090a; --panel:#0e1012; --panel-2:#14171a;
@@ -75,10 +75,10 @@
 </div></div>
 
 <header class="head wrap">
-  <div class="kicker">Sei domande che restano</div>
+  <div class="kicker">Nove domande che restano</div>
   <h1>Quello che la pagina<br>non <em>dice</em></h1>
   <p class="lede">
-    Dopo 13 sezioni e 55 anni di numeri, le domande vere arrivano dopo. Queste sei sono state
+    Dopo 13 sezioni e 55 anni di numeri, le domande vere arrivano dopo. Queste nove sono state
     fatte davvero, e queste sono le risposte — con i conti, e con quello che non si sa.
   </p>
 </header>
@@ -303,6 +303,116 @@
 
   <div class="qa">
     <div class="qn">06</div>
+    <div class="q">Bastano poche centinaia di libri per addestrare un modello che parla e risponde?</div>
+
+    <p>No — e il conto si fa in tre righe. La regola (Chinchilla, DeepMind 2022) è <b>~20 token per
+    parametro</b>. Un libro ≈ 100.000 parole ≈ 130.000 token. Quindi:</p>
+
+    <div class="tablewrap"><table>
+      <tr><th>modello</th><th>token necessari</th><th>libri equivalenti</th></tr>
+      <tr><td>2 milioni (il mini-modello)</td><td>40 milioni</td><td><b>~300</b></td></tr>
+      <tr><td>1 miliardo</td><td>20 miliardi</td><td>~150.000</td></tr>
+      <tr><td>8 miliardi (Llama 8B)</td><td>160 miliardi</td><td>~1,2 milioni</td></tr>
+      <tr><td>70 miliardi</td><td>1,4 trilioni</td><td>~10 milioni</td></tr>
+      <tr><td>1.000 miliardi</td><td>20 trilioni</td><td><b>~150 milioni</b></td></tr>
+    </table></div>
+
+    <p>Guarda la prima riga: <b>poche centinaia di libri sono esattamente la dieta giusta per un modello
+    da due milioni di parametri</b> — cioè per quello che scrive «il silicio è per eporta virgrazioni».
+    Le due cose sono la stessa cosa: con quel corpus puoi permetterti solo quella taglia, e quella taglia
+    produce quello.</p>
+
+    <p>Per arrivare a una macchina che risponde servono 1.000 miliardi di parametri, quindi 150 milioni
+    di libri: sei sotto di un fattore tra 50.000 e 500.000. E i modelli veri usano molto più del minimo
+    teorico — Llama 3 8B ha letto 15 trilioni di token, cioè ~1.900 token per parametro, cento volte la
+    regola — perché il costo che conta non è addestrare, è usare.</p>
+
+    <p class="pull">Un bambino di quattro anni ha sentito 45 milioni di parole e parla. Un modello di
+    frontiera ne ha lette 250.000 volte tante e sbaglia ancora le moltiplicazioni a tre cifre.</p>
+
+    <h2>Dove poche centinaia di libri bastano davvero</h2>
+    <ul>
+      <li><b>Adattare, non addestrare.</b> Un 7B già addestrato si specializza con LoRA in poche ore su
+      una scheda sola: sa già l'italiano e il mondo, tu gli insegni il dominio.</li>
+      <li><b>Dominio stretto.</b> <i>TinyStories</i> (2023): modelli da 2-10 milioni di parametri che
+      scrivono inglese coerente, perché il mondo che descrivono ha poche regole.</li>
+      <li><b>Recuperare invece di addestrare (RAG).</b> Per il sapere fattuale, un indice e i pezzi
+      giusti dati al momento battono qualunque addestramento a questa scala.</li>
+    </ul>
+  </div>
+
+  <div class="qa">
+    <div class="qn">07</div>
+    <div class="q">Quindi qualcuno gli ha dato in pasto milioni di ore di parlato e di video?</div>
+
+    <p>Sì per l'audio e il video — ma <b>non per il sapere</b>. La divisione è netta:</p>
+
+    <div class="tablewrap"><table>
+      <tr><th>modalità</th><th>quantità tipica</th><th>cosa insegna</th></tr>
+      <tr><td><b>testo</b></td><td>15-40 trilioni di token</td><td>tutto il sapere: lingua, fatti, codice, ragionamento</td></tr>
+      <tr><td>parlato</td><td>~680.000 ore (Whisper)</td><td>sentire, la prosodia, il turno di parola</td></tr>
+      <tr><td>video</td><td>milioni di ore, campionate a 1 fotogramma/s</td><td>vedere, il mondo fisico, le azioni</td></tr>
+      <tr><td>immagini</td><td>miliardi di coppie immagine-testo</td><td>associare parola e cosa</td></tr>
+    </table></div>
+
+    <p>Le 680.000 ore sono un dato pubblico: è il corpus di Whisper, raccolto dal web. In token sono
+    circa <b>60 miliardi</b> — meno dell'<b>1%</b> di quello che un modello di frontiera legge in testo.
+    Il video arriva a numeri comparabili solo perché viene spezzato in fotogrammi, ma un'ora di video
+    contiene pochissima informazione nuova.</p>
+
+    <p>E c'è un trucco che pochi notano: buona parte di quel parlato <b>entra nel corpus come testo</b>,
+    sotto forma di sottotitoli. Le trascrizioni automatiche sono già dentro i dataset.</p>
+
+    <p>Quanto ai libri: il dataset più usato, Books3, contiene <b>196.640 libri</b> — circa 25 miliardi di
+    token, lo <b>0,2%</b> della dieta di Llama 3. Anche nei modelli di frontiera i libri sono qualche
+    centinaio di migliaia, non milioni. La cultura umana rilegata, tutta insieme, è un condimento.</p>
+
+    <p>Ultima nota, la più pratica: Llama 3 dichiara <b>solo il 5% di testo non inglese</b>. L'italiano,
+    dentro quel 5%, è l'1-2%. Ecco perché un modello risponde benissimo in inglese e così così in
+    italiano — non è orgoglio, è che siamo fuori dal corpus.</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">08</div>
+    <div class="q">Si può migliorare l'efficienza dell'addestramento?</div>
+
+    <p>Sì — ed è la parte che si racconta meno. Negli ultimi tre anni l'efficienza algoritmica è cresciuta
+    <b>più del silicio</b>: per ottenere la qualità di GPT-3 serve circa <b>tre volte meno calcolo ogni
+    anno</b>. Metà del progresso dal 2020 non viene dalle GPU, viene dal modo in cui le si usa.</p>
+
+    <h2>Le cinque leve</h2>
+    <ul>
+      <li><b>L'ottimizzatore.</b> Muon (2024) ortogonalizza l'aggiornamento con Newton-Schulz invece di
+      farlo coordinata per coordinata: <b>~2× di efficienza</b>. Kimi K2 e GLM-4.5 sono addestrati così.</li>
+      <li><b>La precisione.</b> Addestrare in FP8 raddoppia il throughput: DeepSeek V3, 671 miliardi di
+      parametri, <b>2,79 milioni di ore di H800</b> e 5,6 milioni di dollari dichiarati.</li>
+      <li><b>I dati.</b> Qualità contro quantità: il risultato Phi (1,3 miliardi di parametri, 7 miliardi
+      di token «da libro di testo») eguagliava modelli dieci volte più grandi.</li>
+      <li><b>L'architettura.</b> Mixture of Experts: 10-20 volte più parametri a parità di calcolo per
+      token, perché se ne attiva solo una parte.</li>
+      <li><b>L'allocazione.</b> Chinchilla ha mostrato che tutti addestravano 4 volte troppo poco:
+      raddoppiare i dati era gratis e nessuno lo faceva.</li>
+    </ul>
+
+    <h2>La leva nuova: imparare facendo</h2>
+    <p>Reinforcement learning con ricompense verificabili (RLVR): dai al modello problemi con risposta
+    controllabile e impara ragionando, non leggendo. DeepSeek-R1 ha mostrato che bastano
+    <b>~100.000 problemi verificabili</b> per guadagnare 20-30 punti su matematica e codice, senza un
+    token di pre-addestramento in più. È la prima volta che una macchina impara come un bambino: provando.</p>
+
+    <h2>I tre muri</h2>
+    <p><b>I dati finiscono</b> — il web utile è quasi esaurito, e il sintetico collassa se usato in modo
+    ricorsivo. <b>Il divario con un bambino resta</b> — nessuna leva sopra l'ha chiuso, l'ha spostato.
+    <b>La plasticità</b> — un modello addestrato non impara cose nuove senza dimenticare, e il continual
+    learning è il problema aperto più imbarazzante del campo.</p>
+
+    <p class="pull">Il controesempio che tiene viva la speranza è BabyLM: modelli addestrati su 100
+    milioni di parole — la dieta di un bambino — che con obiettivi e dati giusti raggiungono modelli molto
+    più grandi. Non è la taglia che manca: è <b>come</b> si impara.</p>
+  </div>
+
+  <div class="qa">
+    <div class="qn">09</div>
     <div class="q">E quindi?</div>
 
     <p>La storia non è «i computer diventano più veloci». È che <b>ogni epoca sposta l'attesa di un piano,
@@ -311,14 +421,14 @@
     nascondere con l'ingegneria del software.</p>
 
     <p class="note">Questa pagina nasce dalla stessa ricerca della pagina principale: i numeri sono gli
-    stessi, le fonti sono in fondo a quella. Le risposte 01-05 sono state scritte a novembre 2026 e valgono
+    stessi, le fonti sono in fondo a quella. Le risposte 01-08 sono state scritte a novembre 2026 e valgono
     come tali.</p>
   </div>
 
 </article>
 
 <footer class="wrap">
-  <div>dialogo · sei domande dopo la pagina</div>
+  <div>dialogo · nove domande dopo la pagina</div>
   <div><a href="./">torna alla pagina principale →</a></div>
 </footer>
 
