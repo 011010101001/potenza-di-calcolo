@@ -264,6 +264,44 @@
     .bval{text-align:left}
   }
 
+
+  /* ── matrice delle dipendenze ──────────── */
+  .depbox{border:1px solid var(--rule);background:var(--panel);overflow-x:auto;margin-top:6px}
+  table.depmat{border-collapse:collapse;width:100%;min-width:780px;font-family:var(--mono)}
+  table.depmat th{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font-weight:500;padding:11px 6px;text-align:center;border-bottom:1px solid var(--rule);
+    background:var(--panel-2);white-space:nowrap}
+  table.depmat th.rowh{text-align:left;padding-left:14px}
+  table.depmat td{text-align:center;padding:9px 6px;border-bottom:1px solid var(--rule-soft);font-size:12px}
+  table.depmat td.rowh{text-align:left;padding-left:14px;font-size:11.5px;color:var(--ink);
+    white-space:nowrap;letter-spacing:.02em}
+  table.depmat tr:last-child td{border-bottom:0}
+  .d-ok{color:var(--world)}
+  .d-mid{color:var(--pc)}
+  .d-no{color:#31363b}
+  .depleg{display:flex;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;
+    color:var(--muted);padding:11px 14px;border-top:1px solid var(--rule);background:var(--panel-2)}
+  .depleg b{font-weight:500}
+  @media (max-width:820px){
+    table.depmat th.rowh,table.depmat td.rowh{position:sticky;left:0;z-index:2;background:var(--panel)}
+    table.depmat th.rowh{background:var(--panel-2)}
+    .depbox{position:relative;border-left:1px solid var(--rule)}
+  }
+
+  /* ── la catena di un chip ──────────────── */
+  .chain{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--rule);
+    background:var(--panel);margin-top:6px}
+  .chain .st{padding:14px 12px;border-right:1px solid var(--rule-soft)}
+  .chain .st:last-child{border-right:0}
+  .chain .n{font-family:var(--mono);font-size:8px;letter-spacing:.12em;color:var(--muted)}
+  .chain .w{font-size:12px;color:var(--ink);margin:7px 0 6px;line-height:1.3}
+  .chain .c{font-family:var(--mono);font-size:9px;color:var(--world);line-height:1.45}
+  @media (max-width:900px){
+    .chain{grid-template-columns:1fr 1fr}
+    .chain .st{border-bottom:1px solid var(--rule-soft)}
+    .chain .st:nth-child(2n){border-right:0}
+  }
+
   /* ── pietre miliari della matematica ───── */
   .milestones{margin-top:10px;border-top:1px solid var(--rule-soft)}
   .ms{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--rule-soft)}
@@ -470,6 +508,7 @@
       <a href="#riferimenti">Esempi</a>
       <a href="#ram">RAM</a>
       <a href="#aziende">Aziende</a>
+      <a href="#confini">Confini</a>
       <a href="#quanto">Quanto</a>
       <a href="#llm">LLM</a>
       <a href="#rete">Rete</a>
@@ -1125,9 +1164,123 @@
   </div>
 </section>
 
+<section id="confini">
+  <div class="wrap">
+    <div class="sechead"><span class="num">08 — La sovranità</span></div>
+    <h2>Nessuno è indipendente</h2>
+    <p class="sub">
+      Dopo aver contato quanta potenza c'è al mondo, la domanda che resta è un'altra: <b>chi può
+      fabbricarla</b>. E la risposta è che non esiste un paese sovrano sul silicio — nemmeno gli Stati
+      Uniti. Esiste una catena di sette anelli, e ogni anello ha un padrone diverso.
+    </p>
+
+    <h3 class="subhead">La matrice: chi sa fare cosa</h3>
+    <p class="sub" style="margin-bottom:16px">
+      Ogni riga è un paese, ogni colonna una capacità. Cercate una riga tutta verde: non c'è.
+      Cercate una colonna con un solo padrone: ce ne sono quattro.
+    </p>
+
+    <div class="depbox">
+      <table class="depmat">
+        <thead><tr>
+          <th class="rowh">Paese</th><th>Progetto<br><small>EDA</small></th><th>Litografia<br><small>EUV</small></th>
+          <th>Materiali<br><small>wafer, resist</small></th><th>Fabbrica<br><small>&lt;5 nm</small></th>
+          <th>Fabbrica<br><small>maturi</small></th><th>Packaging<br><small>ATMP</small></th>
+          <th>Memoria<br><small>DRAM, NAND</small></th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="rowh">Stati Uniti</td><td><span class="d-ok">●</span></td><td><span class="d-no">○</span></td><td><span class="d-mid">◐</span></td><td><span class="d-ok">●</span></td><td><span class="d-ok">●</span></td><td><span class="d-mid">◐</span></td><td><span class="d-mid">◐</span></td></tr>
+          <tr><td class="rowh">Taiwan</td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-mid">◐</span></td><td><span class="d-ok">●</span></td><td><span class="d-ok">●</span></td><td><span class="d-ok">●</span></td><td><span class="d-mid">◐</span></td></tr>
+          <tr><td class="rowh">Corea del Sud</td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-mid">◐</span></td><td><span class="d-mid">◐</span></td><td><span class="d-ok">●</span></td><td><span class="d-ok">●</span></td><td><span class="d-ok">●</span></td></tr>
+          <tr><td class="rowh">Paesi Bassi</td><td><span class="d-no">○</span></td><td><span class="d-ok">●</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td></tr>
+          <tr><td class="rowh">Giappone</td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-ok">●</span></td><td><span class="d-no">○</span></td><td><span class="d-ok">●</span></td><td><span class="d-mid">◐</span></td><td><span class="d-mid">◐</span></td></tr>
+          <tr><td class="rowh">Germania</td><td><span class="d-mid">◐</span></td><td><span class="d-mid">◐</span></td><td><span class="d-ok">●</span></td><td><span class="d-no">○</span></td><td><span class="d-ok">●</span></td><td><span class="d-no">○</span></td><td><span class="d-mid">◐</span></td></tr>
+          <tr><td class="rowh">Cina</td><td><span class="d-mid">◐</span></td><td><span class="d-no">○</span></td><td><span class="d-ok">●</span></td><td><span class="d-mid">◐</span></td><td><span class="d-ok">●</span></td><td><span class="d-ok">●</span></td><td><span class="d-mid">◐</span></td></tr>
+          <tr><td class="rowh">India</td><td><span class="d-mid">◐</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-mid">◐</span></td><td><span class="d-no">○</span></td></tr>
+          <tr><td class="rowh">Russia</td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td><td><span class="d-mid">◐</span></td><td><span class="d-no">○</span></td><td><span class="d-no">○</span></td></tr>
+        </tbody>
+      </table>
+      <div class="depleg">
+        <span><b class="d-ok">●</b> domina</span>
+        <span><b class="d-mid">◐</b> partecipa</span>
+        <span><b class="d-no">○</b> dipende</span>
+        <span style="margin-left:auto">novembre 2026</span>
+      </div>
+    </div>
+
+    <p class="caption">
+      I Paesi Bassi hanno <b>una sola riga piena</b> — la litografia — e con quella tengono in scacco
+      tutti gli altri: ASML è il <b>100% dell'EUV</b> mondiale, e senza EUV non esiste un nodo sotto i
+      7 nm. Un solo scanner costa oltre 200 milioni. Il Giappone non ha fabbriche di frontiera e
+      controlla il <b>90% dei photoresist</b> e oltre metà dei wafer di silicio. La Germania non ha un
+      nodo avanzato e mette le <b>lenti Zeiss</b> dentro ogni ASML. Gli Stati Uniti hanno le fabbriche
+      più avanzate del mondo occidentale e <b>non sanno fare una macchina litografica</b>.
+    </p>
+
+    <h3 class="subhead">Un chip, sette paesi</h3>
+    <p class="sub" style="margin-bottom:16px">
+      Seguite il percorso dalla sabbia al processore: in nessun passaggio il testimone resta nello stesso
+      paese per due volte di fila.
+    </p>
+
+    <div class="chain">
+      <div class="st"><div class="n">01</div><div class="w">Sabbia → silicio<br>purificato</div><div class="c">Germania · Giappone</div></div>
+      <div class="st"><div class="n">02</div><div class="w">Monocristallo<br>e wafer</div><div class="c">Giappone · Germania</div></div>
+      <div class="st"><div class="n">03</div><div class="w">Maschere<br>e photoresist</div><div class="c">Giappone · USA</div></div>
+      <div class="st"><div class="n">04</div><div class="w">Stampa<br>litografica</div><div class="c">Paesi Bassi · Germania</div></div>
+      <div class="st"><div class="n">05</div><div class="w">Fabbrica<br>del chip</div><div class="c">Taiwan · Corea · USA</div></div>
+      <div class="st"><div class="n">06</div><div class="w">Taglio, test,<br>package</div><div class="c">Cina · Malesia · Taiwan</div></div>
+      <div class="st"><div class="n">07</div><div class="w">Progetto<br>e software</div><div class="c">USA · Europa</div></div>
+    </div>
+
+    <p class="caption">
+      Un processore da 2 nanometri contiene <b>almeno quattro paesi</b> prima di esistere, e nessuno di
+      loro può farcela da solo. È per questo che i controlli sull'export funzionano: non serve fermare
+      l'ultimo anello, basta togliere il terzo.
+    </p>
+
+    <h3 class="subhead">Il caso Russia: sovranità di progetto, non di fabbrica</h3>
+    <p class="sub" style="margin-bottom:16px">
+      La Russia progetta davvero: <b>Elbrus</b> (MCST) e <b>Baikal</b> sono architetture originali. Ma
+      fino al 2022 quei chip uscivano da <b>TSMC a 28 nm</b>. Dopo le sanzioni la produzione è rientrata
+      in casa, e casa significa <b>Mikron a Zelenograd, 90 nanometri</b> — tecnologia del 2003, wafer da
+      200 mm. Oggi escono carte contactless, SIM, passaporti, RFID, qualche microcontrollore. Il piano
+      governativo prevede i <b>65 nm entro il 2028</b>: un traguardo annunciato per il 2014, poi per il
+      2018, poi per il 2022. Il ministro stesso ammette che il problema non è il progetto — è
+      <b>comprare e consegnare le macchine</b>.
+    </p>
+
+    <h3 class="subhead">Allora dove si può essere sovrani</h3>
+    <div class="unit-grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+      <div>
+        <h3>Non nella frontiera</h3>
+        <p>Nessuno entra nel 2 nm partendo da zero: il Giappone sta spendendo <b>oltre 3 trilioni di
+        yen</b> e a novembre 2026 non ha ancora SRAM funzionanti sul suo nodo pilota. Servono dieci anni
+        di curva di resa, non un investimento.</p>
+      </div>
+      <div>
+        <h3>Nei nodi maturi</h3>
+        <p>90-200 nm, analogico, sensori, MEMS: mercato enorme, barriera bassa, e nessuno ti può
+        sanzionare la ricetta. È la sovranità che conta per l'auto, l'industria, l'energia.</p>
+      </div>
+      <div>
+        <h3>Nella potenza</h3>
+        <p>Carburo di silicio e nitruro di gallio: l'elettronica che regge auto elettriche e reti.
+        È la scommessa italiana — <b>STMicroelectronics</b> ad Agrate sul FD-SOI 18 nm e il campus
+        <b>SiC di Catania</b>, qualche miliardo di investimento.</p>
+      </div>
+    </div>
+
+    <p class="pull" style="border-color:var(--world)">
+      La sovranità del silicio non è «lo faccio io». È <b>«so dire no, e qualcun altro non può»</b>.
+      Oggi quel potere ce l'hanno quattro paesi che fabbricano poco e forniscono tutto.
+    </p>
+  </div>
+</section>
+
 <section id="quanto">
   <div class="wrap">
-    <div class="sechead"><span class="num">08 — Il quanto</span></div>
+    <div class="sechead"><span class="num">09 — Il quanto</span></div>
     <h2>La macchina che non entra in questa scala</h2>
     <p class="sub">
       Un computer quantistico non è un computer più veloce: è un altro tipo di macchina, e per questo
@@ -1199,7 +1352,7 @@
 
 <section id="llm">
   <div class="wrap">
-    <div class="sechead"><span class="num">09 — I modelli</span></div>
+    <div class="sechead"><span class="num">10 — I modelli</span></div>
     <h2>Da ELIZA a quello che gira sul tuo portatile</h2>
     <p class="sub">
       Un modello linguistico è <b>un file di numeri</b> che, dato un pezzo di testo, indovina la parola
@@ -1406,7 +1559,7 @@
 
 <section id="rete">
   <div class="wrap">
-    <div class="sechead"><span class="num">10 — La rete</span></div>
+    <div class="sechead"><span class="num">11 — La rete</span></div>
     <h2>La potenza del mondo, messa in rete</h2>
     <p class="sub">
       Il pianeta ha 92,8 Zop/s installati e li usa per un quinto del tempo. La domanda è ovvia: perché non
@@ -1506,7 +1659,7 @@
 
 <section id="dieci">
   <div class="wrap">
-    <div class="sechead"><span class="num w">11 — Dieci anni</span></div>
+    <div class="sechead"><span class="num w">12 — Dieci anni</span></div>
     <h2>Dieci anni fa / oggi</h2>
     <p class="sub">
       2016 → 2026. Il PC in scrivania è cresciuto di poco più di <b>tre volte</b>.
@@ -1538,7 +1691,7 @@
 
 <section id="dati">
   <div class="wrap">
-    <div class="sechead"><span class="num">12 — I dati</span></div>
+    <div class="sechead"><span class="num">13 — I dati</span></div>
     <h2>Anno per anno</h2>
     <p class="sub">Le due serie complete, con il rapporto: quanti PC medi servono per eguagliare il mondo in quell'anno.</p>
     <div class="tablewrap">
@@ -1557,7 +1710,7 @@
 
 <section id="metodo">
   <div class="wrap">
-    <div class="sechead"><span class="num">13 — Metodo</span></div>
+    <div class="sechead"><span class="num">14 — Metodo</span></div>
     <h2>Cosa è solido e cosa è stima</h2>
 
     <div class="method">

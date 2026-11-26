@@ -39,12 +39,13 @@ con un microscopio, il collo di bottiglia di oggi e se la velocità può avere u
 | 05 | **Riferimenti** | 11 macchine riconoscibili (4004, Commodore 64, NASA Apollo, Cray-2, SGI, Pentium, iPhone 1 e 18, Tesla FSD, RTX 5090, B300) con prezzo d'epoca e costo per Top/s; curva del costo per Top/s 1969–2026; **arena "dieci secondi"** in tempo reale (sei macchine che accumulano operazioni dal vivo, con il verdetto in anni di 4004); riquadro "perché un iPhone 18 non è un terzo di una 5090" |
 | 06 | **La memoria** | densità della RAM dal 1970 (1 Kbit → 32 Gbit), banda e latenza dal 1981, il *memory wall* (la banda ×10⁷, la latenza ferma), e perché oggi l'AI è un problema di memoria più che di calcolo |
 | 07 | **Chi produce** | quota stimata della potenza mondiale per produttore (NVIDIA 39,4%, Google, Apple, MediaTek, Qualcomm, AMD, Amazon, Intel…), concentrazione della filiera, il calcolo che serve all'AI, Colossus 2 |
-| 08 | **Il quanto** | perché un computer quantistico non ha un numero di op/s, dove siamo (Willow, Nighthawk), la roadmap al 2029-2033, i qubit necessari per RSA-2048 |
-| 09 | **I modelli** | da ELIZA agli LLM di frontiera; cosa vuol dire *quantizzato*; il **metro umano** (GPQA, IMO, FrontierMath, Humanity's Last Exam con l'umano di riferimento accanto); i **problemi aperti risolti dall'AI** (AlphaTensor, FunSearch, IMO 2024-25, la congettura di Erdős 2026); e cosa succederebbe a far girare un 27B nel datacenter della NASA del 1969 |
-| 10 | **La rete** | la potenza mondiale come rete P2P: il conto della banda (NVLink 1,8 TB/s contro 7,5 MB/s di fibra), DisTrO e le corse distribuite vere (INTELLECT-1/2, Psyche con Hermes 4.3), i tre muri che restano |
-| 11 | **Dieci anni** | 2016 vs 2026 su quattro metriche, più la crescita annua della potenza mondiale |
-| 12 | **I dati** | tabella completa 1971–2026 con esportazione CSV |
-| 13 | **Metodo** | cosa è misurato, cosa è stima, cosa non va sommato, fonti |
+| 08 | **La sovranità** | nessuno è indipendente: la matrice delle dipendenze (chi sa fare cosa, paese per paese), la catena dei sette anelli da un chip al 2 nm, il caso Russia a 90 nm, e dove una nazione può davvero essere sovrana |
+| 09 | **Il quanto** | perché un computer quantistico non ha un numero di op/s, dove siamo (Willow, Nighthawk), la roadmap al 2029-2033, i qubit necessari per RSA-2048 |
+| 10 | **I modelli** | da ELIZA agli LLM di frontiera; cosa vuol dire *quantizzato*; il **metro umano** (GPQA, IMO, FrontierMath, Humanity's Last Exam con l'umano di riferimento accanto); i **problemi aperti risolti dall'AI** (AlphaTensor, FunSearch, IMO 2024-25, la congettura di Erdős 2026); e cosa succederebbe a far girare un 27B nel datacenter della NASA del 1969 |
+| 11 | **La rete** | la potenza mondiale come rete P2P: il conto della banda (NVLink 1,8 TB/s contro 7,5 MB/s di fibra), DisTrO e le corse distribuite vere (INTELLECT-1/2, Psyche con Hermes 4.3), i tre muri che restano |
+| 12 | **Dieci anni** | 2016 vs 2026 su quattro metriche, più la crescita annua della potenza mondiale |
+| 13 | **I dati** | tabella completa 1971–2026 con esportazione CSV |
+| 14 | **Metodo** | cosa è misurato, cosa è stima, cosa non va sommato, fonti |
 
 ## Fonti principali
 
